@@ -3,3 +3,6 @@
   "version": "1.2.4",
   "description": "Comprehensive Bio-Informatics & Multi-Omics Pipeline for Biological Signal Compilation",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
