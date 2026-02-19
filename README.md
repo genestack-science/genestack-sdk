@@ -171,3 +171,52 @@ Where:
 - $\text{Metric Score}_j$ is the input metric normalized to a `[0, 1]` scale.
 - $\text{Weight Coefficient}_j$ is the statistical modifier for that specific gene target.
 
+Calculated expression scores are classified into three distinct genetic status tiers:
+
+| Score Threshold | Expression Status |
+| :--- | :--- |
+| **0.00 - 0.35** | **Downregulated** |
+| **0.36 - 0.75** | **Normal Baseline** |
+| **0.76 - 1.00** | **Upregulated** |
+
+### 3.4 Protocol Synergy Compilation
+
+The compiler calculates a final coverage score for all suggested compound protocols using this specific formula:
+
+$$\text{Coverage Score } (S_{\text{cov}}) = \frac{\text{Module Pathways Addressed}}{\text{Suboptimal Gene Targets}} \times \gamma \times \lambda$$
+
+Where:
+- **Synergy Coefficient ($\gamma$)**: Bonus applied when combining compounds with complementary mechanisms (`1.15`).
+- **Safety Factor ($\lambda$)**: Penalty factor applied if the stack triggers any warning flags (`0.85`).
+
+---
+
+## 4. Repository & Core Files Reference
+
+The repository is built with a clean separation of concerns, mapping individual algorithmic responsibilities to specific files.
+
+```
+genestack-sdk/
+├── src/
+│   ├── index.ts                # Main SDK entrypoint exporting all core modules.
+│   ├── core/
+│   │   ├── interpreter.ts      # Converts signals to baseline metrics.
+│   │   ├── compiler.ts         # Generates optimized intervention stacks.
+│   │   ├── validator.ts        # Validates signal data structure.
+│   │   ├── tuner.ts            # Optimizes expression weights.
+│   │   ├── mapper.ts           # Translates signals to expression profiles.
+│   │   ├── sequencer.ts        # Parses direct sequencer outputs.
+│   │   ├── loader.ts           # Loads dynamic variant reference models.
+│   │   └── cleaner.ts          # Filters out streaming signal noise.
+│   ├── models/                 # Preloaded reference models.
+│   │   ├── genotypes.ts        # SNP variant maps.
+│   │   ├── pathways.ts         # Biological pathway configurations.
+│   │   ├── interventions.ts    # Compound and mechanism matrices.
+│   │   ├── biomarkers.ts       # Clinical biomarker baseline models.
+│   │   ├── interactions.ts     # Synergy and conflict maps.
+│   │   ├── dosages.ts          # Concentration and capping tables.
+│   │   └── limits.ts           # Pathway safety ranges.
+│   ├── security/               # Safeguards and compliance.
+│   │   ├── overlapEngine.ts    # Prevents contraindications.
+│   │   ├── thresholdManager.ts # Enforces dosage boundaries.
+│   │   ├── validator.ts        # Validates schema structure.
