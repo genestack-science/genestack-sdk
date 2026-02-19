@@ -220,3 +220,92 @@ genestack-sdk/
 │   │   ├── overlapEngine.ts    # Prevents contraindications.
 │   │   ├── thresholdManager.ts # Enforces dosage boundaries.
 │   │   ├── validator.ts        # Validates schema structure.
+│   │   ├── compliance.ts       # Strips out personal identifying data.
+│   │   ├── sandbox.ts          # Isolated worker for untrusted files.
+│   │   └── isolation.ts        # Isolated multi-tenant worker management.
+│   ├── adapters/               # Third-party integrations.
+│   │   ├── wearableApi.ts      # Continuous sensor data ingestion layer.
+│   │   ├── bloodPanel.ts       # Blood biomarker assay converter.
+│   │   ├── omicsParser.ts      # File sequence interpreter.
+│   │   ├── exportManager.ts    # Formats output reports.
+│   │   └── streamEmitter.ts    # Real-time data stream socket.
+│   ├── types/                  # High-integrity TypeScript schemas.
+│   └── utils/                  # Mathematical and tracking utilities.
+└── tests/                      # Full Jest test runner suite.
+```
+
+---
+
+## 5. Installation and Environment Configuration
+
+The GENESTACK SDK requires Node.js 18.x or above.
+
+```bash
+# Clone the repository
+git clone https://github.com/genestack-science/genestack-sdk.git
+cd genestack-sdk
+
+# Install development dependencies via npm
+npm install
+
+# Run the test suite to verify the installation
+npm test
+```
+
+---
+
+## 6. Technical Quickstart & Code Examples
+
+### 6.1 Continuous Biometric Processing with Ingestion
+
+The `Interpreter` module filters and converts high-frequency biometrics into baseline signal scores.
+
+```typescript
+import { Interpreter } from '@genestack/sdk';
+
+const interpreter = new Interpreter();
+const signalPayload = {
+  userId: 'usr_patient_01',
+  timestamp: Date.now(),
+  cognition: {
+    focusPattern: 'burst_crash',
+    workingMemory: 'normal',
+    stressThreshold: 'low'
+  },
+  circadian: {
+    sleepLatency: 'normal',
+    wakingState: 'disturbed',
+    nocturnalArousal: 'high'
+  },
+  inflammation: {
+    sorenessPersistence: 'persistent',
+    chronicFatigue: 'occasional',
+    localizedStiffness: 'moderate'
+  },
+  recovery: {
+    muscleRegeneration: 'slow',
+    forcePreservation: 'normal',
+    jointSoreness: 'moderate'
+  },
+  metabolism: {
+    caloricUtilization: 'normal',
+    weightPreservation: 'easy_fat_gain',
+    energyCrashes: 'frequent'
+  },
+  metadata: {
+    sourceDevice: 'oura',
+    firmwareVersion: 'v4.1.2',
+    samplingFrequencyHz: 1
+  }
+};
+
+const interpretedMetrics = await interpreter.interpret(signalPayload);
+console.log(`Interpreter reliability index: ${interpretedMetrics.reliabilityIndex}`);
+```
+
+### 6.2 Automated Expressive Profiling with Mapper
+
+The `Mapper` module takes the processed signal outputs and extracts corresponding genomic expression profiles.
+
+```typescript
+import { Mapper } from '@genestack/sdk';
