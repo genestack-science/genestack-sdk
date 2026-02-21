@@ -12,3 +12,13 @@ export interface SecurityEvent {
   code: string;
   message: string;
   affectedEntity?: string;
+  detectedAt: number;
+}
+export interface ComplianceCheckResult {
+  isCompliant: boolean;
+  warningsDetected: string[];
+  anonymizedUserId: string;
+  clearedFields: string[];
+  checkedAt: number;
+}
+export interface SandboxExecutionResult {
