@@ -309,3 +309,66 @@ The `Mapper` module takes the processed signal outputs and extracts correspondin
 
 ```typescript
 import { Mapper } from '@genestack/sdk';
+
+const mapper = new Mapper();
+const expressionProfile = await mapper.mapToExpressions(interpretedMetrics);
+
+console.log(`Mapped COMT status: ${expressionProfile.expressions.comt?.status}`);
+```
+
+### 6.3 Protocol Compilation with Compiler
+
+The `Compiler` module analyzes the inferred genomic expressions to generate optimized compound protocols while screening for interactions.
+
+```typescript
+import { Compiler } from '@genestack/sdk';
+
+const compiler = new Compiler();
+const compiledProtocol = await compiler.compile(expressionProfile);
+
+console.log(`Compiled protocol coverage: ${(compiledProtocol.coverageScore * 100).toFixed(2)}%`);
+```
+
+### 6.4 Full Pipeline Chaining Example
+
+```typescript
+import { Interpreter, Mapper, Compiler } from '@genestack/sdk';
+
+async function generateInterventionProtocol(rawInput: any) {
+  const interpreter = new Interpreter();
+  const mapper = new Mapper();
+  const compiler = new Compiler();
+
+  // Chained processing pipeline
+  const interpretedResult = await interpreter.interpret(rawInput);
+  const expressionProfile = await mapper.mapToExpressions(interpretedResult);
+  const finalProtocol = await compiler.compile(expressionProfile);
+
+  return finalProtocol;
+}
+```
+
+---
+
+## 7. Zero-Trust Security & HIPAA Privacy Safeguards
+
+The GENESTACK SDK uses a strict zero-trust data lifecycle to fully protect sensitive biological information.
+
+```
++─────────────────────────────────────────────────────────+
+|                Isolated Worker Threads Sandbox           |
++─────────────────────────────────────────────────────────+
+
+  [ Raw Data Streams / Sequence Input ]
+                   │
+                   ▼
+  +─────────────────────────────────────────+
+  |    Sandbox Environment Isolate          | ---> Heap memory allocation caps
+  |    (Isolated Thread Runtime)            | ---> No external file writing
+  +────────────────┬────────────────────────+ ---> Completely disabled outbound sockets
+                   │
+                   ▼
+      [ Sanitized Output Metrics ]
+```
+
+### 7.1 Memory Allocation & Worker Isolates Sandbox
