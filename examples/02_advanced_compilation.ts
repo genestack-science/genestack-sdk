@@ -27,3 +27,18 @@ async function runAdvancedCompilationPipeline() {
   // Instantiate components
   const interpreter = new Interpreter();
   const mapper = new Mapper();
+  const compiler = new Compiler();
+  const overlapEngine = new OverlapEngine();
+  const thresholdManager = new ThresholdManager();
+
+  console.log('[STEP 1] Generating Comprehensive Mock Patient Omics Ingestion Payload');
+  
+  const complexSignalInput: SignalInput = {
+    userId: 'usr_02X9Z8Y7W6V5U4T3',
+    timestamp: Date.now(),
+    cognition: {
+      focusPattern: 'burst_crash',
+      workingMemory: 'normal',
+      stressThreshold: 'low',
+    },
+    circadian: {
