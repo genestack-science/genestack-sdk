@@ -53,3 +53,31 @@ The fundamental design paradigm of GENESTACK is **"Behavior-to-Expression Status
 ### Core Design Principles
 
 1. **Deterministic Processing**: All calculations map strictly to mathematical formulas, ensuring consistent inference outputs across identical datasets.
+2. **Dynamic Adaptation**: The engine adjusts compound dosage recommendations dynamically based on incoming real-time telemetry changes.
+3. **Decoupled Security**: No personally identifiable information (PII) enters the core calculation processing pipeline.
+4. **Resilient Type Safety**: Strict TypeScript structures prevent type-casting errors and ensure stable calculations.
+
+---
+
+## 2. Ingestion & Preprocessing Mechanics
+
+The ingestion layer handles real-time continuous signal processing. High-frequency biometric feeds from wearables (e.g., Oura, Whoop, Apple Health) are often noisy, requiring specialized cleaning before use.
+
+### 2.1 Moving Gaussian Filtering
+
+A Gaussian smoothing filter is applied to streaming metrics to reduce noise while preserving important physiological shifts:
+
+$$G(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{x^2}{2\sigma^2}}$$
+
+Where:
+- $x$ is the sample distance from the center of the sliding window.
+- $\sigma$ is the standard deviation parameter controlling smoothing strength.
+
+```
+       Raw Data Signal (with noise spikes)
+                │
+                ▼
+  [ Windowing / Radius Calculation ]  --> Window Radius r = ceil(3 * sigma)
+                │
+                ▼
+    [ Gaussian Kernel Smoothing ]    --> Symmetric weight assignment
