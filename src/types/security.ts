@@ -22,3 +22,10 @@ export interface ComplianceCheckResult {
   checkedAt: number;
 }
 export interface SandboxExecutionResult {
+  taskId: string;
+  success: boolean;
+  output: unknown;
+  error?: string;
+  executionDurationMs: number;
+  warningsRaised: string[];
+  memoryUsedBytes?: number;
