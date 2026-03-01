@@ -81,3 +81,38 @@ Where:
                 │
                 ▼
     [ Gaussian Kernel Smoothing ]    --> Symmetric weight assignment
+                │
+                ▼
+     Filtered, Sanitized Data
+```
+
+### 2.2 Outlier Filtering with Z-Score Verification
+
+To eliminate sensor anomalies without losing valid physiological trends, data points undergo Z-score analysis within a moving window:
+
+$$\mu = \frac{1}{N}\sum_{i=1}^{N} x_i \quad \text{and} \quad \sigma = \sqrt{\frac{1}{N}\sum_{i=1}^{N} (x_i - \mu)^2}$$
+
+Any data point where $Z = \frac{|x_i - \mu|}{\sigma} > 1.5$ is excluded from the calculation pipeline.
+
+---
+
+## 3. The Five Core Biological Pathways
+
+The GENESTACK system processes data across five distinct regulatory systems. Each system maps to specific genomic single nucleotide polymorphisms (SNPs) and distinct intervention classes.
+
+### 3.1 Dopaminergic Regulation System
+
+Focuses on executive function, prefrontal dopamine clearance speeds, and dynamic dopamine receptor density.
+
+- **Target Gene Markers**: `COMT` (rs4680), `DRD2` (rs1800497).
+- **Phenotypic Metrics**: Executive attention scores, cognitive fatigue rates, working memory efficiency.
+- **Intervention Categories**: Dopamine synthesis precursors, monoamine oxidase modulators, BDNF enhancers.
+
+```
+                             [ High Dopamine Clearance ]
+                                          │
+                  ┌───────────────────────┴───────────────────────┐
+                  ▼                                               ▼
+          [ Low Sensitivity ]                           [ Normal Sensitivity ]
+         Incorporate Bromantane                        No precursors needed
+```
