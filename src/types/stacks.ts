@@ -8,3 +8,7 @@ export interface CompiledCompound {
   mappedExpressions: string[];
   details: string;
   contraindications: string[];
+  safeBoundsMg: [number, number];
+  clinicalConfidence: number;
+}
+export interface SecurityChecks {
