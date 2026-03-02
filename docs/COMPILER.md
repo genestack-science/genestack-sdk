@@ -23,3 +23,18 @@ The Compiler operates on four core principles:
                      +─────────────────────────────────+
                      |    Targeted Selection Engine     |
                      |  - Maps molecules to pathways   |
+                     |  - Eliminates redundant options |
+                     +────────────────┬────────────────+
+                                      │
+                                      ▼
+                     +─────────────────────────────────+
+                     |     Dynamic Dosage Scaling      |
+                     |  - Caps maximum safe dose       |
+                     |  - Calculates synergy bonus     |
+                     +────────────────┬────────────────+
+                                      │
+                                      ▼
+                     +─────────────────────────────────+
+                     |    Cross-Module Risk Check      |
+                     |  - Prevents contraindications   |
+                     |  - Flags safety overrides       |
