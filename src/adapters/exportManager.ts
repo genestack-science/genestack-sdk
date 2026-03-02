@@ -24,3 +24,18 @@ export class ExportManager {
     }
 
     let content = '';
+
+    switch (format) {
+      case 'json':
+        content = this.toJson(protocol);
+        break;
+      case 'csv':
+        content = this.toCsv(protocol);
+        break;
+      case 'markdown':
+        content = this.toMarkdown(protocol);
+        break;
+      default:
+        throw new Error(`Export Failure: Unsupported format "${format}".`);
+    }
+
