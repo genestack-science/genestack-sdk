@@ -42,3 +42,26 @@ The GENESTACK SDK handles sensitive personal biological telemetry, biometric con
 ```
 
 ### 1.1 Strict Anonymization Protocol
+
+The SDK employs non-reversible, cryptographic hashing for user profile mapping:
+
+$$\text{Profile Hash} = \text{HMAC-SHA256}(\text{Raw User ID}, \text{Cryptographic Client-Side Salt})$$
+
+Because the salt remains strictly within the client device's localized secure storage enclave, reconstructing the original raw User ID from processing logs or inferred outputs is mathematically impossible.
+
+---
+
+## 2. Protected Health Information (PHI) & HIPAA Guidelines
+
+The GENESTACK SDK follows strict data handling protocols to help you build fully HIPAA-compliant decentralized science (DeSci) and digital medicine platforms.
+
+```
++─────────────────────────────────────────────────────────────────────────────+
+|                      Regulatory Compliance Verification                     |
++─────────────────────────────────────────────────────────────────────────────+
+
+ 1. DECOUPLED IDENTITY     Names, e-mails, and static network IP addresses are
+    MODELS                 stripped before parsing begins.
+                           
+ 2. CLIENT-SIDE LOCAL      All phenotypic metrics conversion and math occurs on
+    PROCESSING             device, eliminating transit attack surfaces.
