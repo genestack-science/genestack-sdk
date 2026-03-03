@@ -116,3 +116,59 @@ Focuses on executive function, prefrontal dopamine clearance speeds, and dynamic
           [ Low Sensitivity ]                           [ Normal Sensitivity ]
          Incorporate Bromantane                        No precursors needed
 ```
+
+### 3.2 Circadian Rhythmicity
+
+Controls chronotype timing, slow-wave sleep duration, and cellular repair cycles.
+
+- **Target Gene Markers**: `PER3` (VNTR variant), `CLOCK` (rs1801260).
+- **Phenotypic Metrics**: Sleep latency, slow-wave phase amplitude, nocturnal arousal frequency.
+- **Intervention Categories**: Phase-alignment modulators, nocturnal cortisol reducers.
+
+### 3.3 Inflammatory Balance
+
+Manages localized cytokine activity and dynamic physical stress recovery times.
+
+- **Target Gene Markers**: `TNF-α` (rs1800629), `IL-6` (rs1800795).
+- **Phenotypic Metrics**: Soreness persistence, elevated resting heart rate.
+- **Intervention Categories**: Anti-inflammatory peptides, tissue regeneration promoters.
+
+### 3.4 Anabolic signaling & Growth Axis
+
+Evaluates cellular growth signaling, structural tissue repair, and myostatin suppression.
+
+- **Target Gene Markers**: `IGF-1` (rs35767), `MSTN` (rs1805086).
+- **Phenotypic Metrics**: Exercise adaptation rate, muscle regeneration speed.
+- **Intervention Categories**: Secretagogues, peptide repair fragments.
+
+### 3.5 Metabolic Efficiency
+
+Determines lipid storage tendencies versus cellular caloric uncoupling.
+
+- **Target Gene Markers**: `FTO` (rs9939609), `PPARG` (Pro12Ala).
+- **Phenotypic Metrics**: Baseline metabolic rate, caloric burn efficiency, glucose response proxies.
+- **Intervention Categories**: Mitochondrial modulators, metabolic partition enhancers.
+
+---
+
+## 4. Compilation & Safety Validation Pipeline
+
+Once expressions are determined, the compiler computes compound recommendations. To ensure user safety, this stage uses strict cross-pathway constraint validation.
+
+```
+       [ Suboptimal Expression Profile ]
+                       │
+                       ▼
+    +─────────────────────────────────────+
+    | Compound Synthesis Selection Engine |
+    +──────────────────┬──────────────────+
+                       │
+                       ▼
+    +─────────────────────────────────────+
+    |       Constraint & Safety Checks    |
+    | - Dose ceilings (ThresholdManager)  |
+    | - Overload warnings (OverlapEngine) |
+    +──────────────────┬──────────────────+
+                       │
+                       ▼
+           [ Validated Output Protocol ]
