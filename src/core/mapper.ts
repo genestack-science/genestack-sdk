@@ -16,3 +16,9 @@ export class Mapper {
     const focusScore = 1 - rawFocus;
     if (focusScore >= 0.6) {
       expressions['comt'] = { status: 'Upregulated', score: focusScore };
+    } else if (focusScore < 0.4) {
+      expressions['comt'] = { status: 'Downregulated', score: focusScore };
+    } else {
+      expressions['comt'] = { status: 'Normal', score: focusScore };
+    }
+
