@@ -39,3 +39,27 @@ export class SDKLogger {
       enableTimestamps: true,
       ...config
     };
+  }
+
+  private shouldLog(level: LogLevel): boolean {
+    return LEVEL_PRIORITY[level] >= LEVEL_PRIORITY[this.config.minLevel];
+  }
+
+  private formatMessage(entry: LogEntry): string {
+    if (this.config.enableJsonOutput) {
+      return JSON.stringify(entry);
+    }
+    const ts = this.config.enableTimestamps
+      ? `[${new Date(entry.timestamp).toISOString()}] `
+      : '';
+    const data = entry.data ? ` ${JSON.stringify(entry.data)}` : '';
+    return `${ts}[${entry.level.toUpperCase()}] [${entry.namespace}] ${entry.message}${data}`;
+  }
+
+  public debug(message: string, data?: Record<string, unknown>): void {
+    this.emit('debug', message, data);
+  }
+
+  public info(message: string, data?: Record<string, unknown>): void {
+    this.emit('info', message, data);
+  }
