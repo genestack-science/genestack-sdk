@@ -22,3 +22,15 @@ export class Mapper {
       expressions['comt'] = { status: 'Normal', score: focusScore };
     }
 
+    // Map inflammatory metrics to TNF
+    const loadScore = typeof result.metrics['inflammatory_cytokine_load'] === 'number' ? result.metrics['inflammatory_cytokine_load'] : 0.5;
+    if (loadScore > 0.7) {
+      expressions['tnf'] = { status: 'Upregulated', score: loadScore };
+    } else if (loadScore < 0.3) {
+      expressions['tnf'] = { status: 'Downregulated', score: loadScore };
+    } else {
+      expressions['tnf'] = { status: 'Normal', score: loadScore };
+    }
+
+    // Map growth & recovery to IGF1
+    const repairScore = typeof result.metrics['growth_repair_signal'] === 'number' ? result.metrics['growth_repair_signal'] : 0.5;
