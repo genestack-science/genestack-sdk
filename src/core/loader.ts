@@ -18,3 +18,20 @@ export class VariantDatabaseLoader {
 
   constructor() {
     this.populateInitialCache();
+  }
+
+  /**
+   * Pre-loads the in-memory cache with standard default genomic references.
+   */
+  private populateInitialCache(): void {
+    const defaultReferences: CachedGenomicReference[] = [
+      { id: 'ref_comt',  geneSymbol: 'COMT',  rsId: 'rs4680',      majorAlleles: 'G/G', minorAlleles: 'A/A' },
+      { id: 'ref_drd2',  geneSymbol: 'DRD2',  rsId: 'rs1800497',   majorAlleles: 'C/C', minorAlleles: 'T/T' },
+      { id: 'ref_per3',  geneSymbol: 'PER3',  rsId: 'rs57875989',  majorAlleles: '5/5', minorAlleles: '4/4' },
+      { id: 'ref_clock', geneSymbol: 'CLOCK', rsId: 'rs1801260',   majorAlleles: 'T/T', minorAlleles: 'C/C' },
+      { id: 'ref_tnf',   geneSymbol: 'TNF-α', rsId: 'rs1800629',   majorAlleles: 'G/G', minorAlleles: 'A/A' },
+      { id: 'ref_il6',   geneSymbol: 'IL6',   rsId: 'rs1800795',   majorAlleles: 'G/G', minorAlleles: 'C/C' },
+      { id: 'ref_fto',   geneSymbol: 'FTO',   rsId: 'rs9939609',   majorAlleles: 'T/T', minorAlleles: 'A/A' },
+      { id: 'ref_igf1',  geneSymbol: 'IGF-1', rsId: 'rs35767',     majorAlleles: 'G/G', minorAlleles: 'A/A' },
+      { id: 'ref_mstn',  geneSymbol: 'MSTN',  rsId: 'rs1805086',   majorAlleles: 'A/A', minorAlleles: 'G/G' },
+    ];
