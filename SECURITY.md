@@ -65,3 +65,30 @@ The GENESTACK SDK follows strict data handling protocols to help you build fully
                            
  2. CLIENT-SIDE LOCAL      All phenotypic metrics conversion and math occurs on
     PROCESSING             device, eliminating transit attack surfaces.
+                           
+ 3. ENCRYPTION AT REST     Resting databases use high-grade AES-256-GCM keys
+                           bound to hardware security modules.
+                           
+ 4. ZERO EXPORT DEFAULT    Telemetry is kept locally. Profiles are never sent 
+                           externally without direct, explicit consent.
+```
+
+### 2.1 Stripping and Sanitizing PII Data
+
+Our built-in compliance validator scans ingestion files to ensure zero personally identifiable information (PII) enters downstream engines:
+
+```typescript
+import { IngestionValidator } from './src/security/validator';
+
+const validator = new IngestionValidator();
+const result = validator.validate(userSignals);
+
+if (!result.isValid) {
+  throw new Error('Compliance Violation: Unsanitized data format detected.');
+}
+```
+
+---
+
+## 3. Cryptographic Storage & Encryption at Rest
+
