@@ -63,3 +63,15 @@ export class SDKLogger {
   public info(message: string, data?: Record<string, unknown>): void {
     this.emit('info', message, data);
   }
+
+  public warn(message: string, data?: Record<string, unknown>): void {
+    this.emit('warn', message, data);
+  }
+
+  public error(message: string, data?: Record<string, unknown>): void {
+    this.emit('error', message, data);
+  }
+
+  private emit(level: LogLevel, message: string, data?: Record<string, unknown>): void {
+    if (!this.shouldLog(level)) return;
+
