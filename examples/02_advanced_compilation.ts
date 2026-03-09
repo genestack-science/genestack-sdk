@@ -42,3 +42,25 @@ async function runAdvancedCompilationPipeline() {
       stressThreshold: 'low',
     },
     circadian: {
+      sleepLatency: 'high',
+      wakingState: 'wired_tired',
+      nocturnalArousal: 'high',
+    },
+    inflammation: {
+      sorenessPersistence: 'persistent',
+      chronicFatigue: 'occasional',
+      localizedStiffness: 'high',
+    },
+    recovery: {
+      muscleRegeneration: 'slow',
+      forcePreservation: 'normal',
+      jointSoreness: 'moderate',
+    },
+    metabolism: {
+      caloricUtilization: 'normal',
+      weightPreservation: 'easy_fat_gain',
+      energyCrashes: 'frequent',
+    },
+    metadata: {
+      sourceDevice: 'whoop_direct_cloud_sync',
+      firmwareVersion: 'v4.1.8',
