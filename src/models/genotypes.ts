@@ -19,3 +19,11 @@ export interface AlleleClassification {
 export interface GenotypeSummaryProfile {
   userId: string;
   processedAt: number;
+  totalVariantsProcessed: number;
+  gainOfFunctionCount: number;
+  lossOfFunctionCount: number;
+  classifications: AlleleClassification[];
+}
+
+/**
+ * Determines zygosity based on a two-character allele string like "AA", "AG", or "GG".
