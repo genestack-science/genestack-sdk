@@ -11,3 +11,11 @@ describe('🛡️ Compliance Manager Unit Tests Suite', () => {
 
   beforeEach(() => {
     compliance = new ComplianceManager();
+  });
+
+  it('Should successfully create a compliance manager instance', () => {
+    expect(compliance).toBeDefined();
+    expect(compliance).toBeInstanceOf(ComplianceManager);
+  });
+
+  it('Should correctly verify and sanitize sensitive fields containing personal data', async () => {
