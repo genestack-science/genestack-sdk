@@ -22,3 +22,29 @@ function createIngestionThroughputMock(index: number): SignalInput {
       focusPattern: cognitionOptions[index % cognitionOptions.length]!,
       workingMemory: 'normal',
       stressThreshold: 'low',
+    },
+    circadian: {
+      sleepLatency: 'high',
+      wakingState: sleepOptions[index % sleepOptions.length]!,
+      nocturnalArousal: 'high',
+    },
+    inflammation: {
+      sorenessPersistence: inflammationOptions[index % inflammationOptions.length]!,
+      chronicFatigue: 'occasional',
+      localizedStiffness: 'moderate',
+    },
+    recovery: {
+      muscleRegeneration: 'slow',
+      forcePreservation: 'normal',
+      jointSoreness: 'moderate',
+    },
+    metabolism: {
+      caloricUtilization: 'normal',
+      weightPreservation: 'easy_fat_gain',
+      energyCrashes: 'frequent',
+    },
+    metadata: {
+      sourceDevice: 'concurrency_throughput_tester',
+      firmwareVersion: 'v1.0.1',
+      samplingFrequencyHz: 1.0,
+    }
