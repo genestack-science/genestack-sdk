@@ -56,3 +56,26 @@ check_prerequisites() {
 
   # Validate Node major version meets the baseline standard
   CURRENT_NODE_VERSION=$(node -v | cut -d 'v' -f 2 | cut -d '.' -f 1)
+  if [ "$CURRENT_NODE_VERSION" -lt "$MIN_NODE_VERSION" ]; then
+    log_error "Node version too old (v$CURRENT_NODE_VERSION). Minimum version required: v$MIN_NODE_VERSION."
+    exit 1
+  fi
+
+  # Confirm installation of dependencies via Node modules
+  if [ ! -d "./node_modules" ]; then
+    log_warn "Node modules folder missing. Installing dependencies via 'npm ci'..."
+    npm ci
+  fi
+
+  # Validate TypeScript compiler availability
+  if [ ! -f "$TS_COMPILER" ]; then
+    log_error "TypeScript compiler executable not found at $TS_COMPILER. Run npm install first."
+    exit 1
+  fi
+
+  log_success "All build environment prerequisite checks passed successfully."
+}
+
+# ──────────────────────────────────────────────────────────────────────────────
+# DIRECTORY SANITIZATION PHASE
+# ──────────────────────────────────────────────────────────────────────────────
