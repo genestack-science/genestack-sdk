@@ -18,3 +18,20 @@ export class MultiOmicsParser {
 
   /**
    * Parses raw variant files (e.g. 23andMe, AncestryDNA, or VCF formats) line by line.
+   */
+  public async parseVariantFileContent(rawTextContent: string): Promise<GenomicVariantEntry[]> {
+    if (!rawTextContent || rawTextContent.trim().length === 0) {
+      throw new Error('Parse Failure: Sequencing variant content is empty.');
+    }
+
+    const matchedVariants: GenomicVariantEntry[] = [];
+    const fileLines = rawTextContent.split(/\r?\n/);
+
+    for (const line of fileLines) {
+      const cleanLine = line.trim();
+      
+      // Skip comment lines and header metadata
+      if (cleanLine.startsWith('#') || cleanLine.length === 0) {
+        continue;
+      }
+
