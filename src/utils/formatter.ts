@@ -22,3 +22,21 @@ export function formatConfidenceScore(score: number): string {
  */
 export function keyToLabel(key: string): string {
   return key
+    .replace(/_/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}
+
+/**
+ * Formats an epoch timestamp into a human-readable local date string.
+ */
+export function formatTimestamp(epochMs: number): string {
+  return new Date(epochMs).toLocaleString('en-US', {
+    dateStyle: 'medium',
+    timeStyle: 'short'
+  });
+}
+
+/**
