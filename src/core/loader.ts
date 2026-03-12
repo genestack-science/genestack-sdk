@@ -35,3 +35,15 @@ export class VariantDatabaseLoader {
       { id: 'ref_igf1',  geneSymbol: 'IGF-1', rsId: 'rs35767',     majorAlleles: 'G/G', minorAlleles: 'A/A' },
       { id: 'ref_mstn',  geneSymbol: 'MSTN',  rsId: 'rs1805086',   majorAlleles: 'A/A', minorAlleles: 'G/G' },
     ];
+
+    for (const ref of defaultReferences) {
+      this.inMemoryCache.set(ref.rsId.toLowerCase(), ref);
+      this.totalVariantsLoaded++;
+    }
+  }
+
+  /**
+   * Fetches variant reference details from the in-memory cache.
+   * Falls back to a simulated async database call on cache miss.
+   */
+  public async loadGenomicReference(rsId: string): Promise<CachedGenomicReference | null> {
