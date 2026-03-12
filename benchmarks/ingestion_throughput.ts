@@ -48,3 +48,29 @@ function createIngestionThroughputMock(index: number): SignalInput {
       firmwareVersion: 'v1.0.1',
       samplingFrequencyHz: 1.0,
     }
+  };
+}
+
+async function runHighThroughputConcurrencyTest() {
+  console.log('================================================================');
+  console.log('🏁 MULTI-THREAD HIGH-THROUGHPUT TEST STARTING');
+  console.log('================================================================\n');
+
+  const interpreter = new Interpreter();
+  const durations: number[] = [];
+  let successfulRequests = 0;
+
+  console.log(`[INIT] Executing ${TOTAL_ROUNDS} concurrent batch tests...`);
+  console.log(`[INIT] Batch size limit set to ${CONCURRENCY_BATCH_LIMIT} parallel requests.`);
+  console.log('\n----------------------------------------------------------------\n');
+
+  for (let round = 1; round <= TOTAL_ROUNDS; round++) {
+    const roundStartTime = Date.now();
+    const concurrentBatch: Promise<any>[] = [];
+
+    for (let i = 0; i < CONCURRENCY_BATCH_LIMIT; i++) {
+      const sample = createIngestionThroughputMock(round * 100 + i);
+      // Push promise execution directly to the batch array
+      concurrentBatch.push(interpreter.interpret(sample));
+    }
+
