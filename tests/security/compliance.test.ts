@@ -19,3 +19,12 @@ describe('🛡️ Compliance Manager Unit Tests Suite', () => {
   });
 
   it('Should correctly verify and sanitize sensitive fields containing personal data', async () => {
+    const rawPayload: Record<string, any> = {
+      userId: 'usr_compliance_target_01',
+      email: 'clinical_patient_01@medical-cloud.org',
+      fullname: 'Marcus Aurelius',
+      testResults: {
+        focusScore: 0.82,
+        patient_id: '998811'
+      }
+    };
