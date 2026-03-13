@@ -29,3 +29,25 @@ export function zScore(value: number, values: number[]): number {
   if (sd === 0) return 0;
   return (value - mean(values)) / sd;
 }
+
+/**
+ * Normalizes a value into the [0, 1] range based on min/max bounds.
+ */
+export function normalizeToRange(value: number, min: number, max: number): number {
+  if (min === max) return 0;
+  return Math.min(1, Math.max(0, (value - min) / (max - min)));
+}
+
+/**
+ * Applies a Gaussian weight to a point at distance x from center with standard deviation sigma.
+ */
+export function gaussianWeight(x: number, sigma: number): number {
+  if (sigma <= 0) throw new Error('sigma must be greater than 0.');
+  return Math.exp(-(x * x) / (2 * sigma * sigma));
+}
+
+/**
+ * Applies a Gaussian smoothing kernel to an array of values.
+ */
+export function gaussianSmooth(values: number[], sigma: number): number[] {
+  const radius = Math.ceil(3 * sigma);
