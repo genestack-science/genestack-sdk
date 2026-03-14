@@ -27,3 +27,11 @@ export interface GenotypeSummaryProfile {
 
 /**
  * Determines zygosity based on a two-character allele string like "AA", "AG", or "GG".
+ */
+export function classifyZygosity(majorAllele: string, observedAlleles: string): ZygosityType {
+  const [a1, a2] = observedAlleles.toUpperCase().split('/');
+  if (a1 === a2) {
+    return a1 === majorAllele.toUpperCase() ? 'homozygous_major' : 'homozygous_minor';
+  }
+  return 'heterozygous';
+}
