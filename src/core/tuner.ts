@@ -37,3 +37,31 @@ export class DosageTuner {
 
     const warnings: string[] = [];
     let scalingFactor = 1.0;
+
+    // Apply sensitivity-based scaling
+    if (params.sensitivityProfile === 'high') {
+      scalingFactor *= 0.7;
+      warnings.push('High sensitivity profile: dosages reduced by 30%.');
+    } else if (params.sensitivityProfile === 'low') {
+      scalingFactor *= 1.15;
+    }
+
+    // Apply renal function reduction
+    if (params.renalFunction === 'reduced') {
+      scalingFactor *= 0.85;
+      warnings.push('Reduced renal function: dosages scaled down by 15%.');
+    } else if (params.renalFunction === 'impaired') {
+      scalingFactor *= 0.6;
+      warnings.push('Impaired renal function: dosages scaled down by 40%.');
+    }
+
+    // Apply age-based adjustment for users above 65
+    if (params.age >= 65) {
+      scalingFactor *= 0.85;
+      warnings.push('Age ≥65: conservative dosage scaling applied.');
+    }
+
+    // Cap the scaling factor between 0.5 and 1.2 for safety
+    scalingFactor = Math.min(1.2, Math.max(0.5, scalingFactor));
+
+    const adjustedCompounds: CompiledCompound[] = protocol.compounds.map((compound) => {
