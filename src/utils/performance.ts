@@ -12,3 +12,28 @@ export interface ProfileCheckpoint {
 }
 export interface PerformanceReport {
   profileId: string;
+  startedAt: number;
+  completedAt: number;
+  totalDurationMs: number;
+  checkpoints: ProfileCheckpoint[];
+  throughputPerSec?: number;
+}
+
+export class PerformanceProfiler {
+  private startTime: number = 0;
+  private checkpoints: ProfileCheckpoint[] = [];
+  private profileId: string;
+
+  constructor(profileId?: string) {
+    this.profileId = profileId ?? `prof_${Date.now().toString(36)}`;
+  }
+
+  /**
+   * Starts the profiler timer.
+   */
+  public start(): void {
+    this.startTime = Date.now();
+    this.checkpoints = [];
+  }
+
+  /**
