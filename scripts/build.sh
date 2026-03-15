@@ -79,3 +79,23 @@ check_prerequisites() {
 # ──────────────────────────────────────────────────────────────────────────────
 # DIRECTORY SANITIZATION PHASE
 # ──────────────────────────────────────────────────────────────────────────────
+clean_directories() {
+  log_info "Sanitizing old compilation artifacts in $DIST_DIR..."
+  if [ -d "$DIST_DIR" ]; then
+    rm -rf "$DIST_DIR"
+    log_success "Successfully removed legacy build files."
+  fi
+  mkdir -p "$DIST_DIR"
+}
+
+# ──────────────────────────────────────────────────────────────────────────────
+# TESTING & VALIDATION RUNNER
+# ──────────────────────────────────────────────────────────────────────────────
+execute_test_suites() {
+  log_info "Running system test suites prior to production compilation..."
+  if npm test; then
+    log_success "All unit tests passed successfully."
+  else
+    log_error "Unit test execution failure. Resolving issues is required to proceed."
+    exit 1
+  fi
