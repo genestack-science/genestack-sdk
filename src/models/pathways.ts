@@ -36,3 +36,18 @@ export const PATHWAY_REGISTRY: PathwayDefinition[] = [
   },
   {
     id: 'pathway_circadian',
+    name: 'Circadian Rhythmicity',
+    category: 'circadian',
+    targetGenes: ['PER3', 'CLOCK'],
+    targetSnps: ['rs57875989', 'rs1801260'],
+    biologicalFunction: 'Controls chronotype alignment, slow-wave sleep, and cellular repair timing.',
+    interventionClasses: ['Hormonal_Support', 'Adaptogens'],
+    biomarkerProxies: ['sleep_latency', 'slow_wave_amplitude', 'nocturnal_arousal']
+  },
+  {
+    id: 'pathway_inflammatory',
+    name: 'Inflammatory Balance',
+    category: 'inflammatory',
+    targetGenes: ['TNF-α', 'IL-6'],
+    targetSnps: ['rs1800629', 'rs1800795'],
+    biologicalFunction: 'Governs localized cytokine activity and physical stress recovery.',
