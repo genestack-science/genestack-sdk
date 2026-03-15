@@ -35,3 +35,12 @@ export class MultiOmicsParser {
         continue;
       }
 
+      // 23andMe format typically uses a tab/space separated structure:
+      // rsid   chromosome   position   genotype
+      const parts = cleanLine.split(/\s+/);
+      if (parts.length < 4) {
+        continue;
+      }
+
+      const rsId = parts[0]?.trim() || '';
+      const chromosome = parts[1]?.trim() || '';
