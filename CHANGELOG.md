@@ -20,3 +20,9 @@ Our versioning strategy follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
 
 ---
 
+## [1.2.0]
+
+### Added
+- Integrated continuous **Signal De-Noising** filters to remove outlier spikes from high-frequency wearable biometric streams.
+- Added the **Direct Sequencer Adapter** to extract whitelisted target SNPs (e.g., COMT, DRD2, PER3) from raw sequencing outputs.
+- Created the **Algorithmic Dosage Table** to compute custom compound dosages based on inferred expression weights.
