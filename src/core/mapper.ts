@@ -34,3 +34,8 @@ export class Mapper {
 
     // Map growth & recovery to IGF1
     const repairScore = typeof result.metrics['growth_repair_signal'] === 'number' ? result.metrics['growth_repair_signal'] : 0.5;
+    if (repairScore > 0.7) {
+      expressions['igf1'] = { status: 'Upregulated', score: repairScore };
+    } else if (repairScore < 0.4) {
+      expressions['igf1'] = { status: 'Downregulated', score: repairScore };
+    } else {
