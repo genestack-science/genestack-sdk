@@ -45,3 +45,12 @@ export interface SecurityAuditReport {
   overallRiskScore: number; // 0–1, where 1 = highest risk
   recommendations: string[];
 }
+
+/**
+ * Assigns a numeric risk score to a list of SecurityEvents.
+ */
+export function calculateRiskScore(events: SecurityEvent[]): number {
+  if (events.length === 0) return 0;
+  const weights: Record<SecuritySeverityLevel, number> = {
+    info: 0.1,
+    warning: 0.4,
