@@ -66,3 +66,21 @@ export class PerformanceProfiler {
     const report: PerformanceReport = {
       profileId: this.profileId,
       startedAt: this.startTime,
+      completedAt,
+      totalDurationMs,
+      checkpoints: this.checkpoints
+    };
+
+    if (recordCount !== undefined && totalDurationMs > 0) {
+      report.throughputPerSec = parseFloat(
+        ((recordCount / totalDurationMs) * 1000).toFixed(1)
+      );
+    }
+
+    return report;
+  }
+
+  /**
+   * Returns a formatted console-ready summary of a performance report.
+   */
+  public static formatReport(report: PerformanceReport): string {
