@@ -54,3 +54,8 @@ export function calculateRiskScore(events: SecurityEvent[]): number {
   const weights: Record<SecuritySeverityLevel, number> = {
     info: 0.1,
     warning: 0.4,
+    critical: 1.0
+  };
+  const raw = events.reduce((sum, e) => sum + weights[e.severity], 0);
+  return parseFloat(Math.min(1.0, raw / events.length).toFixed(3));
+}
