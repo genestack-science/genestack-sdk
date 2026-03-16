@@ -37,3 +37,32 @@ export class PerformanceProfiler {
   }
 
   /**
+   * Records a named checkpoint with elapsed time and optional memory snapshot.
+   */
+  public checkpoint(label: string): void {
+    const now = Date.now();
+    const entry: ProfileCheckpoint = {
+      label,
+      timestampMs: now,
+      elapsedSinceStartMs: now - this.startTime
+    };
+
+    if (typeof process !== 'undefined') {
+      entry.memoryUsedMb = parseFloat(
+        (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
+      );
+    }
+
+    this.checkpoints.push(entry);
+  }
+
+  /**
+   * Stops the profiler and returns the full performance report.
+   */
+  public stop(recordCount?: number): PerformanceReport {
+    const completedAt = Date.now();
+    const totalDurationMs = completedAt - this.startTime;
+
+    const report: PerformanceReport = {
+      profileId: this.profileId,
+      startedAt: this.startTime,
