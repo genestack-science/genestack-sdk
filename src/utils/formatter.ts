@@ -40,3 +40,21 @@ export function formatTimestamp(epochMs: number): string {
 }
 
 /**
+ * Formats a duration in milliseconds into a readable string (e.g., "1.23 ms", "2.50 s").
+ */
+export function formatDuration(ms: number): string {
+  if (ms < 1000) return `${ms.toFixed(2)} ms`;
+  return `${(ms / 1000).toFixed(2)} s`;
+}
+
+/**
+ * Formats a byte size into KB or MB.
+ */
+export function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`;
+  return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
+}
+
+/**
+ * Pads a string to a fixed width with trailing spaces for table-aligned output.
