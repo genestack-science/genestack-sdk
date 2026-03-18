@@ -35,3 +35,15 @@ export function classifyZygosity(majorAllele: string, observedAlleles: string): 
   }
   return 'heterozygous';
 }
+
+/**
+ * Determines a simple expression impact label based on zygosity and known gene behavior.
+ */
+export function inferExpressionImpact(
+  geneSymbol: string,
+  zygosity: ZygosityType
+): ExpressionImpact {
+  const gainOfFunctionGenes = ['COMT', 'TNF-α', 'IL6'];
+  const lossOfFunctionGenes = ['DRD2', 'MSTN'];
+
+  if (gainOfFunctionGenes.includes(geneSymbol)) {
