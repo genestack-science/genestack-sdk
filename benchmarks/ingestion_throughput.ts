@@ -74,3 +74,19 @@ async function runHighThroughputConcurrencyTest() {
       concurrentBatch.push(interpreter.interpret(sample));
     }
 
+    // Resolve parallel requests concurrently
+    const batchResults = await Promise.all(concurrentBatch);
+    
+    const roundEndTime = Date.now();
+    const roundDuration = roundEndTime - roundStartTime;
+    durations.push(roundDuration);
+    successfulRequests += batchResults.length;
+
+    console.log(` ✅ Batch #${round.toString().padStart(2, '0')} Processed. Duration: ${roundDuration} ms | Successes: ${batchResults.length}`);
+  }
+
+  // Calculate statistical distribution metrics
+  const totalProcessingDuration = durations.reduce((sum, d) => sum + d, 0);
+  const minDuration = Math.min(...durations);
+  const maxDuration = Math.max(...durations);
+  const averageDuration = totalProcessingDuration / TOTAL_ROUNDS;
