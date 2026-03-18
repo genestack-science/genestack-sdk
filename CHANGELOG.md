@@ -26,3 +26,16 @@ Our versioning strategy follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
 - Integrated continuous **Signal De-Noising** filters to remove outlier spikes from high-frequency wearable biometric streams.
 - Added the **Direct Sequencer Adapter** to extract whitelisted target SNPs (e.g., COMT, DRD2, PER3) from raw sequencing outputs.
 - Created the **Algorithmic Dosage Table** to compute custom compound dosages based on inferred expression weights.
+
+### Changed
+- Re-architected internal data schemas to use stricter TypeScript validation constraints.
+- Updated the testing suite to include continuous integration verification steps.
+
+---
+
+## [1.1.2]
+
+### Fixed
+- Fixed an intermittent cache expiration bug where expired expression profiles remained in the LRU cache.
+- Resolved a race condition during continuous bio-telemetry streaming where sensor anomalies could cause the parser to reject valid samples.
+- Corrected Z-Score boundary check thresholds to avoid false positive exclusions of valid biometric readings.
