@@ -31,3 +31,26 @@ export interface BiomarkerPanel {
   panelId: string;
   userId: string;
   labName: string;
+  collectedAt: number;
+  markers: BiomarkerEntry[];
+}
+export interface BiomarkerSummary {
+  totalMarkers: number;
+  outOfRangeCount: number;
+  criticalCount: number;
+  categoryCoverage: Record<BiomarkerCategory, number>;
+}
+
+/**
+ * Evaluates a single biomarker and returns whether it is within the normal reference range.
+ */
+export function isInRange(marker: BiomarkerEntry): boolean {
+  return marker.value >= marker.referenceRangeMin && marker.value <= marker.referenceRangeMax;
+}
+
+/**
+ * Calculates a summary report for an entire biomarker panel.
+ */
+export function summarizePanel(panel: BiomarkerPanel): BiomarkerSummary {
+  const summary: BiomarkerSummary = {
+    totalMarkers: panel.markers.length,
