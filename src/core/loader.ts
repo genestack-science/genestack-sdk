@@ -47,3 +47,28 @@ export class VariantDatabaseLoader {
    * Falls back to a simulated async database call on cache miss.
    */
   public async loadGenomicReference(rsId: string): Promise<CachedGenomicReference | null> {
+    if (!rsId) return null;
+
+    const cachedRef = this.inMemoryCache.get(rsId.toLowerCase());
+    if (cachedRef) return cachedRef;
+
+    // Simulate an asynchronous variant database call for uncached IDs
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(null), 150);
+    });
+  }
+
+  /**
+   * Inserts or updates a genomic reference in the in-memory cache.
+   */
+  public upsertReference(ref: CachedGenomicReference): void {
+    if (!ref.rsId) throw new Error('Upsert Failure: rsId cannot be empty.');
+    const key = ref.rsId.toLowerCase();
+    if (!this.inMemoryCache.has(key)) {
+      this.totalVariantsLoaded++;
+    }
+    this.inMemoryCache.set(key, ref);
+  }
+
+  /**
+   * Returns how many variants are currently loaded into the cache.
