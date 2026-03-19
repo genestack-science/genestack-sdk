@@ -47,3 +47,19 @@ describe('🛡️ Security Sandbox Unit Tests Suite', () => {
     };
 
     const response = await sandbox.executeIsolatedTask(errorTask);
+
+    expect(response).toBeDefined();
+    expect(response.success).toBe(false);
+    expect(response.output).toBeNull();
+    expect(response.error).toContain('Induced parse exception');
+    expect(response.warningsRaised.length).toBeGreaterThan(0);
+  });
+
+  it('Should detect dangerous patterns in raw script source strings', () => {
+    const safeCode = `const x = 10; console.log(x);`;
+    expect(sandbox.containsHazardousPatterns(safeCode)).toBe(false);
+
+    const maliciousCode = `process.exit(1);`;
+    expect(sandbox.containsHazardousPatterns(maliciousCode)).toBe(true);
+
+    const exploitCode = `require("child_process").exec("rm -rf /");`;
