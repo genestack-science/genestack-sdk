@@ -6,3 +6,5 @@ describe('Compiler Unit Tests', () => {
 
   const mockProfile: ExpressionProfile = {
     id: 'expr_test_123',
+    userId: 'usr_test_123',
+    timestamp: Date.now(),
