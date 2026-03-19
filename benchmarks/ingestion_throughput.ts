@@ -90,3 +90,28 @@ async function runHighThroughputConcurrencyTest() {
   const minDuration = Math.min(...durations);
   const maxDuration = Math.max(...durations);
   const averageDuration = totalProcessingDuration / TOTAL_ROUNDS;
+
+  console.log('\n----------------------------------------------------------------\n');
+  console.log('================================================================');
+  console.log('📈 HIGH-THROUGHPUT BENCHMARK RESULTS SUMMARY');
+  console.log('================================================================');
+
+  console.log(`- Total Parallel Requests Processed:  ${successfulRequests} records`);
+  console.log(`- Combined Compilation Time:          ${totalProcessingDuration} ms`);
+  console.log(`- Peak System Conversion Rate:         ${(successfulRequests / (totalProcessingDuration / 1000)).toFixed(1)} samples/sec`);
+  
+  console.log('\nStatistical Performance Profile:');
+  console.log(`  - Minimum Batch Ingestion Duration:  ${minDuration} ms`);
+  console.log(`  - Maximum Batch Ingestion Duration:  ${maxDuration} ms`);
+  console.log(`  - Average Batch Processing Time:     ${averageDuration.toFixed(1)} ms`);
+
+  console.log('\n================================================================');
+  console.log('🎉 HIGH-THROUGHPUT BENCHMARK EXECUTION SUCCESSFUL');
+  console.log('================================================================\n');
+}
+
+// Start testing
+runHighThroughputConcurrencyTest().catch((err) => {
+  console.error('Fatal concurrency testing exception:', err);
+  process.exit(1);
+});
