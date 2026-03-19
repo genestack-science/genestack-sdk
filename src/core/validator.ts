@@ -41,3 +41,19 @@ export class SchemaValidator {
     }
 
     if (!input.inflammation) {
+      errors.push('inflammation metrics block is missing.');
+    }
+
+    if (!input.recovery) {
+      errors.push('recovery metrics block is missing.');
+    }
+
+    if (!input.metabolism) {
+      errors.push('metabolism metrics block is missing.');
+    }
+
+    if (!input.metadata?.sourceDevice) {
+      warnings.push('metadata.sourceDevice is missing — traceability may be reduced.');
+    }
+
+    return {
