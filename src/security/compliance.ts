@@ -5,3 +5,16 @@ export class ComplianceManager {
     anonymizedUserId: string;
     clearedFields: string[];
   }> {
+    if (!payload) {
+      throw new Error('Compliance Failure: Payload cannot be empty.');
+    }
+
+    const clearedFields: string[] = [];
+    const warningsDetected: string[] = [];
+    let isCompliant = true;
+
+    const sensitiveFields = ['email', 'fullname', 'patient_id'];
+    for (const key of sensitiveFields) {
+      if (key in payload) {
+        clearedFields.push(key);
+        warningsDetected.push(`Sensitive field cleared: ${key}`);
