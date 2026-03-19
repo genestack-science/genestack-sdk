@@ -99,3 +99,31 @@ execute_test_suites() {
     log_error "Unit test execution failure. Resolving issues is required to proceed."
     exit 1
   fi
+}
+
+# ──────────────────────────────────────────────────────────────────────────────
+# PRODUCTION COMPILATION PHASE
+# ──────────────────────────────────────────────────────────────────────────────
+compile_source() {
+  log_info "Compiling TypeScript files to ECMAScript module files via tsc..."
+  
+  START_TIME=$(date +%s)
+
+  if ! "$TS_COMPILER" --project tsconfig.json; then
+    log_error "TypeScript compilation errors detected. Please check source syntax."
+    exit 1
+  fi
+
+  END_TIME=$(date +%s)
+  DURATION=$((END_TIME - START_TIME))
+
+  log_success "Compilation completed successfully in ${DURATION} seconds."
+}
+
+# ──────────────────────────────────────────────────────────────────────────────
+# POST-BUILD LOGISTICS & PACKAGING
+# ──────────────────────────────────────────────────────────────────────────────
+post_build_processing() {
+  log_info "Copying essential metadata files into target bundle..."
+  
+  if [ -f "package.json" ]; then
