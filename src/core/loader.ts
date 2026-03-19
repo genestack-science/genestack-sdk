@@ -72,3 +72,23 @@ export class VariantDatabaseLoader {
 
   /**
    * Returns how many variants are currently loaded into the cache.
+   */
+  public getTotalLoaded(): number {
+    return this.totalVariantsLoaded;
+  }
+
+  /**
+   * Clears out all references in the in-memory cache.
+   */
+  public purgeCache(): void {
+    this.inMemoryCache.clear();
+    this.totalVariantsLoaded = 0;
+  }
+
+  /**
+   * Retrieves all currently loaded references.
+   */
+  public getReferences(): CachedGenomicReference[] {
+    return Array.from(this.inMemoryCache.values());
+  }
+}
