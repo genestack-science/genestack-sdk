@@ -37,3 +37,13 @@ describe('🛡️ Security Sandbox Unit Tests Suite', () => {
     expect(response).toBeDefined();
     expect(response.success).toBe(true);
     expect(response.output).toBe(4950);
+    expect(response.error).toBeUndefined();
+    expect(response.executionDurationMs).toBeLessThan(1000);
+  });
+
+  it('Should correctly detect unhandled runtime exceptions inside isolated tasks', async () => {
+    const errorTask = async () => {
+      throw new Error('Induced parse exception inside sandbox.');
+    };
+
+    const response = await sandbox.executeIsolatedTask(errorTask);
