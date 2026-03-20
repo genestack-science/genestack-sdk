@@ -54,3 +54,26 @@ export function isInRange(marker: BiomarkerEntry): boolean {
 export function summarizePanel(panel: BiomarkerPanel): BiomarkerSummary {
   const summary: BiomarkerSummary = {
     totalMarkers: panel.markers.length,
+    outOfRangeCount: 0,
+    criticalCount: 0,
+    categoryCoverage: {
+      inflammation: 0,
+      hormonal: 0,
+      metabolic: 0,
+      neurological: 0,
+      cardiovascular: 0,
+      immunological: 0
+    }
+  };
+
+  for (const marker of panel.markers) {
+    if (!isInRange(marker)) {
+      summary.outOfRangeCount++;
+      const deviation = Math.abs(marker.value - (marker.referenceRangeMin + marker.referenceRangeMax) / 2);
+      const rangeWidth = marker.referenceRangeMax - marker.referenceRangeMin;
+      if (deviation > rangeWidth) summary.criticalCount++;
+    }
+    summary.categoryCoverage[marker.category]++;
+  }
+
+  return summary;
