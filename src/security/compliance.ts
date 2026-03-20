@@ -18,3 +18,11 @@ export class ComplianceManager {
       if (key in payload) {
         clearedFields.push(key);
         warningsDetected.push(`Sensitive field cleared: ${key}`);
+        isCompliant = false;
+      }
+    }
+
+    if (payload.testResults && typeof payload.testResults === 'object') {
+      for (const key of sensitiveFields) {
+        if (key in payload.testResults) {
+          clearedFields.push(key);
