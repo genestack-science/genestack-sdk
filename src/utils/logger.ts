@@ -75,3 +75,21 @@ export class SDKLogger {
   private emit(level: LogLevel, message: string, data?: Record<string, unknown>): void {
     if (!this.shouldLog(level)) return;
 
+    const entry: LogEntry = {
+      level,
+      namespace: this.config.namespace,
+      message,
+      timestamp: Date.now(),
+      data
+    };
+
+    this.history.push(entry);
+    const formatted = this.formatMessage(entry);
+
+    if (level === 'error') {
+      console.error(formatted);
+    } else if (level === 'warn') {
+      console.warn(formatted);
+    } else {
+      console.log(formatted);
+    }
