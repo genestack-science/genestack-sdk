@@ -10,3 +10,7 @@
     "benchmark": "ts-node scripts/benchmark.ts"
   },
   "dependencies": {
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
