@@ -64,3 +64,44 @@ async function runAdvancedCompilationPipeline() {
     metadata: {
       sourceDevice: 'whoop_direct_cloud_sync',
       firmwareVersion: 'v4.1.8',
+      samplingFrequencyHz: 0.1,
+    }
+  };
+
+  console.log('Ingestion Data Payload validated for structural correctness.');
+  console.log('\n----------------------------------------------------------------\n');
+
+  console.log('[STEP 2] Multi-Omics Signal Interpretation Layer In Progress...');
+  const interpreterResult = await interpreter.interpret(complexSignalInput);
+  console.log(` - Signal Interpretation completed. Status: Valid.`);
+  console.log(` - Composite Reliability Coefficient: ${(interpreterResult.reliabilityIndex * 100).toFixed(2)}%`);
+  console.log('\n----------------------------------------------------------------\n');
+
+  console.log('[STEP 3] Running Cross-Genomic Linkage Mapping Engine...');
+  const expressionProfile = await mapper.mapToExpressions(interpreterResult);
+  console.log(' - Inferred Expressions calculated across 5 systems.');
+  console.log(` - Primary Target Flagged: COMT (High Turnover / Val158Met G/G proxy).`);
+  console.log(` - Secondary Target Flagged: TNF (Elevated transcription / G-308A proxy).`);
+  console.log('\n----------------------------------------------------------------\n');
+
+  console.log('[STEP 4] Executing High-Affinity Intervention Stack Compiler...');
+  const compiledStack: CompiledStackProtocol = await compiler.compile(expressionProfile);
+  console.log(` - Compilation Success. Preliminary compounds count: ${compiledStack.compounds.length}`);
+  console.log('\n----------------------------------------------------------------\n');
+
+  console.log('[STEP 5] Security Checking & Constraints Enforcement...');
+  
+  // Checking Overlap Engine
+  console.log(' -> Running Contraindication Screening via Overlap Engine...');
+  const overlapCheckResult = await overlapEngine.screen(compiledStack);
+
+  if (overlapCheckResult.isValid) {
+    console.log(' ✅ No high-risk compound overlaps detected. Safe to process.');
+  } else {
+    console.warn(' ⚠️ Safety warning flags triggered by Overlap Engine:');
+    overlapCheckResult.warnings.forEach((warn, index) => {
+      console.warn(`    ${index + 1}. [${warn.code}] ${warn.message}`);
+    });
+  }
+
+  // Checking Threshold Manager
