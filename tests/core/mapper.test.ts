@@ -27,3 +27,17 @@ describe('🧬 Mapper Unit Tests Suite', () => {
       computationTimeMs: 12,
       reliabilityIndex: 0.98,
       metrics: {
+        cognition_focus_score: 0.35,
+        circadian_sleep_efficiency: 0.4,
+        inflammatory_cytokine_load: 0.85,
+        growth_repair_signal: 0.35,
+        metabolic_storage_bias: 0.8
+      }
+    };
+
+    const profile = await mapper.mapToExpressions(mockResult);
+
+    expect(profile).toBeDefined();
+    expect(profile.id).toBeDefined();
+    expect(profile.userId).toBe('usr_mapper_test_01');
+    expect(profile.expressions).toBeDefined();
