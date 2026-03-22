@@ -84,3 +84,17 @@ export class PerformanceProfiler {
    * Returns a formatted console-ready summary of a performance report.
    */
   public static formatReport(report: PerformanceReport): string {
+    const lines = [
+      `Profile: ${report.profileId}`,
+      `Total Duration: ${report.totalDurationMs} ms`,
+    ];
+    if (report.throughputPerSec !== undefined) {
+      lines.push(`Throughput: ${report.throughputPerSec} records/sec`);
+    }
+    for (const cp of report.checkpoints) {
+      const mem = cp.memoryUsedMb !== undefined ? ` | Heap: ${cp.memoryUsedMb} MB` : '';
+      lines.push(`  ✓ ${cp.label} — ${cp.elapsedSinceStartMs} ms${mem}`);
+    }
+    return lines.join('\n');
+  }
+}
