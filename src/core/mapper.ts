@@ -39,3 +39,13 @@ export class Mapper {
     } else if (repairScore < 0.4) {
       expressions['igf1'] = { status: 'Downregulated', score: repairScore };
     } else {
+      expressions['igf1'] = { status: 'Normal', score: repairScore };
+    }
+
+    return {
+      id: `expr_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`,
+      userId: result.userId,
+      timestamp: Date.now(),
+      expressions
+    };
+  }
