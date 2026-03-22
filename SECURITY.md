@@ -92,3 +92,63 @@ if (!result.isValid) {
 
 ## 3. Cryptographic Storage & Encryption at Rest
 
+When long-term caching or local saving is required, data is encrypted using high-grade symmetric algorithms to prevent extraction by unauthorized parties.
+
+```
+                  Unencrypted Profile Data Stream
+                                 │
+                                 ▼
+                 +───────────────────────────────+
+                 |    AES-256-GCM Encryptor      |  <-- Cryptographic Key
+                 +───────────────┬───────────────+
+                                 │
+                                 ▼
+                  [ Hex-Encoded Ciphertext Block ]
+                  [ Associated Validation Tag    ]
+                  [ Initialization Vector (IV)   ]
+```
+
+### 3.1 Advanced Encryption Specification
+
+- **Algorithm**: AES-256-GCM (Galois/Counter Mode).
+- **Key Generation**: Cryptographically strong pseudo-random bits generated via hardware-level source enclaves.
+- **Initialization Vector (IV)**: 12-byte cryptographically unique vector for every encryption operation.
+- **Verification Tag**: 16-byte authentication tag ensuring integrity and preventing tampering.
+
+---
+
+## 4. Third-Party Multi-Omics File Security & Sandbox Isolation
+
+Parsing direct sequence outputs from third-party genetic providers (e.g., raw text files, `.vcf` documents, or `.bam` binaries) introduces significant security risks. The GENESTACK SDK routes all untrusted file parsing through isolated sandboxes.
+
+```
++───────────────────────────────────────────────────────────+
+|               Isolate Sandbox Runtime Context             |
++───────────────────────────────────────────────────────────+
+
+  [ Raw Input File Buffer ] ───────► [ Process Limit Filter ] 
+                                             │
+                                             ▼
+  [ Thread Worker Memory ]  ───────► [ Network Socket Kill ]
+                                             │
+                                             ▼
+  [ Whitelisted Variants Only ] ────► [ Parse Success ]
+```
+
+### 4.1 Specific Sandbox Isolation Controls
+
+- **Memory Constraints**: Individual worker memory bounds are restricted to prevent high CPU or RAM usage attacks.
+- **Network Isolation**: Outbound network sockets are completely disabled inside the isolated parser thread to prevent data leaks.
+- **Filesystem Access**: Read and write access is completely blocked outside of the specifically assigned directory scope.
+- **Whitelisted Line Matching**: Only specifically mapped variants (e.g., rs4680, rs1800497) are extracted; all extraneous data lines are immediately discarded from memory.
+
+---
+
+## 5. Automated Memory Sanitization & Data Purge Rules
+
+To prevent data retention leaks and protect against memory-dump extraction attacks, the SDK implements strict memory sanitization routines:
+
+```
+                  Active Processing Memory Space
+                                 │
+                                 ▼
