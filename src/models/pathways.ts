@@ -77,3 +77,24 @@ export const PATHWAY_REGISTRY: PathwayDefinition[] = [
 ];
 
 /**
+ * Returns a pathway definition by its category key.
+ */
+export function getPathwayByCategory(category: PathwayCategory): PathwayDefinition | undefined {
+  return PATHWAY_REGISTRY.find((p) => p.category === category);
+}
+
+/**
+ * Returns all pathways that target a specific gene symbol.
+ */
+export function getPathwaysByGene(geneSymbol: string): PathwayDefinition[] {
+  return PATHWAY_REGISTRY.filter((p) =>
+    p.targetGenes.some((g) => g.toLowerCase() === geneSymbol.toLowerCase())
+  );
+}
+
+/**
+ * Returns all pathways that target a specific SNP rsID.
+ */
+export function getPathwaysBySnp(rsId: string): PathwayDefinition[] {
+  return PATHWAY_REGISTRY.filter((p) =>
+    p.targetSnps.some((s) => s.toLowerCase() === rsId.toLowerCase())
