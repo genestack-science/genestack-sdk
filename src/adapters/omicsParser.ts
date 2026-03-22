@@ -44,3 +44,17 @@ export class MultiOmicsParser {
 
       const rsId = parts[0]?.trim() || '';
       const chromosome = parts[1]?.trim() || '';
+      const position = parseInt(parts[2]?.trim() || '0', 10);
+      const alleles = parts[3]?.trim() || '';
+
+      // Check if the current line matches any of the target SNPs
+      if (this.targetSnpWhiteList.includes(rsId)) {
+        matchedVariants.push({
+          rsId,
+          chromosome,
+          position,
+          alleles,
+          qualityScore: 1.0 // High quality baseline for direct text files
+        });
+      }
+    }
