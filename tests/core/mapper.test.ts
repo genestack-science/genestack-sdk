@@ -41,3 +41,19 @@ describe('🧬 Mapper Unit Tests Suite', () => {
     expect(profile.id).toBeDefined();
     expect(profile.userId).toBe('usr_mapper_test_01');
     expect(profile.expressions).toBeDefined();
+
+    // Verify mapped gene expression score evaluations
+    const comt = profile.expressions.comt;
+    expect(comt).toBeDefined();
+    expect(comt?.status).toBe('Upregulated');
+    expect(comt?.score).toBeCloseTo(0.65);
+
+    const tnf = profile.expressions.tnf;
+    expect(tnf).toBeDefined();
+    expect(tnf?.status).toBe('Upregulated');
+    expect(tnf?.score).toBe(0.85);
+
+    const igf1 = profile.expressions.igf1;
+    expect(igf1).toBeDefined();
+    expect(igf1?.status).toBe('Downregulated');
+    expect(igf1?.score).toBe(0.35);
