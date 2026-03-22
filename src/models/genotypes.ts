@@ -47,3 +47,24 @@ export function inferExpressionImpact(
   const lossOfFunctionGenes = ['DRD2', 'MSTN'];
 
   if (gainOfFunctionGenes.includes(geneSymbol)) {
+    return zygosity === 'homozygous_minor' ? 'gain_of_function' : 'neutral';
+  }
+  if (lossOfFunctionGenes.includes(geneSymbol)) {
+    return zygosity === 'homozygous_minor' ? 'loss_of_function' : 'neutral';
+  }
+  return 'uncertain';
+}
+
+/**
+ * Builds a full GenotypeSummaryProfile from a list of AlleleClassifications.
+ */
+export function buildGenotypeSummary(
+  userId: string,
+  classifications: AlleleClassification[]
+): GenotypeSummaryProfile {
+  return {
+    userId,
+    processedAt: Date.now(),
+    totalVariantsProcessed: classifications.length,
+    gainOfFunctionCount: classifications.filter((c) => c.expressionImpact === 'gain_of_function').length,
+    lossOfFunctionCount: classifications.filter((c) => c.expressionImpact === 'loss_of_function').length,
