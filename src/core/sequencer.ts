@@ -14,3 +14,23 @@ export interface IngestedSnpRecord {
   rsId: string;
   chromosome: string;
   position: number;
+  alleles: string;
+  observedDepth: number;
+  qualityScore: number;
+}
+
+export class DirectSequencerAdapter {
+  private config: SequencerIngestionConfig;
+
+  constructor(customConfig: Partial<SequencerIngestionConfig> = {}) {
+    this.config = {
+      minimumQualityScore: 0.95,
+      sequencerHardwareVendor: 'Illumina NovaSeq',
+      samplingDepth: '30x',
+      ...customConfig
+    };
+  }
+
+  /**
+   * Returns the active sequencer configuration.
+   */
