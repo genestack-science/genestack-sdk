@@ -33,3 +33,20 @@ export class Interpreter {
 
     // 3. Evaluate Inflammatory Cytokine Balance
     metrics['inflammatory_cytokine_load'] = input.inflammation.sorenessPersistence === 'rare' ? 0.15 : 
+                                            input.inflammation.sorenessPersistence === 'occasional' ? 0.45 : 0.85;
+
+    // 4. Evaluate Growth & Recovery Axis
+    metrics['growth_repair_signal'] = input.recovery.muscleRegeneration === 'fast' ? 0.95 : 
+                                      input.recovery.muscleRegeneration === 'normal' ? 0.75 : 0.3;
+
+    // 5. Evaluate Metabolic Storage Bias
+    metrics['metabolic_storage_bias'] = input.metabolism.weightPreservation === 'lean' ? 0.2 : 
+                                        input.metabolism.weightPreservation === 'normal' ? 0.5 : 0.9;
+
+    const computationTimeMs = Date.now() - startTimeMs;
+    const reliabilityIndex = 0.95; // Ingestion quality assurance score
+
+    return {
+      id: `int_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`,
+      userId: input.userId,
+      timestamp: Date.now(),
