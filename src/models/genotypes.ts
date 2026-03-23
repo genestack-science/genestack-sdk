@@ -68,3 +68,6 @@ export function buildGenotypeSummary(
     totalVariantsProcessed: classifications.length,
     gainOfFunctionCount: classifications.filter((c) => c.expressionImpact === 'gain_of_function').length,
     lossOfFunctionCount: classifications.filter((c) => c.expressionImpact === 'loss_of_function').length,
+    classifications
+  };
+}
