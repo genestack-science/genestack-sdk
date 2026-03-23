@@ -17,3 +17,19 @@ export interface AdapterHealthCheck {
 export interface AdapterConfig {
   adapterId: string;
   timeoutMs: number;
+  retryAttempts: number;
+  enableLogging: boolean;
+}
+export interface ParsedAdapterOutput {
+  adapterId: string;
+  parsedAt: number;
+  recordCount: number;
+  data: Record<string, unknown>;
+  warnings: string[];
+}
+
+/**
+ * Creates a default AdapterConfig with sensible fallback values.
+ */
+export function createDefaultAdapterConfig(adapterId: string): AdapterConfig {
+  return {
