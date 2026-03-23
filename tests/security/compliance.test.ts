@@ -28,3 +28,13 @@ describe('🛡️ Compliance Manager Unit Tests Suite', () => {
         patient_id: '998811'
       }
     };
+
+    const result = await compliance.verifyAndSanitize(rawPayload);
+
+    expect(result).toBeDefined();
+    expect(result.isCompliant).toBe(false); // Flagged because sensitive fields were removed
+    expect(result.warningsDetected.length).toBeGreaterThan(0);
+    
+    // Verify that the user ID was converted into an anonymized hash
+    expect(result.anonymizedUserId).toContain('usr_hash_');
+    
