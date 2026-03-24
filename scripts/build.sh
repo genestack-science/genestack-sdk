@@ -127,3 +127,40 @@ post_build_processing() {
   log_info "Copying essential metadata files into target bundle..."
   
   if [ -f "package.json" ]; then
+    cp package.json "$DIST_DIR/"
+  fi
+
+  if [ -f "README.md" ]; then
+    cp README.md "$DIST_DIR/"
+  fi
+
+  if [ -f "LICENSE" ]; then
+    cp LICENSE "$DIST_DIR/"
+  fi
+
+  log_info "Calculating overall bundle size..."
+  TOTAL_SIZE=$(du -sh "$DIST_DIR" | cut -f1)
+  
+  log_success "Post-build processes completed. Bundle distribution size: $TOTAL_SIZE."
+}
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MAIN PIPELINE EXECUTION ENTRYPOINT
+# ──────────────────────────────────────────────────────────────────────────────
+main() {
+  echo -e "${CYAN}================================================================${NC}"
+  echo -e "${CYAN}🧬 GENESTACK PRODUCTION BUNDLE SYNTHESIZER${NC}"
+  echo -e "${CYAN}================================================================${NC}\n"
+
+  check_prerequisites
+  clean_directories
+  execute_test_suites
+  compile_source
+  post_build_processing
+
+  echo -e "\n${CYAN}================================================================${NC}"
+  echo -e "${GREEN}🎉 BUILD COMPLETE: $PROJECT_NAME production files generated.${NC}"
+  echo -e "${CYAN}================================================================${NC}"
+}
+
+main "$@"
