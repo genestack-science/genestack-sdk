@@ -105,3 +105,28 @@ async function runAdvancedCompilationPipeline() {
   }
 
   // Checking Threshold Manager
+  console.log(' -> Validating Dosage Safety Limits via Threshold Manager...');
+  const thresholdCheckResult = await thresholdManager.validateThresholds(compiledStack);
+
+  if (thresholdCheckResult.isCompliant) {
+    console.log(' ✅ Dosage limits are fully compliant with safe operational ranges.');
+  } else {
+    console.warn(' ⚠️ Adjusting dosage parameters to prevent target receptor saturation.');
+    thresholdCheckResult.adjustments.forEach((adj, index) => {
+      console.warn(`    ${index + 1}. Adjusted ${adj.compound} from ${adj.originalDose} to ${adj.adjustedDose}`);
+    });
+  }
+
+  console.log('\n----------------------------------------------------------------\n');
+  console.log('================================================================');
+  console.log('📊 FINAL SANITIZED INTERVENTION PROTOCOL');
+  console.log('================================================================');
+
+  console.log(`Protocol Reference ID: ${compiledStack.id}`);
+  console.log(`Coverage Score Target: ${(compiledStack.coverageScore * 100).toFixed(1)}%`);
+  console.log(`Redundancy Index Check: ${compiledStack.redundancyScore}`);
+  console.log(`Creation Timestamp: ${new Date(compiledStack.timestamp).toLocaleString()}`);
+  console.log('\nCompounds Strategy Breakdown:');
+
+  compiledStack.compounds.forEach((comp, idx) => {
+    console.log(`\n ${idx + 1}. Molecule: ${comp.name.toUpperCase()}`);
