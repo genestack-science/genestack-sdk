@@ -10,3 +10,9 @@ export interface SandboxResponse {
   error?: string;
   executionDurationMs: number;
   warningsRaised: string[];
+}
+
+export class SecuritySandbox {
+  private options: SandboxOptions;
+  constructor(options: SandboxOptions) {
+    this.options = options;
