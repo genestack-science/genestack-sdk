@@ -34,3 +34,44 @@ class TelemetryStreamingManager {
     console.log(`📡 TELEMETRY STREAM SIMULATOR INITIALIZED FOR USER: ${this.userId}`);
     console.log('================================================================\n');
 
+    // Subscribe to clean, processed stream inputs
+    this.sampleStream$.subscribe({
+      next: async (sample: BiometricSample) => {
+        this.receivedPacketCounter++;
+        console.log(`[PACKET INGESTED #${this.receivedPacketCounter}] Sample Type: ${sample.type} | Raw Value: ${sample.value}`);
+
+        // Phase 1: De-noising the telemetry signal
+        const cleanSample = await this.cleaner.cleanSample(sample);
+        console.log(`   -> Signal De-noised. Filtered Variance delta: ${(cleanSample.variance - sample.value).toFixed(2)}`);
+
+        // Phase 2: Compute mathematical conversion to biological range
+        const normalizedScore = this.biometricsConverter.normalizeBiometricValue(
+          cleanSample.type,
+          cleanSample.value
+        );
+        console.log(`   -> Normalized Biomarker Baseline Score: ${(normalizedScore * 100).toFixed(1)}%`);
+
+        // Phase 3: Evaluate signal impact via the functional expression layer
+        const expressionWeight = await this.interpreter.evaluateExpressionDelta(
+          cleanSample.type,
+          normalizedScore
+        );
+
+        if (expressionWeight !== 0) {
+          console.log(`   💥 Alert: Signal shift alters Gene Expression. Weight modifier applied: ${expressionWeight.toFixed(2)}`);
+        } else {
+          console.log('   ✅ Gene Expression stable. No alterations required.');
+        }
+
+        console.log('----------------------------------------------------------------');
+      },
+      error: (err) => {
+        console.error('Fatal telemetry ingestion pipeline exception encountered:', err);
+      },
+      complete: () => {
+        console.log('\n================================================================');
+        console.log('🎉 TELEMETRY STREAM COMPLETED WITHOUT SYSTEM ERRORS');
+        console.log('================================================================');
+        console.log(`Total sample telemetry metrics analyzed: ${this.receivedPacketCounter}`);
+        console.log('================================================================\n');
+      }
