@@ -372,3 +372,57 @@ The GENESTACK SDK uses a strict zero-trust data lifecycle to fully protect sensi
 ```
 
 ### 7.1 Memory Allocation & Worker Isolates Sandbox
+Raw multi-omics sequencing files are handled in isolated workers. These workers operate in restricted memory environments with no external network access to prevent unauthorized code execution or system breaches.
+
+### 7.2 Data Retention & Dynamic Purge Policies
+- **Expression Weights Cache**: In-memory genetic data profiles are automatically purged after 5 minutes of inactivity.
+- **Biometric Sensor Buffers**: Telemetry sample storage is capped at the 25 most recent measurements. Old data is immediately discarded.
+- **Anonymized System Logs**: Diagnostic logs are automatically sanitized to remove all personal identifiers before being written to disk.
+
+---
+
+## 8. Developer Tasks & CLI Command Reference
+
+Common package scripts:
+
+```bash
+# Clean, type check, and build the distribution bundle
+npm run build
+
+# Run all test suites
+npm test
+
+# Format code using Prettier
+npm run format
+
+# Run linter
+npm run lint
+
+# Run analytical performance benchmark
+npm run benchmark
+```
+
+---
+
+## 9. Contribution Guidelines & Release Protocols
+
+We welcome pull requests, bug fixes, features, optimizations, and scientific updates to our existing mapping models and pathway definitions.
+
+- **Git Branching conventions**:
+  - `feature/` for adding new features or modules.
+  - `bugfix/` for bug fixes and performance improvements.
+  - `docs/` for any documentation updates.
+- **TSDoc Coverage**: All exported modules must include detailed TSDoc annotations.
+- **Strict Linting**: Format code using `npm run format` before making a pull request.
+
+---
+
+## 10. Official Social Channels & Project Links
+
+Keep up with project news, developer announcements, and decentralized science updates:
+
+- **Official Documentation**: [docs.genestack.science](https://docs.genestack.science)
+- **Twitter/X Platform**: [@GenestackDeSci](https://x.com/GenestackDeSci)
+- **Developer Discord Server**: [Join our Discord](https://discord.gg/GenestackDeSci)
+- **GitHub Core Source**: [github.com/genestack-science](https://github.com/genestack-science)
+- **Contact Inquiries**: dev-support@genestack.science
