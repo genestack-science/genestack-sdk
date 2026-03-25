@@ -39,3 +39,22 @@ export class ExportManager {
         throw new Error(`Export Failure: Unsupported format "${format}".`);
     }
 
+    return {
+      format,
+      content,
+      byteSize: Buffer.byteLength(content, 'utf8'),
+      generatedAt: Date.now()
+    };
+  }
+
+  /**
+   * Serializes the protocol to a pretty-printed JSON string.
+   */
+  private toJson(protocol: CompiledStackProtocol): string {
+    return JSON.stringify(protocol, null, 2);
+  }
+
+  /**
+   * Serializes the protocol compounds to a CSV string.
+   */
+  private toCsv(protocol: CompiledStackProtocol): string {
