@@ -31,3 +31,17 @@ export interface ExpressionMatrix {
 /**
  * Converts a numeric score (0–1) into a categorical ExpressionState.
  */
+export function scoreToState(score: number, invertedScale = false): ExpressionState {
+  const adjusted = invertedScale ? 1 - score : score;
+  if (adjusted >= 0.7) return 'Upregulated';
+  if (adjusted >= 0.5) return 'Compensating';
+  if (adjusted >= 0.3) return 'Normal';
+  return 'Downregulated';
+}
+
+/**
+ * Maps an ExpressionState to a human-readable label with clinical context.
+ */
+export function stateToLabel(state: ExpressionState): string {
+  const labels: Record<ExpressionState, string> = {
+    Upregulated: 'Overactive — intervention may be required to downregulate.',
