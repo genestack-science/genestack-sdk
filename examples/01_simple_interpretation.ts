@@ -21,3 +21,15 @@ async function runSimpleInterpretationDemo() {
   console.log('[STEP 1] Raw Biometric Signals Payload Definition');
   const signalInput: SignalInput = {
     userId: 'usr_01J8H7K3M9N2V1A5',
+    timestamp: Date.now(),
+    cognition: {
+      focusPattern: 'burst_crash',
+      workingMemory: 'normal',
+      stressThreshold: 'low',
+    },
+    circadian: {
+      sleepLatency: 'high',
+      wakingState: 'disturbed',
+      nocturnalArousal: 'high',
+    },
+    inflammation: {
