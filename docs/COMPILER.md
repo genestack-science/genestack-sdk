@@ -63,3 +63,16 @@ Below is the definitive reference matrix for the primary compound interventions 
 - **Classification**: Synthetic pentadecapeptide
 - **Biological Pathway**: Nitric oxide modulation, VEGFR2 activation
 - **Expression Mapping**: `TNF-α` upregulated, `IL6` upregulated
+- **Mechanism of Action**: Accelerates tissue repair through localized soft tissue remodeling and direct regulation of pro-inflammatory cytokines. BPC-157 works by promoting dynamic growth factor production in targeted areas without systemic risks.
+- **Dynamic Baseline Range**: `200 - 300 mcg`, administered BID (twice daily).
+
+#### CJC-1295 — Growth Hormone Releasing Hormone Analogue
+- **Classification**: Synthetic GHRH peptide (with DAC variant)
+- **Biological Pathway**: Growth Hormone / IGF-1 Axis stimulation
+- **Expression Mapping**: `IGF1` downregulated
+- **Mechanism of Action**: Binds to pituitary receptors to stimulate pulsatile GH release, avoiding the insulin resistance risks associated with synthetic hGH.
+- **Dynamic Baseline Range**: `2.0 - 2.5 mg` weekly.
+
+#### AOD-9604 — Anti-Obesity Drug Fragment
+- **Classification**: Modified GH Fragment (hGH 176-191)
+- **Biological Pathway**: Lipolysis stimulation, adipogenesis restriction
