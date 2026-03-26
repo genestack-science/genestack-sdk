@@ -57,3 +57,10 @@ describe('🧬 Mapper Unit Tests Suite', () => {
     expect(igf1).toBeDefined();
     expect(igf1?.status).toBe('Downregulated');
     expect(igf1?.score).toBe(0.35);
+  });
+
+  it('Should throw mapping exceptions when passed invalid interpreter outcomes', async () => {
+    const emptyResult: any = null;
+    await expect(mapper.mapToExpressions(emptyResult)).rejects.toThrow();
+  });
+});
