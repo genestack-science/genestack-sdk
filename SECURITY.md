@@ -152,3 +152,52 @@ To prevent data retention leaks and protect against memory-dump extraction attac
                   Active Processing Memory Space
                                  │
                                  ▼
+                  [ Dynamic Inactivity Monitor ]
+                                 │
+                  ┌──────────────┴──────────────┐
+                  ▼                             ▼
+         [ Inactive Period > 5m ]     [ Max Queue Depth Reached ]
+                  │                             │
+                  └──────────────┬──────────────┘
+                                 │
+                                 ▼
+                  [ Automated Memory Purge Rule ]
+                  - Overwrites memory buffers
+                  - Invalidates old references
+                  - Garbage collection trigger
+```
+
+### 5.1 Retention and Purge Rules
+
+1. **Expression Weights Cache**: Purged automatically after 5 minutes of inactivity.
+2. **Biometric Stream Buffers**: Limited to the previous 25 readings. Old samples are removed from memory immediately.
+3. **Log Sanitization**: Diagnostic files are stripped of personal identifiers before being written to disk.
+4. **Manual Cleanup**: The `cleanAllCachedData()` method allows developers to explicitly purge all in-memory genetic and phenotypic profiles on demand.
+
+---
+
+## 6. Regulatory Framework Compliance Matrix
+
+The table below outlines how the GENESTACK SDK meets global healthcare data standards:
+
+| Regulatory Framework | Required Standard | SDK Compliance Mechanism |
+| :--- | :--- | :--- |
+| **HIPAA Title II** | Complete de-identification of health data | Automated PII stripping via strict validation rules. |
+| **GDPR Chapter II** | Right to be forgotten (Data erasure) | Local-only execution and explicit manual memory cleanup methods. |
+| **ISO/IEC 27701** | Privacy Information Management | Secure AES-256-GCM encryption at rest for cached files. |
+
+---
+
+## 7. Emergency Response and Threat Modeling
+
+The core team performs continuous threat modeling to defend against security risks:
+
+- **Threat**: Memory-dump data extraction of cached genetic profiles.
+  - **Mitigation**: Automated in-memory cache purge runs every 5 minutes.
+- **Threat**: Cross-tenant data leaks during high-concurrency tasks.
+  - **Mitigation**: Isolated execution environments for each tenant task.
+- **Threat**: Malicious code insertion via raw sequencer files.
+  - **Mitigation**: Sandboxed parsing workers with network access disabled.
+
+---
+
