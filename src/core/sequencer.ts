@@ -34,3 +34,43 @@ export class DirectSequencerAdapter {
   /**
    * Returns the active sequencer configuration.
    */
+  public getConfig(): SequencerIngestionConfig {
+    return { ...this.config };
+  }
+
+  /**
+   * Processes a direct output string from a sequencing platform and extracts valid SNP records.
+   */
+  public async parseSequencerRawInput(rawOutputText: string): Promise<IngestedSnpRecord[]> {
+    if (!rawOutputText || rawOutputText.trim().length === 0) {
+      throw new Error('Parsing Failure: Sequencer raw string input cannot be empty.');
+    }
+
+    const matchedRecords: IngestedSnpRecord[] = [];
+    const rawLines = rawOutputText.split(/\r?\n/);
+
+    for (const line of rawLines) {
+      const cleanLine = line.trim();
+      if (cleanLine.startsWith('#') || cleanLine.length === 0) {
+        continue;
+      }
+
+      // Illumina format tab/space separated schema:
+      // rsid  chromosome  position  genotype  depth  quality
+      const parts = cleanLine.split(/\s+/);
+      if (parts.length < 4) {
+        continue;
+      }
+
+      const rsId = parts[0]?.trim() || '';
+      const chromosome = parts[1]?.trim() || '';
+      const position = parseInt(parts[2]?.trim() || '0', 10);
+      const alleles = parts[3]?.trim() || '';
+
+      const observedDepth = parts[4] ? parseInt(parts[4], 10) : 30;
+      const qualityScore = parts[5] ? parseFloat(parts[5]) : 1.0;
+
+      // Exclude low-quality readings based on configured threshold
+      if (qualityScore < this.config.minimumQualityScore) {
+        continue;
+      }
