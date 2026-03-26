@@ -93,3 +93,13 @@ export class SDKLogger {
     } else {
       console.log(formatted);
     }
+  }
+
+  public getHistory(): LogEntry[] {
+    return [...this.history];
+  }
+
+  public clearHistory(): void {
+    this.history = [];
+  }
+}
