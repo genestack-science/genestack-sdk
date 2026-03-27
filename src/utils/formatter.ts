@@ -58,3 +58,7 @@ export function formatBytes(bytes: number): string {
 
 /**
  * Pads a string to a fixed width with trailing spaces for table-aligned output.
+ */
+export function padEnd(str: string, width: number): string {
+  return str.length >= width ? str : str + ' '.repeat(width - str.length);
+}
