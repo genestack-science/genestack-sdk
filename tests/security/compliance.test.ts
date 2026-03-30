@@ -38,3 +38,9 @@ describe('🛡️ Compliance Manager Unit Tests Suite', () => {
     // Verify that the user ID was converted into an anonymized hash
     expect(result.anonymizedUserId).toContain('usr_hash_');
     
+    // Check that sensitive identifiers were cleared out
+    expect(result.clearedFields).toContain('email');
+    expect(result.clearedFields).toContain('fullname');
+    expect(result.clearedFields).toContain('patient_id');
+  });
+
