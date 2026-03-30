@@ -12,3 +12,11 @@ export interface CompiledCompound {
   clinicalConfidence: number;
 }
 export interface SecurityChecks {
+  isValid: boolean;
+  warnings: string[];
+  adjustments: {
+    compoundId: string;
+    adjustedDose: string;
+    reason: string;
+  }[];
+}
