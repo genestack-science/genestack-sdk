@@ -33,3 +33,12 @@ export interface ParsedAdapterOutput {
  */
 export function createDefaultAdapterConfig(adapterId: string): AdapterConfig {
   return {
+    adapterId,
+    timeoutMs: 5000,
+    retryAttempts: 3,
+    enableLogging: true
+  };
+}
+
+/**
+ * Creates a health check snapshot for an adapter.
