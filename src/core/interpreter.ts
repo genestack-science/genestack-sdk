@@ -50,3 +50,26 @@ export class Interpreter {
       id: `int_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`,
       userId: input.userId,
       timestamp: Date.now(),
+      computationTimeMs,
+      reliabilityIndex,
+      metrics
+    };
+  }
+
+  /**
+   * Compares continuous real-time biomarker readings against base levels to assess dynamic changes.
+   */
+  public async evaluateExpressionDelta(metricKey: string, score: number): Promise<number> {
+    if (score < 0 || score > 1) {
+      throw new Error('Normalization Range Violation: Baseline score must fall within the [0, 1] range.');
+    }
+
+    // Determine weight modifications for changes in specific metrics
+    switch (metricKey) {
+      case 'resting_heart_rate':
+        return score > 0.75 ? 0.2 : score < 0.35 ? -0.25 : 0.0;
+      case 'heart_rate_variability':
+        return score > 0.8 ? 0.35 : score < 0.3 ? -0.4 : 0.0;
+      case 'deep_sleep_duration_seconds':
+        return score < 0.4 ? -0.3 : 0.0;
+      default:
