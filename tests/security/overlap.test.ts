@@ -25,3 +25,24 @@ describe('🛡️ Overlap Engine Unit Tests Suite', () => {
       userId: 'usr_clean_safety_01',
       timestamp: Date.now(),
       compounds: [
+        {
+          id: 'int_semax',
+          name: 'Semax Nootropic',
+          dosage: '450 mcg',
+          frequency: 'daily_morning',
+          class: 'Nootropics',
+          pathway: 'BDNF / TrkB Pathway',
+          mappedExpressions: ['COMT'],
+          details: 'Supports focus.',
+          contraindications: [],
+          safeBoundsMg: [0.1, 1.2],
+          clinicalConfidence: 0.9
+        }
+      ],
+      coverageScore: 1.0,
+      redundancyScore: 'low',
+      securityChecks: { isValid: true, warnings: [], adjustments: [] },
+      suggestedPhasedSchedule: []
+    };
+
+    const assessment = await overlapEngine.screen(cleanProtocol);
