@@ -44,3 +44,12 @@ describe('🛡️ Compliance Manager Unit Tests Suite', () => {
     expect(result.clearedFields).toContain('patient_id');
   });
 
+  it('Should validate compliant anonymized payloads with no modifications', async () => {
+    const cleanPayload: Record<string, any> = {
+      userId: 'usr_clean_anonymized_99',
+      interpretedScore: 0.75,
+      timestamp: Date.now()
+    };
+
+    const result = await compliance.verifyAndSanitize(cleanPayload);
+    expect(result.isCompliant).toBe(true);
