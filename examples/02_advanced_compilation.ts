@@ -130,3 +130,20 @@ async function runAdvancedCompilationPipeline() {
 
   compiledStack.compounds.forEach((comp, idx) => {
     console.log(`\n ${idx + 1}. Molecule: ${comp.name.toUpperCase()}`);
+    console.log(`    - Biological Pathway Targeted: ${comp.pathway}`);
+    console.log(`    - Specific Gene Expression Addressed: ${comp.mappedExpressions.join(', ')}`);
+    console.log(`    - Dynamic Algorithmic Dosage: ${comp.dosage}`);
+    console.log(`    - Dynamic Algorithmic Frequency: ${comp.frequency}`);
+    console.log(`    - Medical Mechanics: ${comp.details}`);
+  });
+
+  console.log('\n================================================================');
+  console.log('🛡️ FINAL STATUS: Fully Compiled, Checked, and Optimized.');
+  console.log('================================================================\n');
+}
+
+// Start async advanced pipeline
+runAdvancedCompilationPipeline().catch((err) => {
+  console.error('Fatal execution failure in Advanced Compilation Pipeline:', err);
+  process.exit(1);
+});
