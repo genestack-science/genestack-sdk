@@ -74,3 +74,18 @@ export class DirectSequencerAdapter {
       if (qualityScore < this.config.minimumQualityScore) {
         continue;
       }
+
+      // Basic allele format validation
+      const validAlleleFormat = /^[ACGTDI/-]{1,2}$/i;
+      if (!validAlleleFormat.test(alleles)) {
+        continue;
+      }
+
+      matchedRecords.push({
+        rsId,
+        chromosome,
+        position,
+        alleles: alleles.toUpperCase(),
+        observedDepth,
+        qualityScore
+      });
