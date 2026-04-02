@@ -46,3 +46,34 @@ describe('🛡️ Overlap Engine Unit Tests Suite', () => {
     };
 
     const assessment = await overlapEngine.screen(cleanProtocol);
+    expect(assessment).toBeDefined();
+    expect(assessment.isValid).toBe(true);
+    expect(assessment.warnings.length).toBe(0);
+    expect(assessment.adjustments.length).toBe(0);
+  });
+
+  it('Should flag dopaminergic overload when combining high-turnover nootropics', async () => {
+    const dangerousProtocol: CompiledStackProtocol = {
+      id: 'stk_dangerous_01',
+      userId: 'usr_dangerous_overlap_01',
+      timestamp: Date.now(),
+      compounds: [
+        {
+          id: 'int_semax',
+          name: 'Semax Nootropic',
+          dosage: '450 mcg',
+          frequency: 'daily_morning',
+          class: 'Nootropics',
+          pathway: 'BDNF / TrkB Pathway',
+          mappedExpressions: ['COMT'],
+          details: 'Supports focus.',
+          contraindications: [],
+          safeBoundsMg: [0.1, 1.2],
+          clinicalConfidence: 0.9
+        },
+        {
+          id: 'int_bromantane',
+          name: 'Bromantane',
+          dosage: '100 mg',
+          frequency: 'daily_morning',
+          class: 'Adaptogens',
