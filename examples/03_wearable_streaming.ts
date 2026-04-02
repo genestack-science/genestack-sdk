@@ -75,3 +75,44 @@ class TelemetryStreamingManager {
         console.log(`Total sample telemetry metrics analyzed: ${this.receivedPacketCounter}`);
         console.log('================================================================\n');
       }
+    });
+
+    // Start emitting mock telemetry signals
+    this.beginMockEmission();
+  }
+
+  private beginMockEmission() {
+    console.log(`Emitting mock wearable biometric telemetry every ${SAMPLE_EMISSION_RATE_MS}ms...\n`);
+
+    const types: (BiometricSample['type'])[] = [
+      'resting_heart_rate',
+      'heart_rate_variability',
+      'respiratory_rate',
+      'deep_sleep_duration_seconds',
+      'body_temperature_celsius'
+    ];
+
+    const emissionTimer = setInterval(() => {
+      // Pick random metric type
+      const randomType = types[Math.floor(Math.random() * types.length)]!;
+      
+      // Calculate realistic mock parameters
+      let randomValue = 0;
+      switch (randomType) {
+        case 'resting_heart_rate':
+          randomValue = 54 + Math.random() * 12; // Normal active resting HR
+          break;
+        case 'heart_rate_variability':
+          randomValue = 68 + Math.random() * 45; // Milliseconds
+          break;
+        case 'respiratory_rate':
+          randomValue = 13.5 + Math.random() * 2.5; // Breaths per minute
+          break;
+        case 'deep_sleep_duration_seconds':
+          randomValue = 5400 + Math.random() * 2400; // 1.5 to 2.1 hours in seconds
+          break;
+        case 'body_temperature_celsius':
+          randomValue = 36.4 + Math.random() * 0.7; // Core temperature
+          break;
+      }
+
