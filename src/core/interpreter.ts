@@ -73,3 +73,7 @@ export class Interpreter {
       case 'deep_sleep_duration_seconds':
         return score < 0.4 ? -0.3 : 0.0;
       default:
+        return 0.0;
+    }
+  }
+}
