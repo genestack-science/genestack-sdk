@@ -28,3 +28,14 @@ export interface SignalMetadata {
   firmwareVersion: string;
   samplingFrequencyHz: number;
 }
+export interface SignalInput {
+  userId: string;
+  timestamp: number;
+  cognition: CognitionMetrics;
+  circadian: CircadianMetrics;
+  inflammation: InflammationMetrics;
+  recovery: RecoveryMetrics;
+  metabolism: MetabolismMetrics;
+  metadata: SignalMetadata;
+}
+export interface InterpreterResult {
