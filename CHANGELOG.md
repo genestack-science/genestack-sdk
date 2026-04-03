@@ -39,3 +39,13 @@ Our versioning strategy follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
 - Fixed an intermittent cache expiration bug where expired expression profiles remained in the LRU cache.
 - Resolved a race condition during continuous bio-telemetry streaming where sensor anomalies could cause the parser to reject valid samples.
 - Corrected Z-Score boundary check thresholds to avoid false positive exclusions of valid biometric readings.
+
+---
+
+## [1.0.0]
+
+### Added
+- Initial public release of the GENESTACK SDK.
+- Support for the five core biological pathways: Dopaminergic Regulation, Circadian Rhythmicity, Inflammatory Balance, Anabolic Signaling, and Metabolic Efficiency.
+- Ingestion adapters for common biomarker reports and third-party wearable device APIs.
+- Comprehensive unit test runner suite and performance benchmarking tools.
