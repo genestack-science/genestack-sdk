@@ -172,3 +172,34 @@ Once expressions are determined, the compiler computes compound recommendations.
                        │
                        ▼
            [ Validated Output Protocol ]
+```
+
+### 4.1 Contraindication Analysis
+
+The system screens for interactions across all proposed compounds. For instance, combining multiple compounds that stimulate the same pathways triggers an immediate warning:
+
+```
+Proposed Compounds: [ Semax, Bromantane ]
+Pathway Impact: Concurrent upregulation of dopamine synthesis pathways.
+Mitigation Action: Adjust the dosage ceiling for both compounds.
+```
+
+### 4.2 Automated Dosage Scaling
+
+Dosages are scaled dynamically based on a patient's inferred expression status and biometrics:
+
+$$\text{Prescribed Dose} = \text{Base Dose} \times (1 + \text{Expression Weight Modifier})$$
+
+Where the modifier is capped to prevent exceeding safety limits.
+
+---
+
+## 5. Security & Multi-Tenant Architecture
+
+GENESTACK implements zero-trust data processing principles. All user data is fully decoupled from identifying attributes before processing.
+
+### 5.1 Sandbox Runtime Isolation
+Untrusted third-party sequencing inputs are handled within isolated workers. These workers run in restricted memory environments to prevent unauthorized system access or execution.
+
+### 5.2 Dynamic HIPAA Verification
+Automated checks continuously verify that all input payloads are anonymized before being saved or exported. Any records containing personal identifiers (e.g., names, locations) are rejected before analysis begins.
