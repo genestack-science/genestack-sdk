@@ -21,3 +21,21 @@ export interface CompoundInteractionRule {
   severity: InteractionSeverity;
   mechanism: InteractionMechanism;
   description: string;
+  mitigation?: string;
+}
+export interface InteractionScreeningResult {
+  pairKey: string;
+  compoundA: string;
+  compoundB: string;
+  severity: InteractionSeverity;
+  mechanism: InteractionMechanism;
+  flagged: boolean;
+  mitigation?: string;
+}
+
+// Standard pre-defined interaction rules for common compound combinations
+export const STANDARD_INTERACTION_RULES: CompoundInteractionRule[] = [
+  {
+    id: 'rule_semax_bromantane',
+    compoundA: 'Semax Nootropic',
+    compoundB: 'Bromantane',
