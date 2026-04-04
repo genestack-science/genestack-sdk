@@ -61,3 +61,29 @@ export const STANDARD_INTERACTION_RULES: CompoundInteractionRule[] = [
     mechanism: 'pathway_amplification',
     description: 'Dual GHRH/ghrelin axis stimulation can cause supraphysiological GH pulses.',
     mitigation: 'Use lower individual doses and monitor IGF-1 levels monthly.'
+  }
+];
+
+/**
+ * Screens a pair of compound names against the standard interaction rules.
+ */
+export function screenInteractionPair(
+  nameA: string,
+  nameB: string,
+  rules: CompoundInteractionRule[] = STANDARD_INTERACTION_RULES
+): InteractionScreeningResult | null {
+  for (const rule of rules) {
+    const matches =
+      (rule.compoundA === nameA && rule.compoundB === nameB) ||
+      (rule.compoundA === nameB && rule.compoundB === nameA);
+
+    if (matches) {
+      return {
+        pairKey: `${nameA}__${nameB}`,
+        compoundA: nameA,
+        compoundB: nameB,
+        severity: rule.severity,
+        mechanism: rule.mechanism,
+        flagged: rule.severity !== 'none' && rule.severity !== 'minor',
+        mitigation: rule.mitigation
+      };
