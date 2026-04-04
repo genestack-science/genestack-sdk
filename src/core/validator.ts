@@ -57,3 +57,25 @@ export class SchemaValidator {
     }
 
     return {
+      isValid: errors.length === 0,
+      errors,
+      warnings
+    };
+  }
+
+  /**
+   * Validates a CompiledStackProtocol against clinical integrity rules.
+   */
+  public validateProtocol(protocol: CompiledStackProtocol): ValidationResult {
+    const errors: string[] = [];
+    const warnings: string[] = [];
+
+    if (!protocol) {
+      return { isValid: false, errors: ['Protocol payload is null or undefined.'], warnings: [] };
+    }
+
+    if (!protocol.id || protocol.id.trim().length === 0) {
+      errors.push('Protocol id is required.');
+    }
+
+    if (!protocol.userId) {
