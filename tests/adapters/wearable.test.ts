@@ -5,3 +5,7 @@ describe('WearableIngestionAdapter', () => {
     const adapter = new WearableIngestionAdapter();
     const packet: WearableTelemetryPacket = {
       userId: 'usr_test_1',
+      deviceSource: 'oura',
+      syncToken: 'token_abc',
+      timestamp: Date.now(),
+      biometrics: [
