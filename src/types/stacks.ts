@@ -20,3 +20,9 @@ export interface SecurityChecks {
     reason: string;
   }[];
 }
+export interface PhasedScheduleItem {
+  phase: number;
+  durationDays: number;
+  compounds: string[];
+  objectives: string;
+}
