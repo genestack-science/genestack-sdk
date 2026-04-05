@@ -26,3 +26,12 @@ export interface PhasedScheduleItem {
   compounds: string[];
   objectives: string;
 }
+export interface CompiledStackProtocol {
+  id: string;
+  userId: string;
+  timestamp: number;
+  compounds: CompiledCompound[];
+  coverageScore: number;
+  redundancyScore: 'low' | 'moderate' | 'high';
+  securityChecks: SecurityChecks;
+  suggestedPhasedSchedule: PhasedScheduleItem[];
