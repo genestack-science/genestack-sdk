@@ -38,3 +38,33 @@ export class WearableIngestionAdapter {
    */
   public async parseWearableTelemetry(packet: WearableTelemetryPacket): Promise<Record<string, any>> {
     if (!packet || !packet.biometrics || packet.biometrics.length === 0) {
+      throw new Error('Ingestion Failure: Telemetry payload contains no biometric samples.');
+    }
+
+    const aggregatedMetrics: Record<string, any> = {};
+
+    for (const sample of packet.biometrics) {
+      if (sample.confidence < 0.65) {
+        // Skip low-confidence sensor readings
+        continue;
+      }
+
+      // De-noise and map metric values directly to expression weights
+      const key = `${packet.deviceSource}_${sample.type}`;
+      
+      if (!aggregatedMetrics[key]) {
+        aggregatedMetrics[key] = [];
+      }
+
+      aggregatedMetrics[key].push(sample.value);
+    }
+
+    // Compute moving averages for metrics
+    const parsedOutputs: Record<string, any> = {
+      source: packet.deviceSource,
+      syncToken: packet.syncToken,
+      samplesParsed: packet.biometrics.length,
+      timestamp: packet.timestamp,
+      movingAverages: {}
+    };
+
