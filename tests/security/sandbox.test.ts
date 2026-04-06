@@ -63,3 +63,6 @@ describe('🛡️ Security Sandbox Unit Tests Suite', () => {
     expect(sandbox.containsHazardousPatterns(maliciousCode)).toBe(true);
 
     const exploitCode = `require("child_process").exec("rm -rf /");`;
+    expect(sandbox.containsHazardousPatterns(exploitCode)).toBe(true);
+  });
+});
