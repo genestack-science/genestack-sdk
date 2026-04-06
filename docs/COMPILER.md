@@ -76,3 +76,23 @@ Below is the definitive reference matrix for the primary compound interventions 
 #### AOD-9604 — Anti-Obesity Drug Fragment
 - **Classification**: Modified GH Fragment (hGH 176-191)
 - **Biological Pathway**: Lipolysis stimulation, adipogenesis restriction
+- **Expression Mapping**: `FTO` upregulated
+- **Mechanism of Action**: Targets specific $\beta_3$-adrenergic receptors to activate localized lipolysis without raising systemic IGF-1 levels.
+- **Dynamic Baseline Range**: `250 - 350 mcg` daily in fasted states.
+
+---
+
+### 3.2 Neuromodulation Stacks
+
+#### Semax — Synthetic ACTH Analogue
+- **Classification**: Nootropic neuropeptide
+- **Biological Pathway**: BDNF synthesis upregulation, prefrontal dopaminergic support
+- **Expression Mapping**: `COMT` upregulated (High-turnover variant)
+- **Mechanism of Action**: Upregulates Brain-Derived Neurotrophic Factor in dopaminergic pathways to support sustained executive focus.
+- **Dynamic Baseline Range**: `400 - 600 mcg` daily via nasal spray.
+
+#### Bromantane
+- **Classification**: Actoprotector, atypical stimulant
+- **Biological Pathway**: Dopamine synthesis enhancement
+- **Expression Mapping**: `DRD2` downregulated (Low receptor density)
+- **Mechanism of Action**: Upregulates tyrosine hydroxylase activity—the rate-limiting step in dopamine synthesis—to support long-term motivation without receptor downregulation.
