@@ -5,3 +5,6 @@ export interface BloodMarker {
   unit: string;
   referenceRange: [number, number];
 }
+
+export class BloodPanelParser {
+  public parseLabReport(jsonContent: string): BloodMarker[] {
