@@ -35,3 +35,31 @@ export class Compiler {
           mappedExpressions: ['COMT'],
           details: 'Upregulates available Brain-Derived Neurotrophic Factor to prevent cognitive crash.',
           contraindications: ['High_Anxiety'],
+          safeBoundsMg: [0.1, 1.2],
+          clinicalConfidence: 0.91
+        });
+        cumulativeCoverage += 0.85;
+      } else {
+        cumulativeCoverage += 1.0;
+      }
+    }
+
+    // 2. Process TNF Expressions to map Peptides
+    const tof = profile.expressions.tnf;
+    if (tof) {
+      totalGenesAnalyzed++;
+      if (tof.status === 'Upregulated' || tof.status === 'Compensating') {
+        compounds.push({
+          id: 'int_bpc157_comp',
+          name: 'BPC-157 Peptide',
+          dosage: '250 mcg',
+          frequency: 'BID',
+          class: 'Peptides',
+          pathway: 'VEGFR-2 Angiogenesis',
+          mappedExpressions: ['TNF', 'IL6'],
+          details: 'Directly downregulates localized inflammatory markers.',
+          contraindications: ['Active_Oncology'],
+          safeBoundsMg: [0.1, 1.0],
+          clinicalConfidence: 0.95
+        });
+        cumulativeCoverage += 0.95;
