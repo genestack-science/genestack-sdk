@@ -53,3 +53,8 @@ describe('🛡️ Compliance Manager Unit Tests Suite', () => {
 
     const result = await compliance.verifyAndSanitize(cleanPayload);
     expect(result.isCompliant).toBe(true);
+    expect(result.warningsDetected.length).toBe(0);
+    expect(result.clearedFields.length).toBe(0);
+    expect(result.anonymizedUserId).toContain('usr_hash_');
+  });
+});
