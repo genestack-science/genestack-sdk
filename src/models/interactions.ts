@@ -87,3 +87,7 @@ export function screenInteractionPair(
         flagged: rule.severity !== 'none' && rule.severity !== 'minor',
         mitigation: rule.mitigation
       };
+    }
+  }
+  return null;
+}
