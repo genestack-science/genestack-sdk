@@ -89,3 +89,20 @@ export class DirectSequencerAdapter {
         observedDepth,
         qualityScore
       });
+    }
+
+    return matchedRecords;
+  }
+
+  /**
+   * Translates allele data from a sequence into standard variant status markers.
+   */
+  public convertAllelesToVariantStatus(
+    rsId: string,
+    alleles: string
+  ): 'Downregulated' | 'Normal' | 'Upregulated' | 'Compensating' {
+    const term = rsId.toLowerCase().trim();
+    const cleanAlleles = alleles.toUpperCase().trim();
+
+    if (term === 'rs4680' && cleanAlleles === 'G/G') return 'Upregulated';
+    if (term === 'rs4680' && cleanAlleles === 'A/A') return 'Downregulated';
