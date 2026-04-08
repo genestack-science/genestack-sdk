@@ -201,3 +201,10 @@ The core team performs continuous threat modeling to defend against security ris
 
 ---
 
+## 8. Vulnerability Reporting Policy
+
+If you discover a potential security vulnerability in the GENESTACK SDK, please report it to our security team immediately:
+
+- **Reporting Email**: security-team@genestack.science
+- **PGP Encryption**: Encrypt all reports using our public PGP key.
+- **Response Timeline**: Our development team will acknowledge your report within 24 hours and issue a patch within 7 business days.
