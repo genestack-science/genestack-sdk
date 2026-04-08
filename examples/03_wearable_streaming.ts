@@ -116,3 +116,32 @@ class TelemetryStreamingManager {
           break;
       }
 
+      const sample: BiometricSample = {
+        id: `sample_${Date.now().toString(36)}`,
+        type: randomType,
+        value: parseFloat(randomValue.toFixed(2)),
+        timestamp: Date.now(),
+        confidence: 0.88 + Math.random() * 0.11
+      };
+
+      this.sampleStream$.next(sample);
+    }, SAMPLE_EMISSION_RATE_MS);
+
+    // Stop emission after test period
+    setTimeout(() => {
+      clearInterval(emissionTimer);
+      this.sampleStream$.complete();
+    }, SIMULATION_DURATION_MS);
+  }
+}
+
+async function runTelemetryStream() {
+  const manager = new TelemetryStreamingManager('usr_oura_whoop_integrated_01');
+  await manager.startStreamSimulation();
+}
+
+// Start Stream Execution
+runTelemetryStream().catch((err) => {
+  console.error('Fatal streaming error in Wearable Telemetry processing:', err);
+  process.exit(1);
+});
