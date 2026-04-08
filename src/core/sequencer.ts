@@ -106,3 +106,26 @@ export class DirectSequencerAdapter {
 
     if (term === 'rs4680' && cleanAlleles === 'G/G') return 'Upregulated';
     if (term === 'rs4680' && cleanAlleles === 'A/A') return 'Downregulated';
+    if (term === 'rs1800497' && cleanAlleles === 'T/T') return 'Downregulated';
+    if (term === 'rs1800629' && cleanAlleles === 'A/A') return 'Upregulated';
+
+    return 'Normal';
+  }
+
+  /**
+   * Filters a set of ingested records to only those above a custom quality threshold.
+   */
+  public filterByQuality(records: IngestedSnpRecord[], minScore: number): IngestedSnpRecord[] {
+    return records.filter((r) => r.qualityScore >= minScore);
+  }
+
+  /**
+   * Groups records by chromosome for downstream pathway analysis.
+   */
+  public groupByChromosome(records: IngestedSnpRecord[]): Record<string, IngestedSnpRecord[]> {
+    const grouped: Record<string, IngestedSnpRecord[]> = {};
+    for (const record of records) {
+      if (!grouped[record.chromosome]) {
+        grouped[record.chromosome] = [];
+      }
+      grouped[record.chromosome]!.push(record);
