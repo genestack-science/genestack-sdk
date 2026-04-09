@@ -129,3 +129,7 @@ export class DirectSequencerAdapter {
         grouped[record.chromosome] = [];
       }
       grouped[record.chromosome]!.push(record);
+    }
+    return grouped;
+  }
+}
