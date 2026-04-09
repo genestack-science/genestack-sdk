@@ -58,3 +58,26 @@ export class ExportManager {
    * Serializes the protocol compounds to a CSV string.
    */
   private toCsv(protocol: CompiledStackProtocol): string {
+    const headers = ['id', 'name', 'dosage', 'frequency', 'class', 'pathway', 'clinicalConfidence'];
+    const rows = protocol.compounds.map((c) =>
+      [c.id, c.name, c.dosage, c.frequency, c.class, c.pathway, c.clinicalConfidence].join(',')
+    );
+    return [headers.join(','), ...rows].join('\n');
+  }
+
+  /**
+   * Generates a human-readable Markdown protocol report.
+   */
+  private toMarkdown(protocol: CompiledStackProtocol): string {
+    const lines: string[] = [
+      `# GENESTACK Protocol Report`,
+      ``,
+      `**Protocol ID:** \`${protocol.id}\``,
+      `**User ID:** \`${protocol.userId}\``,
+      `**Coverage Score:** ${(protocol.coverageScore * 100).toFixed(1)}%`,
+      `**Generated At:** ${new Date(protocol.timestamp).toISOString()}`,
+      ``,
+      `## Recommended Compounds`,
+      ``
+    ];
+
