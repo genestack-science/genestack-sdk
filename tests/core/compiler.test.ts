@@ -8,3 +8,6 @@ describe('Compiler Unit Tests', () => {
     id: 'expr_test_123',
     userId: 'usr_test_123',
     timestamp: Date.now(),
+    expressions: {
+      comt: { status: 'Upregulated' },
+      tnf: { status: 'Normal' },
