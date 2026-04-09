@@ -26,3 +26,13 @@ export class ComplianceManager {
       for (const key of sensitiveFields) {
         if (key in payload.testResults) {
           clearedFields.push(key);
+          warningsDetected.push(`Sensitive field cleared: ${key}`);
+          isCompliant = false;
+        }
+      }
+    }
+
+    const userId = payload.userId || 'usr_anonymous';
+    const anonymizedUserId = `usr_hash_${userId.replace('usr_', '')}`;
+
+    return {
