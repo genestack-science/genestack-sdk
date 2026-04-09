@@ -96,3 +96,34 @@ Below is the definitive reference matrix for the primary compound interventions 
 - **Biological Pathway**: Dopamine synthesis enhancement
 - **Expression Mapping**: `DRD2` downregulated (Low receptor density)
 - **Mechanism of Action**: Upregulates tyrosine hydroxylase activity—the rate-limiting step in dopamine synthesis—to support long-term motivation without receptor downregulation.
+- **Dynamic Baseline Range**: `50 - 100 mg` daily in the morning.
+
+---
+
+## 4. Algorithmic Stack Coverage Formulation
+
+The compiler scores the effectiveness of each stack using this specific formula:
+
+$$\text{Coverage Score } (S_{\text{cov}}) = \frac{\text{Module Pathways Addressed}}{\text{Suboptimal Gene Targets}} \times \text{Synergy Coefficient } (\gamma) \times \text{Safety Factor } (\lambda)$$
+
+Where:
+- **Synergy Coefficient ($\gamma$)**: Represents the performance boost of using compounds with overlapping, complementary mechanisms (`1.15`).
+- **Safety Factor ($\lambda$)**: Dynamically lowers the total score if a stack triggers constraint flags (`0.85`).
+
+### 4.1 Implementation Strategy
+
+Developers can add new therapeutic molecules to the compilation database by expanding the underlying schemas. Let's look at a typical structure:
+
+```typescript
+import { InterventionSchema } from '../src/types/expressions';
+
+export const customIntervention: InterventionSchema = {
+  id: 'int_custom_peptide',
+  name: 'Thymosin Beta 4',
+  targetGene: 'IL6',
+  compoundClass: 'Peptide',
+  baseDosageMcg: 250,
+  dosageCappingMcg: 500,
+  scientificRationale: 'Upregulates dynamic cell repair and reduces baseline inflammatory markers.'
+};
+```
