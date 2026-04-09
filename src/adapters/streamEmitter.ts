@@ -25,3 +25,17 @@ export class OutboundStreamEmitter {
   public connectEndpoint(endpointUrl: string): void {
     if (!endpointUrl || !endpointUrl.startsWith('ws')) {
       throw new Error(`Connection Failure: Endpoint "${endpointUrl}" must be a valid WebSocket URI.`);
+    }
+
+    console.log(`[STREAMING] Established connection to outbound telemetry endpoint: ${endpointUrl}`);
+  }
+
+  /**
+   * Emits a new biometric packet into the stream.
+   */
+  public emitPacket(sample: BiometricSample): void {
+    if (!sample || !sample.type) {
+      return;
+    }
+
+    this.activeEmissionsCounter++;
