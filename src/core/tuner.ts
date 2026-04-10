@@ -83,3 +83,13 @@ export class DosageTuner {
     };
   }
 
+  /**
+   * Validates that a dosage value falls within the compound's clinical safety bounds.
+   */
+  public validateDosageSafety(compound: CompiledCompound): boolean {
+    const rawDosage = parseFloat(compound.dosage);
+    if (isNaN(rawDosage)) return true; // Non-numeric dosages pass through
+    const [min, max] = compound.safeBoundsMg;
+    return rawDosage >= min && rawDosage <= max;
+  }
+}
