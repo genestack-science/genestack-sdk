@@ -39,3 +39,17 @@ export class OutboundStreamEmitter {
     }
 
     this.activeEmissionsCounter++;
+    this.socketStream$.next(sample);
+  }
+
+  /**
+   * Shuts down the outbound socket stream safely.
+   */
+  public disconnect(): void {
+    if (this.emissionIntervalTimer) {
+      clearInterval(this.emissionIntervalTimer);
+      this.emissionIntervalTimer = null;
+    }
+    
+    this.socketStream$.complete();
+    console.log('[STREAMING] Stream emitter safely disconnected.');
