@@ -68,3 +68,28 @@ export class WearableIngestionAdapter {
       movingAverages: {}
     };
 
+    for (const [key, values] of Object.entries(aggregatedMetrics)) {
+      if (Array.isArray(values) && values.length > 0) {
+        const sum = values.reduce((acc, val) => acc + val, 0);
+        parsedOutputs.movingAverages[key] = parseFloat((sum / values.length).toFixed(2));
+      }
+    }
+
+    return parsedOutputs;
+  }
+
+  /**
+   * Filters out sudden sensor noise spikes from incoming biometric streams.
+   */
+  public deNoiseStream(samples: BiometricSample[]): BiometricSample[] {
+    if (samples.length <= 1) {
+      return [...samples];
+    }
+
+    const values = samples.map((s) => s.value);
+    const mean = values.reduce((sum, v) => sum + v, 0) / values.length;
+    
+    // Compute standard deviation
+    const squaredDiffs = values.map((v) => Math.pow(v - mean, 2));
+    const variance = squaredDiffs.reduce((sum, v) => sum + v, 0) / values.length;
+    const stdDev = Math.sqrt(variance);
