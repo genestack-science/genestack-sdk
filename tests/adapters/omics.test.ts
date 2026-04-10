@@ -5,3 +5,7 @@ describe('MultiOmicsParser', () => {
     const parser = new MultiOmicsParser();
     const mockContent = `
 rs4680 22 17300000 AA
+rs1800497 11 11300000 GG
+`;
+    const variants = await parser.parseVariantFileContent(mockContent);
+    expect(variants.length).toBe(2);
