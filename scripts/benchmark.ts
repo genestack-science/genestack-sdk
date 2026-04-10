@@ -15,3 +15,39 @@ import { SignalInput } from '../src/types/signals';
 
 const SAMPLE_SIZE = 450;
 const OUTPUT_UPDATE_INTERVAL = 50;
+
+function createBenchmarkSample(index: number): SignalInput {
+  const cognitionOptions: ('stable' | 'burst_crash' | 'low_drive')[] = ['stable', 'burst_crash', 'low_drive'];
+  const sleepOptions: ('deep_refreshed' | 'disturbed' | 'wired_tired')[] = ['deep_refreshed', 'disturbed', 'wired_tired'];
+  const inflammationOptions: ('rare' | 'occasional' | 'persistent')[] = ['rare', 'occasional', 'persistent'];
+  
+  return {
+    userId: `usr_bench_${index}_${Date.now().toString(36)}`,
+    timestamp: Date.now(),
+    cognition: {
+      focusPattern: cognitionOptions[index % cognitionOptions.length]!,
+      workingMemory: 'normal',
+      stressThreshold: 'low',
+    },
+    circadian: {
+      sleepLatency: 'high',
+      wakingState: sleepOptions[index % sleepOptions.length]!,
+      nocturnalArousal: 'high',
+    },
+    inflammation: {
+      sorenessPersistence: inflammationOptions[index % inflammationOptions.length]!,
+      chronicFatigue: 'rare',
+      localizedStiffness: 'moderate',
+    },
+    recovery: {
+      muscleRegeneration: 'slow',
+      forcePreservation: 'normal',
+      jointSoreness: 'moderate',
+    },
+    metabolism: {
+      caloricUtilization: 'normal',
+      weightPreservation: 'easy_fat_gain',
+      energyCrashes: 'frequent',
+    },
+    metadata: {
+      sourceDevice: 'benchmark_harness',
