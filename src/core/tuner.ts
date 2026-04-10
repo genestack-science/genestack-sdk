@@ -65,3 +65,21 @@ export class DosageTuner {
     scalingFactor = Math.min(1.2, Math.max(0.5, scalingFactor));
 
     const adjustedCompounds: CompiledCompound[] = protocol.compounds.map((compound) => {
+      const rawDosage = parseFloat(compound.dosage);
+      const unit = compound.dosage.replace(/[\d.]+\s*/, '');
+      const adjustedValue = isNaN(rawDosage)
+        ? compound.dosage
+        : `${(rawDosage * scalingFactor).toFixed(2)} ${unit}`.trim();
+
+      return { ...compound, dosage: adjustedValue };
+    });
+
+    return {
+      protocolId: protocol.id,
+      userId: protocol.userId,
+      adjustedCompounds,
+      scalingFactorApplied: parseFloat(scalingFactor.toFixed(3)),
+      warnings
+    };
+  }
+
