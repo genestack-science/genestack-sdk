@@ -36,3 +36,8 @@ export class ComplianceManager {
     const anonymizedUserId = `usr_hash_${userId.replace('usr_', '')}`;
 
     return {
+      isCompliant,
+      warningsDetected,
+      anonymizedUserId,
+      clearedFields
+    };
