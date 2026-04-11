@@ -9,3 +9,7 @@ rs1800497 11 11300000 GG
 `;
     const variants = await parser.parseVariantFileContent(mockContent);
     expect(variants.length).toBe(2);
+    expect(variants[0]!.rsId).toBe('rs4680');
+    expect(parser.extractAllelesForSnp(variants, 'rs4680')).toBe('AA');
+  });
+});
