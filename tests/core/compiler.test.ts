@@ -11,3 +11,8 @@ describe('Compiler Unit Tests', () => {
     expressions: {
       comt: { status: 'Upregulated' },
       tnf: { status: 'Normal' },
+      igf1: { status: 'Downregulated' }
+    }
+  };
+
+  test('should compile expression profiles into protocol stacks', async () => {
