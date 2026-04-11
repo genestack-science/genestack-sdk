@@ -16,3 +16,34 @@ export interface PhysiologicalBound {
   metric: string;
   unit: string;
   criticalLow: number;
+  normalLow: number;
+  normalHigh: number;
+  criticalHigh: number;
+}
+
+export const COMPOUND_SAFETY_THRESHOLDS: SafetyThreshold[] = [
+  {
+    compoundId: 'cat_semax',
+    compoundName: 'Semax',
+    absoluteMaxDailyMg: 1.5,
+    absoluteMinEffectiveMg: 0.1,
+    warningThresholdMg: 1.2,
+    cycleMaxWeeks: 8
+  },
+  {
+    compoundId: 'cat_bpc157',
+    compoundName: 'BPC-157',
+    absoluteMaxDailyMg: 1.0,
+    absoluteMinEffectiveMg: 0.1,
+    warningThresholdMg: 0.75,
+    cycleMaxWeeks: 12
+  },
+  {
+    compoundId: 'cat_cjc1295',
+    compoundName: 'CJC-1295 + DAC',
+    absoluteMaxDailyMg: 4.0,
+    absoluteMinEffectiveMg: 0.5,
+    warningThresholdMg: 3.0,
+    cycleMaxWeeks: 16
+  },
+  {
