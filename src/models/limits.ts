@@ -47,3 +47,19 @@ export const COMPOUND_SAFETY_THRESHOLDS: SafetyThreshold[] = [
     cycleMaxWeeks: 16
   },
   {
+    compoundId: 'cat_bromantane',
+    compoundName: 'Bromantane',
+    absoluteMaxDailyMg: 200,
+    absoluteMinEffectiveMg: 25,
+    warningThresholdMg: 150,
+    cycleMaxWeeks: 12
+  }
+];
+
+export const PHYSIOLOGICAL_BOUNDS: PhysiologicalBound[] = [
+  {
+    metric: 'resting_heart_rate',
+    unit: 'bpm',
+    criticalLow: 30,
+    normalLow: 50,
+    normalHigh: 90,
