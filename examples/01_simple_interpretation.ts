@@ -33,3 +33,22 @@ async function runSimpleInterpretationDemo() {
       nocturnalArousal: 'high',
     },
     inflammation: {
+      sorenessPersistence: 'occasional',
+      chronicFatigue: 'rare',
+      localizedStiffness: 'moderate',
+    },
+    recovery: {
+      muscleRegeneration: 'slow',
+      forcePreservation: 'normal',
+      jointSoreness: 'moderate',
+    },
+    metabolism: {
+      caloricUtilization: 'normal',
+      weightPreservation: 'easy_fat_gain',
+      energyCrashes: 'frequent',
+    },
+    metadata: {
+      sourceDevice: 'oura_gen3_direct_sync',
+      firmwareVersion: 'v2.4.12',
+      samplingFrequencyHz: 0.05,
+    }
