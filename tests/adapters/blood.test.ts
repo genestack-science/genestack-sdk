@@ -10,3 +10,4 @@ describe('BloodPanelParser', () => {
     expect(markers.length).toBe(1);
     expect(markers[0]!.name).toBe('Vitamin D');
   });
+});
