@@ -6,3 +6,7 @@ export interface OverlapWarning {
 export interface OverlapAdjustment {
   compound: string;
   adjustedDose: string;
+}
+export interface OverlapAssessment {
+  isValid: boolean;
+  warnings: OverlapWarning[];
