@@ -58,3 +58,15 @@ export class MultiOmicsParser {
         });
       }
     }
+
+    return matchedVariants;
+  }
+
+  /**
+   * Directly extracts alleles for a specific target SNP.
+   */
+  public extractAllelesForSnp(variants: GenomicVariantEntry[], rsId: string): string | null {
+    const matched = variants.find((v) => v.rsId.toLowerCase() === rsId.toLowerCase());
+    return matched ? matched.alleles : null;
+  }
+}
