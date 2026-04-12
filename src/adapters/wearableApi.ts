@@ -93,3 +93,15 @@ export class WearableIngestionAdapter {
     const squaredDiffs = values.map((v) => Math.pow(v - mean, 2));
     const variance = squaredDiffs.reduce((sum, v) => sum + v, 0) / values.length;
     const stdDev = Math.sqrt(variance);
+
+    if (stdDev === 0) {
+      return [...samples];
+    }
+
+    // Exclude outliers that fall beyond 2 standard deviations from the mean
+    return samples.filter((sample) => {
+      const zScore = Math.abs(sample.value - mean) / stdDev;
+      return zScore <= 1.5;
+    });
+  }
+}
