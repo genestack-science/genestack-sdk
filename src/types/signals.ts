@@ -39,3 +39,13 @@ export interface SignalInput {
   metadata: SignalMetadata;
 }
 export interface InterpreterResult {
+  id: string;
+  userId: string;
+  timestamp: number;
+  computationTimeMs: number;
+  reliabilityIndex: number;
+  metrics: Record<string, string | number>;
+}
+export interface ExpressionStatus {
+  status: 'Upregulated' | 'Compensating' | 'Normal' | 'Downregulated';
+  score?: number;
