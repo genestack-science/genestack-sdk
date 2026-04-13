@@ -12,3 +12,5 @@ export class BloodPanelParser {
       throw new Error('Parse Failure: Blood panel content is empty.');
     }
     const parsed = JSON.parse(jsonContent);
+    if (!Array.isArray(parsed)) {
+      throw new Error('Parse Failure: Invalid blood markers format.');
