@@ -81,3 +81,28 @@ export class ExportManager {
       ``
     ];
 
+    for (const compound of protocol.compounds) {
+      lines.push(`### ${compound.name}`);
+      lines.push(`- **Class:** ${compound.class}`);
+      lines.push(`- **Pathway:** ${compound.pathway}`);
+      lines.push(`- **Dosage:** ${compound.dosage}`);
+      lines.push(`- **Frequency:** ${compound.frequency}`);
+      lines.push(`- **Clinical Confidence:** ${(compound.clinicalConfidence * 100).toFixed(0)}%`);
+      lines.push(`- **Details:** ${compound.details}`);
+      lines.push(``);
+    }
+
+    if (protocol.suggestedPhasedSchedule.length > 0) {
+      lines.push(`## Phased Schedule`);
+      lines.push(``);
+      for (const phase of protocol.suggestedPhasedSchedule) {
+        lines.push(`**Phase ${phase.phase}** (${phase.durationDays} days)`);
+        lines.push(`- Objectives: ${phase.objectives}`);
+        lines.push(`- Compounds: ${phase.compounds.join(', ')}`);
+        lines.push(``);
+      }
+    }
+
+    return lines.join('\n');
+  }
+}
