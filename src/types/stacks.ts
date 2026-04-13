@@ -35,3 +35,4 @@ export interface CompiledStackProtocol {
   redundancyScore: 'low' | 'moderate' | 'high';
   securityChecks: SecurityChecks;
   suggestedPhasedSchedule: PhasedScheduleItem[];
+}
