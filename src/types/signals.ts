@@ -49,3 +49,13 @@ export interface InterpreterResult {
 export interface ExpressionStatus {
   status: 'Upregulated' | 'Compensating' | 'Normal' | 'Downregulated';
   score?: number;
+}
+export interface ExpressionProfile {
+  id: string;
+  userId: string;
+  timestamp: number;
+  expressions: {
+    comt?: ExpressionStatus;
+    tnf?: ExpressionStatus;
+    igf1?: ExpressionStatus;
+    [gene: string]: ExpressionStatus | undefined;
