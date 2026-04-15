@@ -10,3 +10,14 @@ describe('Interpreter Unit Tests', () => {
     cognition: {
       focusPattern: 'stable',
       workingMemory: 'normal',
+      stressThreshold: 'resilient'
+    },
+    circadian: {
+      sleepLatency: 'low',
+      wakingState: 'deep_refreshed',
+      nocturnalArousal: 'low'
+    },
+    inflammation: {
+      sorenessPersistence: 'rare',
+      chronicFatigue: 'rare',
+      localizedStiffness: 'none'
