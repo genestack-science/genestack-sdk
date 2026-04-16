@@ -32,3 +32,21 @@ cd genestack-sdk
 npm install
 
 # Run all test suites locally
+npm test
+```
+
+### Git Branching Conventions
+We use the following naming conventions for our git feature branches:
+- **`feature/`**: Adding new modules or major updates to existing engines.
+- **`bugfix/`**: Correcting errors or unexpected processing bugs.
+- **`docs/`**: Modifying or expanding the repository's documentation files.
+- **`refactor/`**: Improving code quality without modifying behavior.
+
+---
+
+## 4. Coding Standards
+
+To ensure high maintainability and prevent common type errors, please adhere to these coding standards.
+
+### 4.1 Strict Linting and Formatting
+- Always format files using the configured Prettier rule set (`npm run format`) before making a pull request.
