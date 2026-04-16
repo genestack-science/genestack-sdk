@@ -42,3 +42,17 @@ export function createDefaultAdapterConfig(adapterId: string): AdapterConfig {
 
 /**
  * Creates a health check snapshot for an adapter.
+ */
+export function createHealthCheck(
+  adapterId: string,
+  name: string,
+  status: AdapterStatus,
+  latencyMs?: number
+): AdapterHealthCheck {
+  return {
+    adapterId,
+    name,
+    status,
+    lastPingAt: Date.now(),
+    latencyMs
+  };
