@@ -79,3 +79,18 @@ export class SchemaValidator {
     }
 
     if (!protocol.userId) {
+      errors.push('Protocol userId is required.');
+    }
+
+    if (!Array.isArray(protocol.compounds) || protocol.compounds.length === 0) {
+      errors.push('Protocol must contain at least one compound.');
+    }
+
+    for (const compound of protocol.compounds ?? []) {
+      if (!compound.name) {
+        errors.push(`Compound id="${compound.id}" is missing a name.`);
+      }
+      if (compound.clinicalConfidence < 0 || compound.clinicalConfidence > 1) {
+        errors.push(`Compound "${compound.name}" has an invalid clinicalConfidence value.`);
+      }
+      if (compound.safeBoundsMg[0] >= compound.safeBoundsMg[1]) {
