@@ -59,3 +59,5 @@ export interface ExpressionProfile {
     tnf?: ExpressionStatus;
     igf1?: ExpressionStatus;
     [gene: string]: ExpressionStatus | undefined;
+  };
+}
