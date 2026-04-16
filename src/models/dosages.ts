@@ -9,3 +9,19 @@ export type DosageFrequency =
   | 'daily_evening'
   | 'BID'
   | 'TID'
+  | 'weekly'
+  | 'bi_weekly'
+  | 'as_needed';
+
+export interface StructuredDosage {
+  compoundId: string;
+  compoundName: string;
+  amount: number;
+  unit: DosageUnit;
+  frequency: DosageFrequency;
+  withFood: boolean;
+  cycleOnDays?: number;
+  cycleOffDays?: number;
+  notes?: string;
+}
+export interface DosageRange {
