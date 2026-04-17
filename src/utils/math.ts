@@ -51,3 +51,21 @@ export function gaussianWeight(x: number, sigma: number): number {
  */
 export function gaussianSmooth(values: number[], sigma: number): number[] {
   const radius = Math.ceil(3 * sigma);
+  return values.map((_, idx) => {
+    let weightedSum = 0;
+    let weightTotal = 0;
+    for (let offset = -radius; offset <= radius; offset++) {
+      const i = idx + offset;
+      if (i >= 0 && i < values.length) {
+        const w = gaussianWeight(offset, sigma);
+        weightedSum += values[i]! * w;
+        weightTotal += w;
+      }
+    }
+    return weightTotal > 0 ? weightedSum / weightTotal : values[idx]!;
+  });
+}
+
+/**
+ * Clamps a value between min and max inclusive.
+ */
