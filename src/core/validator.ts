@@ -94,3 +94,15 @@ export class SchemaValidator {
         errors.push(`Compound "${compound.name}" has an invalid clinicalConfidence value.`);
       }
       if (compound.safeBoundsMg[0] >= compound.safeBoundsMg[1]) {
+        warnings.push(`Compound "${compound.name}" has an inverted safe dosage range.`);
+      }
+    }
+
+    if (protocol.coverageScore < 0 || protocol.coverageScore > 1) {
+      warnings.push('coverageScore is out of the expected [0, 1] range.');
+    }
+
+    return {
+      isValid: errors.length === 0,
+      errors,
+      warnings
