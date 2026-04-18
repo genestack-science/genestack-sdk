@@ -53,3 +53,30 @@ export class SDKCache<T> {
       return null;
     }
 
+    entry.hitCount++;
+    this.totalHits++;
+    return entry.value;
+  }
+
+  /**
+   * Returns whether a non-expired entry exists for the given key.
+   */
+  public has(key: string): boolean {
+    return this.get(key) !== null;
+  }
+
+  /**
+   * Removes a single entry from the cache.
+   */
+  public delete(key: string): void {
+    this.store.delete(key);
+  }
+
+  /**
+   * Purges all expired entries from the cache.
+   */
+  public purgeExpired(): number {
+    const now = Date.now();
+    let purgedCount = 0;
+    for (const [key, entry] of this.store.entries()) {
+      if (now > entry.expiresAt) {
