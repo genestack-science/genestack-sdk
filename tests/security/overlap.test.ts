@@ -77,3 +77,22 @@ describe('🛡️ Overlap Engine Unit Tests Suite', () => {
           dosage: '100 mg',
           frequency: 'daily_morning',
           class: 'Adaptogens',
+          pathway: 'Glutamatergic Neuro-Modulation',
+          mappedExpressions: ['DRD2'],
+          details: 'Dopamine synthesis.',
+          contraindications: [],
+          safeBoundsMg: [25, 150],
+          clinicalConfidence: 0.85
+        }
+      ],
+      coverageScore: 1.0,
+      redundancyScore: 'low',
+      securityChecks: { isValid: true, warnings: [], adjustments: [] },
+      suggestedPhasedSchedule: []
+    };
+
+    const assessment = await overlapEngine.screen(dangerousProtocol);
+    expect(assessment).toBeDefined();
+    expect(assessment.isValid).toBe(false);
+
+    // Assert that the overlap engine triggers the correct security warning code
