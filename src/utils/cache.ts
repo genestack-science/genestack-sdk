@@ -80,3 +80,32 @@ export class SDKCache<T> {
     let purgedCount = 0;
     for (const [key, entry] of this.store.entries()) {
       if (now > entry.expiresAt) {
+        this.store.delete(key);
+        purgedCount++;
+      }
+    }
+    this.totalPurged += purgedCount;
+    return purgedCount;
+  }
+
+  /**
+   * Clears all cache entries.
+   */
+  public clear(): void {
+    this.totalPurged += this.store.size;
+    this.store.clear();
+  }
+
+  /**
+   * Returns cache performance statistics.
+   */
+  public getStats(): CacheStats {
+    return {
+      totalEntries: this.store.size,
+      hitRate: this.totalRequests > 0
+        ? parseFloat((this.totalHits / this.totalRequests).toFixed(3))
+        : 0,
+      expiredPurged: this.totalPurged
+    };
+  }
+}
