@@ -50,3 +50,12 @@ To ensure high maintainability and prevent common type errors, please adhere to 
 
 ### 4.1 Strict Linting and Formatting
 - Always format files using the configured Prettier rule set (`npm run format`) before making a pull request.
+- Run the ESLint engine via `npm run lint` to catch unused variables or unhandled imports.
+
+### 4.2 TSDoc Annotations
+- All exported functions, methods, and types must include comprehensive TSDoc comments explaining their parameters, returns, and expected edge case behavior.
+
+---
+
+## 5. Submitting a Pull Request
+
