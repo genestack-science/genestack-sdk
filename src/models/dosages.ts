@@ -25,3 +25,9 @@ export interface StructuredDosage {
   notes?: string;
 }
 export interface DosageRange {
+  minDose: number;
+  maxDose: number;
+  unit: DosageUnit;
+  recommendedStartDose: number;
+}
+export interface DosageAdjustmentLog {
