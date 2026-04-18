@@ -31,3 +31,14 @@ export interface DosageRange {
   recommendedStartDose: number;
 }
 export interface DosageAdjustmentLog {
+  compoundId: string;
+  originalDose: number;
+  adjustedDose: number;
+  adjustmentReason: string;
+  appliedAt: number;
+}
+
+/**
+ * Formats a StructuredDosage into a human-readable prescription string.
+ */
+export function formatDosageLabel(dosage: StructuredDosage): string {
