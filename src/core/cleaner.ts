@@ -28,3 +28,28 @@ export class Cleaner {
 
     const metricKey = sample.type.toLowerCase();
     
+    if (!Cleaner.trailingValues[metricKey]) {
+      Cleaner.trailingValues[metricKey] = [];
+    }
+
+    // Append the latest raw value to the sliding window array
+    Cleaner.trailingValues[metricKey].push(sample.value);
+
+    // Limit window to previous 25 readings
+    if (Cleaner.trailingValues[metricKey].length > 25) {
+      Cleaner.trailingValues[metricKey].shift();
+    }
+
+    const windowValues = Cleaner.trailingValues[metricKey]!;
+    let filteredStatus = false;
+    let finalCleanValue = sample.value;
+
+    // Check if there are enough trailing readings to calculate standard deviation
+    if (windowValues.length >= 3) {
+      const sum = windowValues.reduce((acc, v) => acc + v, 0);
+      const mean = sum / windowValues.length;
+
+      const squaredDiffs = windowValues.map((v) => Math.pow(v - mean, 2));
+      const variance = squaredDiffs.reduce((acc, v) => acc + v, 0) / windowValues.length;
+      const stdDev = Math.sqrt(variance);
+
