@@ -53,3 +53,11 @@ export class Cleaner {
       const variance = squaredDiffs.reduce((acc, v) => acc + v, 0) / windowValues.length;
       const stdDev = Math.sqrt(variance);
 
+      // Flag as an anomaly if the reading deviates from the mean by more than 2.5 standard deviations
+      if (stdDev > 0) {
+        const zScore = Math.abs(sample.value - mean) / stdDev;
+        if (zScore > 2.5) {
+          filteredStatus = true;
+          // Use the rolling average as a fallback to smooth out the spike
+          finalCleanValue = parseFloat(mean.toFixed(2));
+        }
