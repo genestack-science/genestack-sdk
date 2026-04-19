@@ -52,3 +52,21 @@ async function runSimpleInterpretationDemo() {
       firmwareVersion: 'v2.4.12',
       samplingFrequencyHz: 0.05,
     }
+  };
+
+  console.log('Successfully initialized SignalInput payload for processing.');
+  console.log(JSON.stringify(signalInput, null, 2));
+  console.log('\n----------------------------------------------------------------\n');
+
+  console.log('[STEP 2] Running Interpreter Signal De-noising & Processing');
+  // Pass input to the signal de-noising layer
+  const interpreterResult = await interpreter.interpret(signalInput);
+
+  console.log('Interpreter Output Metrics:');
+  console.log(`- Base Signals Processed: ${Object.keys(interpreterResult.metrics).length}`);
+  console.log(`- Processing Duration: ${interpreterResult.computationTimeMs} ms`);
+  console.log(`- Reliability Index: ${(interpreterResult.reliabilityIndex * 100).toFixed(1)}%`);
+  console.log('\n----------------------------------------------------------------\n');
+
+  console.log('[STEP 3] Running Mapping Engine to Infer Expressions');
+  // Pass the processed output to the cross-genomic linkage mapping engine
