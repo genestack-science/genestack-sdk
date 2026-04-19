@@ -51,3 +51,36 @@ function createBenchmarkSample(index: number): SignalInput {
     },
     metadata: {
       sourceDevice: 'benchmark_harness',
+      firmwareVersion: 'v1.0.0',
+      samplingFrequencyHz: 1.0,
+    }
+  };
+}
+
+async function runThroughputProfiling() {
+  console.log('================================================================');
+  console.log('🏁 GENESTACK PERFORMANCE BENCHMARKING HARNESS STARTING');
+  console.log('================================================================\n');
+
+  const interpreter = new Interpreter();
+  const mapper = new Mapper();
+
+  console.log(`[INIT] Generating ${SAMPLE_SIZE} synthetic multi-omics telemetry samples...`);
+  const benchmarkSamples: SignalInput[] = [];
+  for (let i = 0; i < SAMPLE_SIZE; i++) {
+    benchmarkSamples.push(createBenchmarkSample(i));
+  }
+  console.log('Dataset populated successfully. Processing initialization complete.');
+  console.log('\n----------------------------------------------------------------\n');
+
+  console.log('[PROFILING START] Initiating telemetry data parsing loops...');
+
+  const startTimeMs = Date.now();
+  const initialMemoryUsage = process.memoryUsage();
+
+  let successfullyProcessedSamples = 0;
+
+  for (let i = 0; i < SAMPLE_SIZE; i++) {
+    const sample = benchmarkSamples[i]!;
+
+    // Run basic interpreter parsing
