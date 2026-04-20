@@ -42,3 +42,20 @@ export interface DosageAdjustmentLog {
  * Formats a StructuredDosage into a human-readable prescription string.
  */
 export function formatDosageLabel(dosage: StructuredDosage): string {
+  const cycleInfo = dosage.cycleOnDays
+    ? ` — cycle: ${dosage.cycleOnDays} days on / ${dosage.cycleOffDays ?? 0} days off`
+    : '';
+  const foodNote = dosage.withFood ? ', with food' : '';
+  return `${dosage.amount} ${dosage.unit} (${dosage.frequency}${foodNote}${cycleInfo})`;
+}
+
+/**
+ * Returns true if a given amount falls within the provided DosageRange.
+ */
+export function isWithinSafeRange(amount: number, range: DosageRange): boolean {
+  return amount >= range.minDose && amount <= range.maxDose;
+}
+
+/**
+ * Scales a dosage amount by a multiplier, clamped to the provided safety range.
+ */
