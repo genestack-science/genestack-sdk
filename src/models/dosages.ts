@@ -59,3 +59,7 @@ export function isWithinSafeRange(amount: number, range: DosageRange): boolean {
 /**
  * Scales a dosage amount by a multiplier, clamped to the provided safety range.
  */
+export function scaleAndClamp(amount: number, multiplier: number, range: DosageRange): number {
+  const scaled = amount * multiplier;
+  return Math.min(range.maxDose, Math.max(range.minDose, scaled));
+}
