@@ -61,3 +61,17 @@ export class Cleaner {
           // Use the rolling average as a fallback to smooth out the spike
           finalCleanValue = parseFloat(mean.toFixed(2));
         }
+      }
+    }
+
+    // Compute variance from rolling average
+    const trailingMean = windowValues.reduce((acc, v) => acc + v, 0) / windowValues.length;
+    const variance = parseFloat(Math.abs(finalCleanValue - trailingMean).toFixed(2));
+
+    return {
+      id: sample.id,
+      type: sample.type,
+      value: finalCleanValue,
+      variance,
+      filteredStatus,
+      timestamp: Date.now()
