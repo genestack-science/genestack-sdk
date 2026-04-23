@@ -84,3 +84,25 @@ async function runThroughputProfiling() {
     const sample = benchmarkSamples[i]!;
 
     // Run basic interpreter parsing
+    const interpretedResult = await interpreter.interpret(sample);
+
+    // Run cross-genomic linkage mapping
+    const expressionProfile = await mapper.mapToExpressions(interpretedResult);
+
+    if (expressionProfile.id) {
+      successfullyProcessedSamples++;
+    }
+
+    if (i > 0 && i % OUTPUT_UPDATE_INTERVAL === 0) {
+      const currentElapsedMs = Date.now() - startTimeMs;
+      const rate = (successfullyProcessedSamples / (currentElapsedMs / 1000)).toFixed(1);
+      console.log(`⏳ Progress Check: ${successfullyProcessedSamples}/${SAMPLE_SIZE} parsed. Rate: ${rate} samples/sec`);
+    }
+  }
+
+  const endMemoryUsage = process.memoryUsage();
+  const totalElapsedMs = Date.now() - startTimeMs;
+  const processingThroughputRate = (successfullyProcessedSamples / (totalElapsedMs / 1000)).toFixed(1);
+
+  console.log('\n----------------------------------------------------------------\n');
+  console.log('================================================================');
