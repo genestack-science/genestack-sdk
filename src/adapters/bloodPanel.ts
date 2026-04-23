@@ -14,3 +14,7 @@ export class BloodPanelParser {
     const parsed = JSON.parse(jsonContent);
     if (!Array.isArray(parsed)) {
       throw new Error('Parse Failure: Invalid blood markers format.');
+    }
+    return parsed;
+  }
+}
