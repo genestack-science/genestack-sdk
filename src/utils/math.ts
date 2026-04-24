@@ -69,3 +69,14 @@ export function gaussianSmooth(values: number[], sigma: number): number[] {
 /**
  * Clamps a value between min and max inclusive.
  */
+export function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
+
+/**
+ * Rounds a number to the specified number of decimal places.
+ */
+export function roundTo(value: number, decimals: number): number {
+  const factor = Math.pow(10, decimals);
+  return Math.round(value * factor) / factor;
+}
