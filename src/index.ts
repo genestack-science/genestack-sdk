@@ -5,3 +5,5 @@ export * from './core/cleaner';
 export * from './adapters/omicsParser';
 export * from './adapters/streamEmitter';
 export * from './adapters/wearableApi';
+export * from './types/signals';
+export * from './types/stacks';
