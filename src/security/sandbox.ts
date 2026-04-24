@@ -16,3 +16,13 @@ export class SecuritySandbox {
   private options: SandboxOptions;
   constructor(options: SandboxOptions) {
     this.options = options;
+  }
+
+  public getOptions(): SandboxOptions {
+    return this.options;
+  }
+
+  public async executeIsolatedTask(task: () => Promise<any>): Promise<SandboxResponse> {
+    const startTime = Date.now();
+    try {
+      const output = await task();
