@@ -59,3 +59,12 @@ To ensure high maintainability and prevent common type errors, please adhere to 
 
 ## 5. Submitting a Pull Request
 
+Please follow the checklist below to submit your pull request:
+
+1. Create a new branch matching our git conventions (`git checkout -b feature/dynamic-threshold-engine`).
+2. Implement your changes following our coding standards.
+3. Add tests to fully verify your changes.
+4. Ensure all tests pass (`npm test`) and that the project builds cleanly (`npm run build`).
+5. Run the code formatters (`npm run format`).
+6. Commit your changes using descriptive commit messages and push to the remote repository.
+7. Open a Pull Request on GitHub against our `main` branch.
