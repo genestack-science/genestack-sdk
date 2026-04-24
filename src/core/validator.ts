@@ -106,3 +106,6 @@ export class SchemaValidator {
       isValid: errors.length === 0,
       errors,
       warnings
+    };
+  }
+}
