@@ -77,3 +77,4 @@ export function summarizePanel(panel: BiomarkerPanel): BiomarkerSummary {
   }
 
   return summary;
+}
