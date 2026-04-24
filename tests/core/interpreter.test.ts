@@ -21,3 +21,13 @@ describe('Interpreter Unit Tests', () => {
       sorenessPersistence: 'rare',
       chronicFatigue: 'rare',
       localizedStiffness: 'none'
+    },
+    recovery: {
+      muscleRegeneration: 'fast',
+      forcePreservation: 'enhanced',
+      jointSoreness: 'none'
+    },
+    metabolism: {
+      caloricUtilization: 'efficient',
+      weightPreservation: 'lean',
+      energyCrashes: 'rare'
