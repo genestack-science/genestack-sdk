@@ -9,3 +9,6 @@ describe('WearableIngestionAdapter', () => {
       syncToken: 'token_abc',
       timestamp: Date.now(),
       biometrics: [
+        { id: 's1', type: 'resting_heart_rate', value: 65, timestamp: Date.now(), confidence: 0.95 }
+      ],
+      metadata: {
