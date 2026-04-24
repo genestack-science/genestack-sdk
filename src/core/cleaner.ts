@@ -75,3 +75,13 @@ export class Cleaner {
       variance,
       filteredStatus,
       timestamp: Date.now()
+    };
+  }
+
+  /**
+   * Resets trailing window memory for all metrics.
+   */
+  public purgeHistoricalBuffers(): void {
+    Cleaner.trailingValues = {};
+  }
+}
