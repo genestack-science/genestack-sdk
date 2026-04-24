@@ -53,3 +53,11 @@ export class OutboundStreamEmitter {
     
     this.socketStream$.complete();
     console.log('[STREAMING] Stream emitter safely disconnected.');
+  }
+
+  /**
+   * Starts a mock emission interval to simulate continuous data streaming.
+   */
+  public startMockContinuousEmission(intervalMs = 2000): void {
+    if (this.emissionIntervalTimer) {
+      clearInterval(this.emissionIntervalTimer);
