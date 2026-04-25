@@ -73,3 +73,18 @@ $$\text{Raw Expression Value } (V) = \sum_{i=1}^{n} N_i \times W_i$$
 
 Where:
 - $W_i$ is the specific weight modifier assigned to the metric.
+- $n$ is the total number of metrics evaluated for that gene.
+
+The calculated score is classified into discrete gene status tiers:
+
+| Calculated Score ($V$) | Target Gene Status Classification |
+| :--- | :--- |
+| **0.00 - 0.35** | **Downregulated** |
+| **0.36 - 0.75** | **Normal Baseline** |
+| **0.76 - 1.00** | **Upregulated** |
+
+---
+
+## 4. Complete Weight Matrix
+
+The table below details how individual phenotypic markers map to specific inferred gene expression states.
