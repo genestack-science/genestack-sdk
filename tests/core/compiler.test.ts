@@ -20,3 +20,8 @@ describe('Compiler Unit Tests', () => {
     expect(protocol).toBeDefined();
     expect(protocol.userId).toBe('usr_test_123');
     expect(protocol.compounds.length).toBeGreaterThan(0);
+    expect(protocol.securityChecks.isValid).toBe(true);
+  });
+
+  test('should reject invalid expression profiles', async () => {
+    await expect(compiler.compile(null as any)).rejects.toThrow();
