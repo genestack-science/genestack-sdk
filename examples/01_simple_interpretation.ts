@@ -70,3 +70,21 @@ async function runSimpleInterpretationDemo() {
 
   console.log('[STEP 3] Running Mapping Engine to Infer Expressions');
   // Pass the processed output to the cross-genomic linkage mapping engine
+  const expressionProfile: ExpressionProfile = await mapper.mapToExpressions(interpreterResult);
+
+  console.log('Mapping Engine output completed successfully.\n');
+  console.log('================================================================');
+  console.log('📊 INFERRED EXPRESSIONS PROFILE RESULTS');
+  console.log('================================================================');
+
+  const { expressions } = expressionProfile;
+
+  // Pretty print mapped expression results for inspection
+  for (const [gene, details] of Object.entries(expressions)) {
+    console.log(`\n🔹 TARGET GENE: ${gene.toUpperCase()}`);
+    console.log(`  - Inferred Expression Level: ${details.status}`);
+    console.log(`  - Algorithmic Score: ${(details.score * 100).toFixed(2)}%`);
+    console.log(`  - Scientific Mechanism: ${details.technical}`);
+  }
+
+  console.log('\n================================================================');
