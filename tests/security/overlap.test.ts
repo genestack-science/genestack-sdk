@@ -96,3 +96,12 @@ describe('🛡️ Overlap Engine Unit Tests Suite', () => {
     expect(assessment.isValid).toBe(false);
 
     // Assert that the overlap engine triggers the correct security warning code
+    const warnCodes = assessment.warnings.map((w) => w.code);
+    expect(warnCodes.includes('DOPAMINERGIC_OVERLOAD')).toBe(true);
+
+    // Verify dosage ceiling was applied to prevent receptor burnout
+    expect(assessment.adjustments.length).toBe(1);
+    expect(assessment.adjustments[0]?.compound).toBe('Bromantane');
+    expect(assessment.adjustments[0]?.adjustedDose).toBe('25 mg');
+  });
+});
