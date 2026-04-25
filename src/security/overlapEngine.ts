@@ -10,3 +10,7 @@ export interface OverlapAdjustment {
 export interface OverlapAssessment {
   isValid: boolean;
   warnings: OverlapWarning[];
+  adjustments: OverlapAdjustment[];
+}
+
+export class OverlapEngine {
