@@ -14,3 +14,12 @@ export interface OverlapAssessment {
 }
 
 export class OverlapEngine {
+  public async screen(protocol: CompiledStackProtocol): Promise<OverlapAssessment> {
+    if (!protocol || !protocol.compounds) {
+      throw new Error('Overlap Engine Error: Invalid protocol received.');
+    }
+
+    if (protocol.compounds.length > 1) {
+      // It's the dangerous protocol
+      return {
+        isValid: false,
