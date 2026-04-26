@@ -31,3 +31,11 @@ describe('Interpreter Unit Tests', () => {
       caloricUtilization: 'efficient',
       weightPreservation: 'lean',
       energyCrashes: 'rare'
+    },
+    metadata: {
+      sourceDevice: 'test_harness',
+      firmwareVersion: '1.0.0',
+      samplingFrequencyHz: 1
+    }
+  };
+
