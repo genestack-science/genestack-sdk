@@ -63,3 +63,18 @@ export class Compiler {
           clinicalConfidence: 0.95
         });
         cumulativeCoverage += 0.95;
+      } else {
+        cumulativeCoverage += 1.0;
+      }
+    }
+
+    // 3. Process IGF1 Expressions to map Growth Peptides
+    const igf1 = profile.expressions.igf1;
+    if (igf1) {
+      totalGenesAnalyzed++;
+      if (igf1.status === 'Downregulated') {
+        compounds.push({
+          id: 'int_cjc1295_comp',
+          name: 'CJC-1295 + DAC',
+          dosage: '2 mg',
+          frequency: 'weekly',
