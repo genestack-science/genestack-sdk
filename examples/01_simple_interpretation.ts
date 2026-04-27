@@ -88,3 +88,17 @@ async function runSimpleInterpretationDemo() {
   }
 
   console.log('\n================================================================');
+  console.log('🔬 Summary Analysis:');
+  console.log(' - COMT exhibits High Turnover (Val/Val proxy). Faster dopamine clearance.');
+  console.log(' - PER3 is Downregulated. Reduced delta-wave sleep phase latency.');
+  console.log(' - IGF1 is Low Signal. Suboptimal growth factor signaling.');
+  console.log('================================================================\n');
+
+  console.log('[COMPLETED] Simple Interpretation Demo Execution Successful.\n');
+}
+
+// Execute demo
+runSimpleInterpretationDemo().catch((err) => {
+  console.error('Fatal execution failure in Simple Interpretation Demo:', err);
+  process.exit(1);
+});
