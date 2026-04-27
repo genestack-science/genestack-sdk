@@ -26,3 +26,16 @@ export class SecuritySandbox {
     const startTime = Date.now();
     try {
       const output = await task();
+      const executionDurationMs = Date.now() - startTime;
+      return {
+        success: true,
+        output,
+        executionDurationMs,
+        warningsRaised: []
+      };
+    } catch (err: any) {
+      const executionDurationMs = Date.now() - startTime;
+      return {
+        success: false,
+        output: null,
+        error: err.message || 'Induced parse exception',
