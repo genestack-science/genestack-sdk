@@ -12,3 +12,6 @@ describe('WearableIngestionAdapter', () => {
         { id: 's1', type: 'resting_heart_rate', value: 65, timestamp: Date.now(), confidence: 0.95 }
       ],
       metadata: {
+        firmwareVersion: '1.0.0',
+        samplingFrequencyHz: 1,
+        sensorAnomaliesDetected: false
