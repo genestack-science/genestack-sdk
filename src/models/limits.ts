@@ -63,3 +63,28 @@ export const PHYSIOLOGICAL_BOUNDS: PhysiologicalBound[] = [
     criticalLow: 30,
     normalLow: 50,
     normalHigh: 90,
+    criticalHigh: 120
+  },
+  {
+    metric: 'heart_rate_variability',
+    unit: 'ms',
+    criticalLow: 10,
+    normalLow: 30,
+    normalHigh: 100,
+    criticalHigh: 200
+  },
+  {
+    metric: 'body_temperature_celsius',
+    unit: '°C',
+    criticalLow: 35.0,
+    normalLow: 36.1,
+    normalHigh: 37.5,
+    criticalHigh: 39.5
+  },
+  {
+    metric: 'sleep_duration_hours',
+    unit: 'hours',
+    criticalLow: 3,
+    normalLow: 6,
+    normalHigh: 10,
+    criticalHigh: 14
