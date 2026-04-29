@@ -56,3 +56,4 @@ export function createHealthCheck(
     lastPingAt: Date.now(),
     latencyMs
   };
+}
