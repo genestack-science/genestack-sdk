@@ -39,3 +39,16 @@ export class SecuritySandbox {
         success: false,
         output: null,
         error: err.message || 'Induced parse exception',
+        executionDurationMs,
+        warningsRaised: ['Unhandled runtime exception detected']
+      };
+    }
+  }
+
+  public containsHazardousPatterns(code: string): boolean {
+    if (!code) return false;
+    const hazardousPatterns = ['process.exit', 'require', 'child_process', 'fs.'];
+    for (const pattern of hazardousPatterns) {
+      if (code.includes(pattern)) {
+        return true;
+      }
