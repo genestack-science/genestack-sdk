@@ -91,3 +91,29 @@ export class Compiler {
         cumulativeCoverage += 1.0;
       }
     }
+
+    const coverageScore = totalGenesAnalyzed === 0 ? 1.0 : parseFloat((cumulativeCoverage / totalGenesAnalyzed).toFixed(2));
+
+    return {
+      id: `stack_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`,
+      userId: profile.userId,
+      timestamp: Date.now(),
+      compounds,
+      coverageScore,
+      redundancyScore: 'low',
+      securityChecks: {
+        isValid: true,
+        warnings: [],
+        adjustments: []
+      },
+      suggestedPhasedSchedule: [
+        {
+          phase: 1,
+          durationDays: 30,
+          compounds: compounds.map((c) => c.name),
+          objectives: 'Initial baseline phase to address immediate focus and recovery targets.'
+        }
+      ]
+    };
+  }
+}
