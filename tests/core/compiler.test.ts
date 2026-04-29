@@ -25,3 +25,5 @@ describe('Compiler Unit Tests', () => {
 
   test('should reject invalid expression profiles', async () => {
     await expect(compiler.compile(null as any)).rejects.toThrow();
+  });
+});
