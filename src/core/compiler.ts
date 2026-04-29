@@ -78,3 +78,16 @@ export class Compiler {
           name: 'CJC-1295 + DAC',
           dosage: '2 mg',
           frequency: 'weekly',
+          class: 'Peptides',
+          pathway: 'GHRH Axis Stimulator',
+          mappedExpressions: ['IGF1'],
+          details: 'Stimulates steady pulsatile growth hormone output to repair damaged tissue.',
+          contraindications: ['Pituitary_Adenoma'],
+          safeBoundsMg: [1.0, 4.0],
+          clinicalConfidence: 0.89
+        });
+        cumulativeCoverage += 0.82;
+      } else {
+        cumulativeCoverage += 1.0;
+      }
+    }
