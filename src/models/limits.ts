@@ -88,3 +88,16 @@ export const PHYSIOLOGICAL_BOUNDS: PhysiologicalBound[] = [
     normalLow: 6,
     normalHigh: 10,
     criticalHigh: 14
+  }
+];
+
+/**
+ * Finds the safety threshold record for a given compound ID.
+ */
+export function getThresholdById(compoundId: string): SafetyThreshold | undefined {
+  return COMPOUND_SAFETY_THRESHOLDS.find((t) => t.compoundId === compoundId);
+}
+
+/**
+ * Returns whether a given dosage amount is at or above the warning threshold.
+ */
