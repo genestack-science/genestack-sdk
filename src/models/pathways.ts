@@ -98,3 +98,5 @@ export function getPathwaysByGene(geneSymbol: string): PathwayDefinition[] {
 export function getPathwaysBySnp(rsId: string): PathwayDefinition[] {
   return PATHWAY_REGISTRY.filter((p) =>
     p.targetSnps.some((s) => s.toLowerCase() === rsId.toLowerCase())
+  );
+}
