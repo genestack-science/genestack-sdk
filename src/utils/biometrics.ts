@@ -33,3 +33,25 @@ export function computeLinearSlope(values: number[]): number {
 
   let numerator = 0;
   let denominator = 0;
+
+  for (let i = 0; i < n; i++) {
+    numerator += (i - xMean) * (values[i]! - yMean);
+    denominator += (i - xMean) ** 2;
+  }
+
+  return denominator === 0 ? 0 : numerator / denominator;
+}
+
+/**
+ * Classifies a slope value into a BiometricTrend label.
+ */
+export function classifyTrend(slope: number, threshold = 0.05): BiometricTrend {
+  if (slope > threshold) return 'rising';
+  if (slope < -threshold) return 'falling';
+  return 'stable';
+}
+
+/**
+ * Runs a full trend analysis on a BiometricWindow.
+ */
+export function analyzeTrend(window: BiometricWindow): TrendAnalysis {
