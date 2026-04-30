@@ -55,3 +55,11 @@ export function classifyTrend(slope: number, threshold = 0.05): BiometricTrend {
  * Runs a full trend analysis on a BiometricWindow.
  */
 export function analyzeTrend(window: BiometricWindow): TrendAnalysis {
+  const slope = computeLinearSlope(window.values);
+  const trend = classifyTrend(slope);
+  const periodMs =
+    window.timestamps.length >= 2
+      ? window.timestamps[window.timestamps.length - 1]! - window.timestamps[0]!
+      : 0;
+
+  // Confidence based on how cleanly the slope fits (simplified)
