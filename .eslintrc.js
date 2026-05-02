@@ -17,3 +17,4 @@ module.exports = {
     'no-console': 'off',
     'semi': ['error', 'always']
   }
+};
