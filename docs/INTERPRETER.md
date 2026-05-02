@@ -120,3 +120,20 @@ The table below details how individual phenotypic markers map to specific inferr
 To extend the interpreter for custom tracking metrics, implement the `CustomInterpreter` interface:
 
 ```typescript
+import { SignalInput, InterpreterResult } from '../src/types/signals';
+
+export class CustomInterpreter extends Interpreter {
+  public async computeCustomInference(input: SignalInput): Promise<InterpreterResult> {
+    const defaultOutput = await this.interpret(input);
+    
+    // Add custom processing logic
+    if (input.metadata.samplingFrequencyHz > 10) {
+      defaultOutput.metrics['enhanced_resolution'] = 1;
+    }
+    
+    return defaultOutput;
+  }
+}
+```
+
+This extensible architecture ensures that the GENESTACK SDK can adapt to new biological models and emerging diagnostic technologies.
