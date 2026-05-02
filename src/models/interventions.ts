@@ -97,3 +97,17 @@ export const COMPOUND_CATALOG: CatalogCompound[] = [
     maxDailyDoseMg: 200,
     contraindications: [],
     clinicalEvidenceScore: 0.72
+  }
+];
+
+/**
+ * Looks up a compound from the catalog by name or alias.
+ */
+export function findCompoundByName(name: string): CatalogCompound | undefined {
+  const lowerName = name.toLowerCase();
+  return COMPOUND_CATALOG.find(
+    (c) =>
+      c.name.toLowerCase() === lowerName ||
+      c.aliases.some((a) => a.toLowerCase() === lowerName)
+  );
+}
