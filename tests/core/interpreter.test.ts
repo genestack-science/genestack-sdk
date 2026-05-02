@@ -54,3 +54,5 @@ describe('Interpreter Unit Tests', () => {
 
   test('should reject out-of-range delta scores', async () => {
     await expect(interpreter.evaluateExpressionDelta('resting_heart_rate', -1)).rejects.toThrow();
+  });
+});
