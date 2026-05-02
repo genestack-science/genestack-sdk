@@ -52,3 +52,7 @@ export class SecuritySandbox {
       if (code.includes(pattern)) {
         return true;
       }
+    }
+    return false;
+  }
+}
