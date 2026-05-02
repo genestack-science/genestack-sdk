@@ -88,3 +88,35 @@ The calculated score is classified into discrete gene status tiers:
 ## 4. Complete Weight Matrix
 
 The table below details how individual phenotypic markers map to specific inferred gene expression states.
+
+### 4.1 Dopaminergic Regulation (`cognition` module)
+
+| Focus Metric | Metric Description | Mapped Gene Target | Status Inference | Weight Modifier |
+| :--- | :--- | :--- | :--- | :--- |
+| `stable` | Consistent cognitive focus | COMT / DRD2 | Normal Baseline | +0.00 |
+| `burst_crash` | Short focus followed by fatigue | COMT | High Turnover | +0.45 |
+| `low_drive` | Low baseline motivation | DRD2 | Low Sensitivity | +0.40 |
+
+### 4.2 Circadian Rhythmicity (`circadian` module)
+
+| Sleep Metric | Metric Description | Mapped Gene Target | Status Inference | Weight Modifier |
+| :--- | :--- | :--- | :--- | :--- |
+| `deep_refreshed`| Waking feeling fully rested | PER3 / CLOCK | Aligned Phase | +0.00 |
+| `disturbed` | Frequent waking, low deep sleep | PER3 | Shortened Phase | +0.38 |
+| `wired_tired` | Alert at night, tired at morning | CLOCK | Phase Delayed | +0.42 |
+
+### 4.3 Inflammatory Balance (`inflammation` module)
+
+| Soreness Metric | Metric Description | Mapped Gene Target | Status Inference | Weight Modifier |
+| :--- | :--- | :--- | :--- | :--- |
+| `rare` | Minimal post-exercise soreness | TNF / IL-6 | Healthy Baseline | +0.00 |
+| `occasional` | Standard physical recovery times| IL-6 | Normal Repair | +0.25 |
+| `persistent` | Chronic systemic soreness | TNF | High Activity | +0.55 |
+
+---
+
+## 5. Implementation Guide: Building Custom Modulators
+
+To extend the interpreter for custom tracking metrics, implement the `CustomInterpreter` interface:
+
+```typescript
