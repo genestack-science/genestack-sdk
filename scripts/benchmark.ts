@@ -106,3 +106,25 @@ async function runThroughputProfiling() {
 
   console.log('\n----------------------------------------------------------------\n');
   console.log('================================================================');
+  console.log('📈 BENCHMARK PERFORMANCE PROFILE RESULTS');
+  console.log('================================================================');
+
+  console.log(`- Total Ingestion Workload:  ${successfullyProcessedSamples} records`);
+  console.log(`- Total Time Elapsed:        ${totalElapsedMs} ms`);
+  console.log(`- Data Conversion Rate:      ${processingThroughputRate} records/sec`);
+  
+  console.log('\nMemory Profile Diagnostics:');
+  console.log(`  - Baseline Heap Used:      ${(initialMemoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+  console.log(`  - Final Heap Allocation:   ${(endMemoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+  console.log(`  - Memory Overhead delta:   ${((endMemoryUsage.heapUsed - initialMemoryUsage.heapUsed) / 1024 / 1024).toFixed(2)} MB`);
+  
+  console.log('\n================================================================');
+  console.log('🎉 BENCHMARK EXECUTION COMPLETED WITHOUT ISSUES');
+  console.log('================================================================\n');
+}
+
+// Start profiling
+runThroughputProfiling().catch((err) => {
+  console.error('Fatal benchmark execution exception:', err);
+  process.exit(1);
+});

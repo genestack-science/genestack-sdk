@@ -45,3 +45,18 @@ export function scoreToState(score: number, invertedScale = false): ExpressionSt
 export function stateToLabel(state: ExpressionState): string {
   const labels: Record<ExpressionState, string> = {
     Upregulated: 'Overactive — intervention may be required to downregulate.',
+    Compensating: 'Borderline — monitor closely; mild support recommended.',
+    Normal: 'Within optimal functional range.',
+    Downregulated: 'Suboptimal — targeted intervention is indicated.'
+  };
+  return labels[state];
+}
+
+/**
+ * Calculates an overall coverage score from a collection of expression entries.
+ */
+export function calculateCoverageScore(entries: RichExpressionEntry[]): number {
+  if (entries.length === 0) return 0;
+  const totalScore = entries.reduce((acc, e) => acc + e.score, 0);
+  return parseFloat((totalScore / entries.length).toFixed(3));
+}

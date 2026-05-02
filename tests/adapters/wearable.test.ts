@@ -15,3 +15,12 @@ describe('WearableIngestionAdapter', () => {
         firmwareVersion: '1.0.0',
         samplingFrequencyHz: 1,
         sensorAnomaliesDetected: false
+      }
+    };
+
+    const result = await adapter.parseWearableTelemetry(packet);
+    expect(result).toBeDefined();
+    expect(result.source).toBe('oura');
+    expect(result.movingAverages['oura_resting_heart_rate']).toBe(65);
+  });
+});

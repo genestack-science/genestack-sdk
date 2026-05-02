@@ -23,3 +23,15 @@ export class OverlapEngine {
       // It's the dangerous protocol
       return {
         isValid: false,
+        warnings: [{ code: 'DOPAMINERGIC_OVERLOAD', message: 'Avoid simultaneous dopamine pathway activation.' }],
+        adjustments: [{ compound: 'Bromantane', adjustedDose: '25 mg' }]
+      };
+    }
+
+    return {
+      isValid: true,
+      warnings: [],
+      adjustments: []
+    };
+  }
+}

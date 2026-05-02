@@ -101,3 +101,8 @@ export function getThresholdById(compoundId: string): SafetyThreshold | undefine
 /**
  * Returns whether a given dosage amount is at or above the warning threshold.
  */
+export function isAboveWarningThreshold(compoundId: string, dosageMg: number): boolean {
+  const threshold = getThresholdById(compoundId);
+  if (!threshold) return false;
+  return dosageMg >= threshold.warningThresholdMg;
+}

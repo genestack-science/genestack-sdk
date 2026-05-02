@@ -61,3 +61,20 @@ export class OutboundStreamEmitter {
   public startMockContinuousEmission(intervalMs = 2000): void {
     if (this.emissionIntervalTimer) {
       clearInterval(this.emissionIntervalTimer);
+    }
+
+    console.log(`[STREAMING] Starting mock telemetry emission every ${intervalMs} ms...`);
+
+    this.emissionIntervalTimer = setInterval(() => {
+      const sample: BiometricSample = {
+        id: `sample_${Date.now().toString(36)}`,
+        type: 'resting_heart_rate',
+        value: 55 + Math.random() * 15,
+        timestamp: Date.now(),
+        confidence: 0.95
+      };
+
+      this.emitPacket(sample);
+    }, intervalMs);
+  }
+}
