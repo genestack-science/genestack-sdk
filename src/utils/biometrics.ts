@@ -63,3 +63,21 @@ export function analyzeTrend(window: BiometricWindow): TrendAnalysis {
       : 0;
 
   // Confidence based on how cleanly the slope fits (simplified)
+  const maxSlope = 5;
+  const confidence = parseFloat(Math.min(1, Math.abs(slope) / maxSlope).toFixed(3));
+
+  return { metric: window.metric, trend, slope, confidence, periodMs };
+}
+
+/**
+ * Normalizes a biometric reading into the [0, 1] range using known physiological bounds.
+ */
+export function normalizeBiometric(
+  value: number,
+  criticalLow: number,
+  criticalHigh: number
+): number {
+  const range = criticalHigh - criticalLow;
+  if (range === 0) return 0;
+  return Math.min(1, Math.max(0, (value - criticalLow) / range));
+}
