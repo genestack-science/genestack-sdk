@@ -16,6 +16,16 @@ When contributing code, please follow these core development principles:
 2. **Strict Type Safety**: All source code must be written in TypeScript with complete types. Avoid using the `any` type whenever possible.
 3. **Optimized Execution**: Biometric streams and raw genomic file parsing must be optimized to prevent memory leaks or high CPU usage.
 4. **Privacy-First (HIPAA)**: Ensure that no personally identifiable data leaks into the processing layers or console logs.
+5. **Evidence-Based Logic**: Any modification to biomarker thresholds or pathway mapping must be backed by a cited peer-reviewed research paper.
+
+---
+
+## 3. Scientific Pathway Contributions
+
+We actively encourage the scientific community to contribute new biological pathway models. When adding a new pathway (e.g., PER3, TNF, etc.), please ensure:
+- The `src/core/mapper.ts` logic reflects the established biological research.
+- Threshold definitions are configurable via the `src/types/signals.ts` module.
+- You provide a brief summary of the scientific rationale in the Pull Request description.
 
 ---
 
