@@ -7,6 +7,8 @@
 import { SignalInput, InterpreterResult } from '../types/signals';
 
 export class Interpreter {
+  private cache: Map<string, InterpreterResult> = new Map();
+
   /**
    * Translates incoming multi-omics and biometric signals into normalized metrics.
    */
@@ -15,6 +17,12 @@ export class Interpreter {
 
     if (!input || !input.userId) {
       throw new Error('Interpretation Error: Ingestion payload contains no user identity.');
+    }
+
+    // Check cache for identical input fingerprint
+    const cacheKey = JSON.stringify(input);
+    if (this.cache.has(cacheKey)) {
+      return this.cache.get(cacheKey)!;
     }
 
     const metrics: Record<string, string | number> = {};
@@ -46,7 +54,7 @@ export class Interpreter {
     const computationTimeMs = Date.now() - startTimeMs;
     const reliabilityIndex = 0.95; // Ingestion quality assurance score
 
-    return {
+    const result = {
       id: `int_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`,
       userId: input.userId,
       timestamp: Date.now(),
@@ -54,6 +62,9 @@ export class Interpreter {
       reliabilityIndex,
       metrics
     };
+
+    this.cache.set(cacheKey, result);
+    return result;
   }
 
   /**
