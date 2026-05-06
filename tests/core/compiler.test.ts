@@ -26,4 +26,16 @@ describe('Compiler Unit Tests', () => {
   test('should reject invalid expression profiles', async () => {
     await expect(compiler.compile(null as any)).rejects.toThrow();
   });
+
+  test('should correctly handle compensating states in intervention logic', async () => {
+    const compensatingProfile: ExpressionProfile = {
+      ...mockProfile,
+      expressions: {
+        ...mockProfile.expressions,
+        tnf: { status: 'Compensating' }
+      }
+    };
+    const protocol = await compiler.compile(compensatingProfile);
+    expect(protocol.compounds.some(c => c.category === 'Modulator')).toBe(true);
+  });
 });
