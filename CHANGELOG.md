@@ -9,6 +9,23 @@ Our versioning strategy follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
 
 ---
 
+## [1.3.0-beta] - 2026-05-06
+
+### Added
+- New **SignalNormalizer** utility for standardized multi-omics data scaling and Z-Score calculation.
+- Implemented **Source Origin Validation** in wearable adapters to ensure telemetry integrity.
+
+### Changed
+- Modularized the **Expression Mapping Logic** in the core Mapper engine for improved maintainability.
+
+### Fixed
+- Improved **Intervention Logic** test coverage for complex compensating biological states.
+
+### Performance
+- Implemented **Result Caching** in the Signal Interpreter to optimize repetitive data stream processing.
+
+---
+
 ## [1.2.4]
 
 ### Added
