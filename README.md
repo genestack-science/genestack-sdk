@@ -426,3 +426,4 @@ Keep up with project news, developer announcements, and decentralized science up
 - **Developer Discord Server**: [Join our Discord](https://discord.gg/GenestackDeSci)
 - **GitHub Core Source**: [github.com/genestack-science](https://github.com/genestack-science)
 - **Contact Inquiries**: dev-support@genestack.science
+- **Official Token Contract**: `4iFnyr79uHmkzU1sUjkEw2i5pv9zat8WM6D1FTPvpump`
