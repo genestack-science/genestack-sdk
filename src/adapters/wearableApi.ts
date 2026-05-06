@@ -33,10 +33,16 @@ export interface WearableTelemetryPacket {
 }
 
 export class WearableIngestionAdapter {
+  private readonly AUTHORIZED_SOURCES = ['oura', 'whoop', 'apple_health', 'garmin'];
+
   /**
    * Translates incoming telemetry packets into valid Signal Interpreter metrics.
    */
   public async parseWearableTelemetry(packet: WearableTelemetryPacket): Promise<Record<string, any>> {
+    if (!packet || !packet.deviceSource || !this.AUTHORIZED_SOURCES.includes(packet.deviceSource)) {
+      throw new Error(`Security Failure: Telemetry ingestion from unauthorized source: ${packet?.deviceSource}`);
+    }
+
     if (!packet || !packet.biometrics || packet.biometrics.length === 0) {
       throw new Error('Ingestion Failure: Telemetry payload contains no biometric samples.');
     }
