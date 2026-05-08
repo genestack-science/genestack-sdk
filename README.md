@@ -6,7 +6,7 @@
 ---
 
 [![DeSci Portal](https://img.shields.io/badge/DeSci-7a2fff.svg?style=for-the-badge)](https://github.com/genestack-science/genestack-sdk)
-[![SDK Version](https://img.shields.io/badge/release-v1.2.4-00FF66.svg?style=for-the-badge)](https://github.com/genestack-science/genestack-sdk)
+[![SDK Version](https://img.shields.io/badge/release-v2.0.0-00FF66.svg?style=for-the-badge)](https://github.com/genestack-science/genestack-sdk)
 [![Node.js Support](https://img.shields.io/badge/node-%3E%3D%2018.x-green.svg?style=for-the-badge)](https://nodejs.org)
 [![Build Status](https://img.shields.io/badge/tests-passing-brightgreen.svg?style=for-the-badge)](https://github.com/genestack-science/genestack-sdk)
 
@@ -92,9 +92,16 @@ The fundamental design paradigm of GENESTACK is **"Behavior-to-Expression Status
                                     │
                                     ▼
                         +──────────────────────────+
-                        | Pathway Constraint Guard |
-                        | - Interaction checks     |
-                        | - Safety caps            |
+                        |   Experiment System      |
+                        | - Protocol run tracking  |
+                        | - Outcome logging        |
+                        +───────────┬──────────────+
+                                    │
+                                    ▼
+                        +──────────────────────────+
+                        |   Network Intelligence   |
+                        | - Data aggregation       |
+                        | - Community insights     |
                         +───────────┬──────────────+
                                     │
                                     ▼
@@ -346,6 +353,30 @@ async function generateInterventionProtocol(rawInput: any) {
 
   return finalProtocol;
 }
+```
+
+### 6.5 Tracking Protocol Experiments (Phase 02)
+
+The `ExperimentSystem` allows you to track real-time outcomes and aggregate network-wide insights.
+
+```typescript
+import { experimentSystem, networkIntelligence } from '@genestack/sdk';
+
+// 1. Initialize a protocol run
+const run = experimentSystem.initializeRun(userId, compiledProtocol, baselineSignals);
+
+// 2. Log outcome checkpoints
+experimentSystem.logCheckpoint(run.id, {
+  subjectiveScore: 8,
+  cognitiveDelta: 1.2,
+  physicalDelta: 0.5,
+  adverseEvents: []
+});
+
+// 3. Generate network insights
+const allRuns = experimentSystem.getAllRuns();
+const networkInsights = networkIntelligence.generateInsights(allRuns);
+console.log(`Network reliability: ${networkInsights.reliabilityScore}`);
 ```
 
 ---
