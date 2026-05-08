@@ -9,6 +9,19 @@ Our versioning strategy follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
 
 ---
 
+## [2.0.0] - 2026-05-09
+
+### Added
+- **Experiment System (Phase 02)**: Launched the core protocol tracking engine for real-time outcome logging and experiment management.
+- **Network Intelligence Layer**: Implemented data aggregation for network-wide signal insights, including match counts and outcome consensus.
+- **Standardized Experiment Schema**: Defined `ExperimentRun` and `ExperimentCheckpoint` for consistent data across the DeSci layer.
+- **Protocol Timeline API**: Added methods to visualize the chronological history of active and completed experiments.
+
+### Changed
+- Promoted SDK to stable **Phase 02 (Network Genesis)** build.
+
+---
+
 ## [1.3.0-beta] - 2026-05-06
 
 ### Added
