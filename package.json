@@ -1,6 +1,6 @@
 {
   "name": "@genestack/sdk",
-  "version": "1.2.4",
+  "version": "2.0.0",
   "description": "Comprehensive Bio-Informatics & Multi-Omics Pipeline for Biological Signal Compilation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
