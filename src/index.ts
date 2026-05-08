@@ -7,3 +7,6 @@ export * from './adapters/streamEmitter';
 export * from './adapters/wearableApi';
 export * from './types/signals';
 export * from './types/stacks';
+export * from './core/experimentSystem';
+export * from './core/networkIntelligence';
+export * from './types/experiment';
