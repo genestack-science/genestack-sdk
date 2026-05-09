@@ -97,4 +97,16 @@ export class PerformanceProfiler {
     }
     return lines.join('\n');
   }
+
+  /**
+   * Monitors for memory instability in high-throughput genomic parsing (May 9th Patch).
+   */
+  public trackMemLeak(thresholdMb = 500): boolean {
+    const currentUsage = process.memoryUsage().heapUsed / 1024 / 1024;
+    if (currentUsage > thresholdMb) {
+      console.warn(`[PERFORMANCE WARNING] Memory threshold exceeded: ${currentUsage.toFixed(2)}MB / ${thresholdMb}MB`);
+      return true;
+    }
+    return false;
+  }
 }
