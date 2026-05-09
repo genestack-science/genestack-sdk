@@ -11,6 +11,15 @@ export class OutboundStreamEmitter {
   private socketStream$ = new Subject<BiometricSample>();
   private activeEmissionsCounter = 0;
   private emissionIntervalTimer: NodeJS.Timeout | null = null;
+  private emissionBuffer: BiometricSample[] = [];
+
+  /**
+   * Batches multiple packets for optimized high-throughput genomic transmission.
+   */
+  public batchEmit(samples: BiometricSample[]): void {
+    console.log(`[STREAMING] Batch emitting ${samples.length} clinical packets...`);
+    samples.forEach(s => this.emitPacket(s));
+  }
 
   /**
    * Subscribes to the outbound stream to receive biometric updates in real-time.
