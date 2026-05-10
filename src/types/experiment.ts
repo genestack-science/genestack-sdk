@@ -43,9 +43,6 @@ export interface ExperimentRun {
   finalSignals?: InterpreterResult;
 }
 
-/**
- * Aggregated network-wide insights.
- */
 export interface NetworkInsights {
   totalRuns: number;
   activeSubjects: number;
@@ -61,4 +58,32 @@ export interface NetworkInsights {
     averageDays: number;
   }[];
   reliabilityScore: number;
+}
+
+/**
+ * Phase 3 Protocol Types
+ */
+export type ProtocolDuration = '7_days' | '14_days' | '30_days' | '90_days';
+
+export interface ProtocolLogCheckpoint {
+  id: string;
+  protocolRunId: string;
+  timestamp: number;
+  dayNumber: number;
+  adherenceScore: number;
+  currentSignalProfile: any; // SignalInput
+  subjectiveNotes?: string;
+  adverseEvents?: string[];
+}
+
+export interface ProtocolRun {
+  id: string;
+  userId: string;
+  stackId: string;
+  status: 'active' | 'completed' | 'paused' | 'aborted';
+  startDate: number;
+  endDate?: number;
+  targetDuration: ProtocolDuration;
+  baselineSignalProfile: any; // SignalInput
+  checkpoints: ProtocolLogCheckpoint[];
 }
