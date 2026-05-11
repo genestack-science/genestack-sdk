@@ -43,8 +43,14 @@ describe('Interpreter Unit Tests', () => {
     const result = await interpreter.interpret(mockInput);
     expect(result).toBeDefined();
     expect(result.userId).toBe('usr_test_123');
-    expect(result.reliabilityIndex).toBe(0.95);
+    expect(result.reliabilityIndex).toBe(0.97);
     expect(result.metrics['cognition_focus_score']).toBe(0.9);
+  });
+
+  test('should surface Phase 3 gene metrics', async () => {
+    const result = await interpreter.interpret(mockInput);
+    expect(result.metrics['gene_comt_score']).toBeDefined();
+    expect(result.metrics['gene_nr3c1_score']).toBeUndefined(); // Stress was not provided in mock
   });
 
   test('should evaluate expression deltas within valid range', async () => {
