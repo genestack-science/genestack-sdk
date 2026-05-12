@@ -52,6 +52,18 @@ export class SchemaValidator {
       errors.push('metabolism metrics block is missing.');
     }
 
+    if (!input.mood) {
+      errors.push('mood metrics block is missing.');
+    }
+
+    if (!input.stress) {
+      errors.push('stress metrics block is missing.');
+    }
+
+    if (!input.methylation) {
+      errors.push('methylation metrics block is missing.');
+    }
+
     if (!input.metadata?.sourceDevice) {
       warnings.push('metadata.sourceDevice is missing — traceability may be reduced.');
     }
