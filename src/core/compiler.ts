@@ -92,6 +92,78 @@ export class Compiler {
       }
     }
 
+    // 4. HPA Axis: Ashwagandha mapping (Phase 3)
+    const fkbp5 = profile.expressions.fkbp5;
+    if (fkbp5) {
+      totalGenesAnalyzed++;
+      if (fkbp5.status === 'Upregulated') {
+        compounds.push({
+          id: 'int_ashwa_comp',
+          name: 'Ashwagandha KSM-66',
+          dosage: '600 mg',
+          frequency: 'daily_evening',
+          class: 'Botanicals',
+          pathway: 'HPA Axis / Cortisol Modulation',
+          mappedExpressions: ['FKBP5', 'NR3C1'],
+          details: 'Suppresses FKBP5 overdrive and sensitizes glucocorticoid receptors.',
+          contraindications: ['Hyperthyroidism'],
+          safeBoundsMg: [300, 1200],
+          clinicalConfidence: 0.94
+        });
+        cumulativeCoverage += 0.91;
+      } else {
+        cumulativeCoverage += 1.0;
+      }
+    }
+
+    // 5. Oxidative Stress: Sulforaphane mapping (Phase 3)
+    const sod2 = profile.expressions.sod2;
+    if (sod2) {
+      totalGenesAnalyzed++;
+      if (sod2.status === 'Downregulated') {
+        compounds.push({
+          id: 'int_sulfor_comp',
+          name: 'Sulforaphane (Nrf2 Activator)',
+          dosage: '20 mg',
+          frequency: 'daily_morning',
+          class: 'Isothiocyanates',
+          pathway: 'Nrf2 Antioxidant Response',
+          mappedExpressions: ['SOD1', 'SOD2'],
+          details: 'Ultra-potent Nrf2 activator inducing mitochondrial dismutase synthesis.',
+          contraindications: ['Hypothyroidism'],
+          safeBoundsMg: [10, 60],
+          clinicalConfidence: 0.96
+        });
+        cumulativeCoverage += 0.95;
+      } else {
+        cumulativeCoverage += 1.0;
+      }
+    }
+
+    // 6. Methylation Cycle: L-Methylfolate mapping (Phase 3)
+    const mthfr = profile.expressions.mthfr;
+    if (mthfr) {
+      totalGenesAnalyzed++;
+      if (mthfr.status === 'Downregulated') {
+        compounds.push({
+          id: 'int_lmethyl_comp',
+          name: 'L-Methylfolate',
+          dosage: '400 mcg',
+          frequency: 'daily_morning',
+          class: 'Vitamins',
+          pathway: 'One-Carbon Methylation',
+          mappedExpressions: ['MTHFR'],
+          details: 'Bypasses MTHFR genetic constraints to feed the methyl donor pool.',
+          contraindications: ['B12_Deficiency'],
+          safeBoundsMg: [200, 1000],
+          clinicalConfidence: 0.98
+        });
+        cumulativeCoverage += 0.98;
+      } else {
+        cumulativeCoverage += 1.0;
+      }
+    }
+
     const coverageScore = totalGenesAnalyzed === 0 ? 1.0 : parseFloat((cumulativeCoverage / totalGenesAnalyzed).toFixed(2));
 
     return {
