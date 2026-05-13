@@ -10,7 +10,10 @@ export type PathwayCategory =
   | 'circadian'
   | 'inflammatory'
   | 'growth_axis'
-  | 'metabolic';
+  | 'metabolic'
+  | 'hpa_axis'
+  | 'oxidative_stress'
+  | 'methylation';
 
 export interface PathwayDefinition {
   id: string;
@@ -73,6 +76,36 @@ export const PATHWAY_REGISTRY: PathwayDefinition[] = [
     biologicalFunction: 'Determines lipid storage tendency vs. mitochondrial uncoupling capacity.',
     interventionClasses: ['Mitochondrial', 'Metabolic'],
     biomarkerProxies: ['fasting_glucose', 'resting_metabolic_rate', 'body_composition']
+  },
+  {
+    id: 'pathway_hpa_axis',
+    name: 'HPA Axis Stress Loop',
+    category: 'hpa_axis',
+    targetGenes: ['NR3C1', 'FKBP5', 'CRH'],
+    targetSnps: ['rs41423247'],
+    biologicalFunction: 'Regulates the hypothalamic-pituitary-adrenal response to stress and cortisol load.',
+    interventionClasses: ['Adaptogens', 'Adrenal_Support'],
+    biomarkerProxies: ['perceived_control', 'cortisol_slope', 'hyperarousal']
+  },
+  {
+    id: 'pathway_oxidative_stress',
+    name: 'Oxidative Stress Pathway',
+    category: 'oxidative_stress',
+    targetGenes: ['SOD1', 'SOD2', 'GPX1'],
+    targetSnps: ['rs4880', 'rs1050450'],
+    biologicalFunction: 'Controls cellular defense against reactive oxygen species and lipid peroxidation.',
+    interventionClasses: ['Antioxidants', 'Mitochondrial'],
+    biomarkerProxies: ['oxidized_ldl', 'glutathione_levels', 'joint_soreness']
+  },
+  {
+    id: 'pathway_methylation',
+    name: 'Epigenetic Methylation Cycle',
+    category: 'methylation',
+    targetGenes: ['MTHFR', 'DNMT1', 'DNMT3A'],
+    targetSnps: ['rs1801133', 'rs1801131'],
+    biologicalFunction: 'Regulates DNA methyltransferase activity and the 1-carbon metabolic cycle.',
+    interventionClasses: ['Methyl_Donors', 'Vitamins'],
+    biomarkerProxies: ['homocysteine', 'sam_sah_ratio', 'global_methylation']
   }
 ];
 
