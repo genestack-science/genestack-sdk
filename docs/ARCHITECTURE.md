@@ -4,7 +4,7 @@
 
 This technical specification outlines the programmatic designs, formal mathematical models, multi-layer validation pipelines, and zero-trust security architecture driving the GENESTACK SDK. 
 
-GENESTACK is an advanced functional genomics and high-frequency biological signal compiler. It converts multidimensional phenotypic telemetry (e.g., continuous heart rate variability, sleep latency, and blood biochemistry arrays) into high-fidelity genomic expression inferences. These inferences are processed by a rule-based constraint compiler to generate highly synergistic peptide, nootropic, and compound intervention protocols tailored to individual cellular states.
+GENESTACK is an advanced functional genomics and high-frequency biological signal compiler. It converts multidimensional phenotypic telemetry across 8 core signal categories (Cognition, Circadian, Inflammation, Recovery, Metabolism, Mood, Stress, and Methylation) into high-fidelity genomic expression inferences. These inferences are processed by a weighted probabilistic engine to generate highly synergistic peptide, nootropic, and compound intervention protocols tailored to individual cellular states.
 
 ---
 
@@ -14,45 +14,46 @@ The fundamental design paradigm of GENESTACK is **"Behavior-to-Expression Status
 
 ```
 +─────────────────────────────────────────────────────────────────────────────+
-|                          GENESTACK Information Lifecycle                    |
+|                          GENESTACK Information Lifecycle (v2.1)             |
 +─────────────────────────────────────────────────────────────────────────────+
                                        
-   [ High-Frequency Biomarkers & Telemetry ]      [ Static Genomic SNP Data ]
-                      │                                        │
-                      └───────────────────┬────────────────────┘
-                                          │
-                                          ▼
-                         +─────────────────────────────────+
-                         |     Signal Ingestion Layer      |
-                         |  - Real-time rolling filtering  |
-                         |  - Statistical outlier removal  |
-                         +────────────────┬────────────────+
-                                          │
-                                          ▼
-                         +─────────────────────────────────+
-                         | Genomic Inference Mapping Engine |
-                         |  - Expression state generation  |
-                         |  - Linkage disequilibrium rules |
-                         +────────────────┬────────────────+
-                                          │
-                                          ▼
-                         +─────────────────────────────────+
-                         |    Pathway Validation Engine    |
-                         |  - Contraindication screening   |
-                         |  - Over-activation guarding     |
-                         +────────────────┬────────────────+
-                                          │
-                                          ▼
-                         +─────────────────────────────────+
-                         | Protocol Compilation & Synthesis |
-                         |  - Affinity calculation         |
-                         |  - Dynamic dosage scaling       |
-                         +─────────────────────────────────+
+   [ 8-Channel Biometric Telemetry ]      [ Static Genomic SNP Data ]
+          (Mood, Stress, etc.)                       │
+                       │                             │
+                       └──────────────┬──────────────┘
+                                      │
+                                      ▼
+                     +─────────────────────────────────+
+                     |     Signal Ingestion Layer      |
+                     |  - Real-time rolling filtering  |
+                     |  - Statistical outlier removal  |
+                     +────────────────┬────────────────+
+                                      │
+                                      ▼
+                     +─────────────────────────────────+
+                     |  Probabilistic Inference Engine |
+                     |  - 25-Gene Weighted Mapping     |
+                     |  - Bayesian Time-Decay Synthesis |
+                     +────────────────┬────────────────+
+                                      │
+                                      ▼
+                     +─────────────────────────────────+
+                     |    Pathway Validation Engine    |
+                     |  - Pathogen Risk (Strain-Zero)  |
+                     |  - Contraindication screening   |
+                     +────────────────┬────────────────+
+                                      │
+                                      ▼
+                     +─────────────────────────────────+
+                     | Protocol Compilation & Synthesis |
+                     |  - Phase 3 Intervention Library |
+                     |  - Dynamic dosage scaling       |
+                     +─────────────────────────────────+
 ```
 
 ### Core Design Principles
 
-1. **Deterministic Processing**: All calculations map strictly to mathematical formulas, ensuring consistent inference outputs across identical datasets.
+1. **Probabilistic Weighting**: Calculations utilize weighted contributions from multiple signal channels to infer gene expression with higher confidence.
 2. **Dynamic Adaptation**: The engine adjusts compound dosage recommendations dynamically based on incoming real-time telemetry changes.
 3. **Decoupled Security**: No personally identifiable information (PII) enters the core calculation processing pipeline.
 4. **Resilient Type Safety**: Strict TypeScript structures prevent type-casting errors and ensure stable calculations.
@@ -83,7 +84,7 @@ Where:
     [ Gaussian Kernel Smoothing ]    --> Symmetric weight assignment
                 │
                 ▼
-     Filtered, Sanitized Data
+      Filtered, Sanitized Data
 ```
 
 ### 2.2 Outlier Filtering with Z-Score Verification
@@ -96,59 +97,49 @@ Any data point where $Z = \frac{|x_i - \mu|}{\sigma} > 1.5$ is excluded from the
 
 ---
 
-## 3. The Five Core Biological Pathways
+## 3. The Eight Core Biological Pathways
 
-The GENESTACK system processes data across five distinct regulatory systems. Each system maps to specific genomic single nucleotide polymorphisms (SNPs) and distinct intervention classes.
+The GENESTACK system processes data across eight distinct regulatory systems. Each system maps to specific genomic single nucleotide polymorphisms (SNPs) and distinct intervention classes.
 
 ### 3.1 Dopaminergic Regulation System
-
-Focuses on executive function, prefrontal dopamine clearance speeds, and dynamic dopamine receptor density.
-
 - **Target Gene Markers**: `COMT` (rs4680), `DRD2` (rs1800497).
 - **Phenotypic Metrics**: Executive attention scores, cognitive fatigue rates, working memory efficiency.
-- **Intervention Categories**: Dopamine synthesis precursors, monoamine oxidase modulators, BDNF enhancers.
-
-```
-                             [ High Dopamine Clearance ]
-                                          │
-                  ┌───────────────────────┴───────────────────────┐
-                  ▼                                               ▼
-          [ Low Sensitivity ]                           [ Normal Sensitivity ]
-         Incorporate Bromantane                        No precursors needed
-```
+- **Intervention Categories**: Dopamine synthesis precursors, monoamine oxidase modulators.
 
 ### 3.2 Circadian Rhythmicity
-
-Controls chronotype timing, slow-wave sleep duration, and cellular repair cycles.
-
 - **Target Gene Markers**: `PER3` (VNTR variant), `CLOCK` (rs1801260).
 - **Phenotypic Metrics**: Sleep latency, slow-wave phase amplitude, nocturnal arousal frequency.
 - **Intervention Categories**: Phase-alignment modulators, nocturnal cortisol reducers.
 
 ### 3.3 Inflammatory Balance
-
-Manages localized cytokine activity and dynamic physical stress recovery times.
-
 - **Target Gene Markers**: `TNF-α` (rs1800629), `IL-6` (rs1800795).
 - **Phenotypic Metrics**: Soreness persistence, elevated resting heart rate.
 - **Intervention Categories**: Anti-inflammatory peptides, tissue regeneration promoters.
 
 ### 3.4 Anabolic signaling & Growth Axis
-
-Evaluates cellular growth signaling, structural tissue repair, and myostatin suppression.
-
 - **Target Gene Markers**: `IGF-1` (rs35767), `MSTN` (rs1805086).
 - **Phenotypic Metrics**: Exercise adaptation rate, muscle regeneration speed.
 - **Intervention Categories**: Secretagogues, peptide repair fragments.
 
 ### 3.5 Metabolic Efficiency
-
-Determines lipid storage tendencies versus cellular caloric uncoupling.
-
 - **Target Gene Markers**: `FTO` (rs9939609), `PPARG` (Pro12Ala).
 - **Phenotypic Metrics**: Baseline metabolic rate, caloric burn efficiency, glucose response proxies.
 - **Intervention Categories**: Mitochondrial modulators, metabolic partition enhancers.
 
+### 3.6 HPA Axis Stress Loop [PHASE 3]
+- **Target Gene Markers**: `NR3C1`, `FKBP5`.
+- **Phenotypic Metrics**: Perceived control, coping reserve, hyperarousal frequency.
+- **Intervention Categories**: Ashwagandha KSM-66, Phosphatidylserine.
+
+### 3.7 Oxidative Stress Pathway [PHASE 3]
+- **Target Gene Markers**: `SOD1`, `SOD2`.
+- **Phenotypic Metrics**: Localized stiffness, joint soreness delta.
+- **Intervention Categories**: Sulforaphane, NAC, CoQ10.
+
+### 3.8 Epigenetic Methylation Cycle [PHASE 3]
+- **Target Gene Markers**: `MTHFR`, `DNMT1`.
+- **Phenotypic Metrics**: SAM/SAH ratios, homocysteine turnover levels.
+- **Intervention Categories**: L-Methylfolate, TMG, Methyl-B12.
 ---
 
 ## 4. Compilation & Safety Validation Pipeline
