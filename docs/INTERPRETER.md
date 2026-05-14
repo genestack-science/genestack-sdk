@@ -14,19 +14,19 @@ Genes operate in continuous, dynamic states of activity. Instead of binary switc
 
 ```
 +─────────────────────────────────────────────────────────────────────────────+
-|                     Signal Extraction & Normalization Flow                  |
+|                     Signal Extraction & Normalization Flow (v2.1)           |
 +─────────────────────────────────────────────────────────────────────────────+
 
-  [ Raw Ingestion Telemetry ] ---> (Resting HR, HRV, Sleep Latency, Focus)
+  [ 8-Channel Ingestion ] ----> (Mood, Stress, Methylation + 5 Core Channels)
                │
                ▼
   [ De-Noising Engine ] ---------> (Excludes out-of-bounds readings)
                │
                ▼
-  [ Continuous Mapping ] --------> (Normalizes data to [0, 1] scale)
+  [ Probabilistic Engine ] ------> (Weighted Inference for 25 Target Genes)
                │
                ▼
-  [ Inference Computation ] -----> (Weights matched with SNP heuristics)
+  [ Bayesian Synthesis ] --------> (Time-decayed state consolidation)
                │
                ▼
   [ Threshold Classifier ] ------> (Determines Expression Status)
@@ -41,7 +41,7 @@ For instance, the `COMT` gene codes for the Catechol-O-Methyltransferase enzyme,
 
 ## 3. Detailed Mathematical Models
 
-The interpreter processes incoming data using a rule-based weighted scoring algorithm to determine expression levels.
+The interpreter processes incoming data using a weighted probabilistic inference engine (Phase 3 upgrade).
 
 ### 3.1 Normalization of Input Variables
 
@@ -49,69 +49,53 @@ Continuous inputs must be normalized to a standard `[0, 1]` range before analysi
 
 $$\text{Normalized Value } (N) = \frac{\text{Observed Reading } (R) - \text{Minimum Baseline Value } (B_{\text{min}})}{\text{Maximum Baseline Value } (B_{\text{max}}) - \text{Minimum Baseline Value } (B_{\text{min}})}$$
 
-Where:
-- $R$ is the dynamic biometric reading.
-- $B_{\text{min}}$ is the minimum historical baseline.
-- $B_{\text{max}}$ is the maximum historical baseline.
+### 3.2 Probabilistic Weighted Scoring
 
-### 3.2 Continuous Moving Average Smoothing
+In Phase 3, the engine has transitioned from deterministic rules to multi-variate weighted sums:
 
-To minimize short-term noise in high-frequency streams, the engine uses an Exponentially Weighted Moving Average (EWMA):
-
-$$\text{EWMA}_t = \alpha \times X_t + (1 - \alpha) \times \text{EWMA}_{t-1}$$
+$$\text{Raw Expression Value } (V_g) = \sum_{i=1}^{n} (N_i \cdot w_{i,g}) \cdot \gamma_{decay}$$
 
 Where:
-- $X_t$ is the current reading.
-- $\alpha$ is the smoothing constant (typically set to $0.3$).
-- $\text{EWMA}_{t-1}$ is the previous smoothed value.
-
-### 3.3 Weighted Scoring & Status Classification
-
-Once normalized, metrics are evaluated using specific gene weights:
-
-$$\text{Raw Expression Value } (V) = \sum_{i=1}^{n} N_i \times W_i$$
-
-Where:
-- $W_i$ is the specific weight modifier assigned to the metric.
-- $n$ is the total number of metrics evaluated for that gene.
+- $V_g$ is the calculated expression score for gene $g$.
+- $N_i$ is the normalized value of input signal $i$.
+- $w_{i,g}$ is the specific weight coefficient for that signal-gene pair.
+- $\gamma_{decay}$ is the Bayesian time-decay factor.
 
 The calculated score is classified into discrete gene status tiers:
 
 | Calculated Score ($V$) | Target Gene Status Classification |
 | :--- | :--- |
-| **0.00 - 0.35** | **Downregulated** |
-| **0.36 - 0.75** | **Normal Baseline** |
+| **0.00 - 0.20** | **Downregulated** |
+| **0.21 - 0.40** | **Compensating** |
+| **0.41 - 0.75** | **Normal Baseline** |
 | **0.76 - 1.00** | **Upregulated** |
 
 ---
 
-## 4. Complete Weight Matrix
+## 4. Complete Weight Matrix (Expanded Phase 3)
 
-The table below details how individual phenotypic markers map to specific inferred gene expression states.
+The table below details how individual phenotypic markers map to specific inferred gene expression states across the 25-gene library.
 
-### 4.1 Dopaminergic Regulation (`cognition` module)
+### 4.1 Phase 3 Core Pathways
 
-| Focus Metric | Metric Description | Mapped Gene Target | Status Inference | Weight Modifier |
+| Pathway | Metric Key | Mapped Gene Target | Status Inference | Typical Weight |
 | :--- | :--- | :--- | :--- | :--- |
-| `stable` | Consistent cognitive focus | COMT / DRD2 | Normal Baseline | +0.00 |
-| `burst_crash` | Short focus followed by fatigue | COMT | High Turnover | +0.45 |
-| `low_drive` | Low baseline motivation | DRD2 | Low Sensitivity | +0.40 |
+| **HPA Axis** | `perceivedControl` | NR3C1 | Receptor Density | 0.65 |
+| **HPA Axis** | `hyperarousal` | FKBP5 | Feedback Inhib. | 0.90 |
+| **Oxidative** | `localizedStiff` | SOD1 | Cytoplasmic SOD | 0.70 |
+| **Oxidative** | `jointSoreness` | SOD2 | Mitochondrial SOD| 0.85 |
+| **Methylation**| `samSahRatio` | MTHFR | Cycle Efficiency | 0.95 |
+| **Methylation**| `homocysteine` | DNMT1 | Methyl-transferase| 0.80 |
 
-### 4.2 Circadian Rhythmicity (`circadian` module)
+### 4.2 Legacy Foundation Pathways
 
-| Sleep Metric | Metric Description | Mapped Gene Target | Status Inference | Weight Modifier |
+| Pathway | Focus/Sleep Metric | Mapped Gene Target | Status Inference | Weight Modifier |
 | :--- | :--- | :--- | :--- | :--- |
-| `deep_refreshed`| Waking feeling fully rested | PER3 / CLOCK | Aligned Phase | +0.00 |
-| `disturbed` | Frequent waking, low deep sleep | PER3 | Shortened Phase | +0.38 |
-| `wired_tired` | Alert at night, tired at morning | CLOCK | Phase Delayed | +0.42 |
-
-### 4.3 Inflammatory Balance (`inflammation` module)
-
-| Soreness Metric | Metric Description | Mapped Gene Target | Status Inference | Weight Modifier |
-| :--- | :--- | :--- | :--- | :--- |
-| `rare` | Minimal post-exercise soreness | TNF / IL-6 | Healthy Baseline | +0.00 |
-| `occasional` | Standard physical recovery times| IL-6 | Normal Repair | +0.25 |
-| `persistent` | Chronic systemic soreness | TNF | High Activity | +0.55 |
+| **Dopamine** | `stable` | COMT / DRD2 | Healthy Activity | 0.00 |
+| **Dopamine** | `burst_crash` | COMT | High Turnover | 0.45 |
+| **Circadian** | `deep_refreshed`| PER3 / CLOCK | Aligned Phase | 0.00 |
+| **Circadian** | `wired_tired` | CLOCK | Phase Delayed | 0.42 |
+| **Inflammation**| `persistent` | TNF | High Activity | 0.55 |
 
 ---
 
