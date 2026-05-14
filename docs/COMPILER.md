@@ -100,6 +100,31 @@ Below is the definitive reference matrix for the primary compound interventions 
 
 ---
 
+### 3.3 Intelligence Expansion Interventions
+
+#### Ashwagandha (KSM-66) — Withania Somnifera
+- **Classification**: Standardized Botanical Adaptogen
+- **Biological Pathway**: HPA Axis / Cortisol Modulation
+- **Expression Mapping**: `FKBP5` upregulated, `NR3C1` downregulated
+- **Mechanism of Action**: Sensitizes glucocorticoid receptors and suppresses FKBP5 overdrive to restore negative feedback inhibition in the HPA axis.
+- **Dynamic Baseline Range**: `600 - 1200 mg` daily.
+
+#### Sulforaphane — Isothiocyanate
+- **Classification**: Potent Nrf2 Activator
+- **Biological Pathway**: Endogenous Antioxidant Response (Oxidative Stress)
+- **Expression Mapping**: `SOD2` downregulated, `NFE2L2` downregulated
+- **Mechanism of Action**: Activates the Nrf2 pathway, inducing the expression of Phase II detoxification enzymes and mitochondrial superoxide dismutase.
+- **Dynamic Baseline Range**: `20 - 60 mg` daily.
+
+#### L-Methylfolate — 5-MTHF
+- **Classification**: Bioactive Vitamin B9 Analogue
+- **Biological Pathway**: One-Carbon Methylation Cycle
+- **Expression Mapping**: `MTHFR` downregulated (677C>T variant)
+- **Mechanism of Action**: Bypasses the MTHFR rate-limiting enzyme to directly feed the methyl donor pool, ensuring stable DNA methylation and homocysteine clearance.
+- **Dynamic Baseline Range**: `400 - 1000 mcg` daily.
+
+---
+
 ## 4. Algorithmic Stack Coverage Formulation
 
 The compiler scores the effectiveness of each stack using this specific formula:
