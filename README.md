@@ -61,7 +61,7 @@ The fundamental design paradigm of GENESTACK is **"Behavior-to-Expression Status
 
 ```
 +─────────────────────────────────────────────────────────────────────────────+
-|                         GENESTACK Processing Workflow                       |
+|                         GENESTACK Processing Workflow (v2.1)                |
 +─────────────────────────────────────────────────────────────────────────────+
 
  [ Real-Time Health Biometrics ]           [ Raw DNA/Genomic Sequences ]
@@ -85,7 +85,7 @@ The fundamental design paradigm of GENESTACK is **"Behavior-to-Expression Status
                                     │
                                     ▼
                         +──────────────────────────+
-                        |   Compiler Engine        |
+                        |   Synthesis Compiler     |
                         | - Dynamic dosage scaling |
                         | - Synergy bonuses        |
                         +───────────┬──────────────+
@@ -143,6 +143,24 @@ Analyzes cellular energy conversion vectors to determine conversion speed versus
 - **Gene Links**: `FTO rs9939609`, `PPARG Pro12Ala`.
 - **Target Phenotypic Signals**: Weight maintenance trends, energy levels after eating, and caloric burn rates.
 - **Target Interventions**: Mitochondrial uncoupling agents and targeted nutrient partitioners.
+
+### 2.6 HPA Axis Stress Loop
+Focuses on the suprachiasmatic nucleus hypothalamic-pituitary-adrenal axis regulating cortisol and endocrine load.
+- **Gene Links**: `NR3C1`, `FKBP5`.
+- **Target Phenotypic Signals**: Perceived control, coping reserve, hyperarousal frequency.
+- **Target Interventions**: Ashwagandha KSM-66, Phosphatidylserine.
+
+### 2.7 Oxidative Stress Pathway
+Tracks vascular endothelial cellular defense against reactive oxygen species (ROS) and lipid peroxidation.
+- **Gene Links**: `SOD1`, `SOD2`.
+- **Target Phenotypic Signals**: Localized stiffness, joint soreness delta.
+- **Target Interventions**: Sulforaphane, NAC, CoQ10.
+
+### 2.8 Epigenetic Methylation Cycle
+Analyzes the systemic 1-carbon pathway regulating DNA methyltransferase and gene expression silencing.
+- **Gene Links**: `MTHFR`, `DNMT1`.
+- **Target Phenotypic Signals**: SAM/SAH ratios, homocysteine turnover levels.
+- **Target Interventions**: L-Methylfolate, TMG, Methyl-B12.
 
 ---
 
