@@ -9,6 +9,24 @@ Our versioning strategy follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
 
 ---
 
+## [2.1.0] - 2026-05-15
+
+### Added
+- **Phase 03 (Intelligence Expansion)**: Deepened biological logic with 25-gene library support and weighted probabilistic inference.
+- **8-Category Signal Vector**: Added Mood, Stress, and Methylation metrics to the core ingestion schema.
+- **Probabilistic Engine**: Re-implemented the inference engine with weighted scoring and Bayesian time-decay synthesis.
+- **New Intervention Mappings**: Integrated Ashwagandha (HPA), Sulforaphane (Oxidative), and L-Methylfolate (Methylation) protocols.
+
+### Changed
+- Upgraded **Signal Interpreter** to utilize the new Probabilistic Engine for higher confidence mapping.
+- Expanded **Pathogen Risk (Strain-Zero)** analysis to include cognitive and emotional biomarkers.
+
+### Fixed
+- Restored missing `ProtocolRun` and `ProtocolLogCheckpoint` lifecycle types.
+- Resolved build-blocker implicit-any errors in the core pipeline.
+
+---
+
 ## [2.0.0] - 2026-05-09
 
 ### Added
