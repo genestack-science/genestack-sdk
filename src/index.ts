@@ -10,3 +10,5 @@ export * from './types/stacks';
 export * from './core/experimentSystem';
 export * from './core/networkIntelligence';
 export * from './types/experiment';
+export * from './core/probabilisticEngine';
+export * from './core/validator';
