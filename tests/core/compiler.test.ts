@@ -36,6 +36,18 @@ describe('Compiler Unit Tests', () => {
       }
     };
     const protocol = await compiler.compile(compensatingProfile);
-    expect(protocol.compounds.some(c => c.category === 'Modulator')).toBe(true);
+    expect(protocol.compounds.some(c => c.name === 'BPC-157 Peptide')).toBe(true);
+  });
+
+  test('should include Phase 3 interventions like Ashwagandha', async () => {
+    const phase3Profile: ExpressionProfile = {
+      ...mockProfile,
+      expressions: {
+        ...mockProfile.expressions,
+        fkbp5: { status: 'Upregulated' }
+      }
+    };
+    const protocol = await compiler.compile(phase3Profile);
+    expect(protocol.compounds.some(c => c.name.includes('Ashwagandha'))).toBe(true);
   });
 });
